@@ -30,12 +30,19 @@ h6 {
 }
 body{
   font-family: 'Roboto', sans-serif;
+  font-style: normal;
 }
-
 .wrapper {
   margin: 0 auto;
   max-width: 1600px;
 }
+.container{
+  margin: 0 auto;
+  max-width: 1160px;
+}
+
+/* Header */
+
 .header {
   background-color: #000000;
   height: 80px;
@@ -46,11 +53,8 @@ body{
   align-items: center;
   padding-top: 14px;
 }
-.container{
-  margin: 0 auto;
-  max-width: 1160px;
-}
 .header__logo{
+  position: relative;
   width: 82px;
   height: 52px;
   border: 1px solid #FFFFFF;
@@ -67,9 +71,10 @@ body{
   line-height: 120%;
 }
 .bamboo-icon {
+  cursor: pointer;
   position: absolute;
-  left: 382px;
-  top: 38px;
+  top: 22.64px;
+  left: 10.23px;
 }
 .header__menu {
 }
@@ -88,6 +93,7 @@ body{
   margin: 0 29px;
 }
 .active {
+  color: orange;
 }
 .designed__link {
 }
@@ -96,4 +102,68 @@ body{
   font-weight: 500;
   font-size: 16px;
   line-height: 140%;
+}
+
+
+/* Favorite animal */
+
+.favorite_animal{
+  background: url("../../assets/images/Giant\ Panda.png");
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  width: 1600px;
+  height: 780px;
+  z-index: -1;
+}
+.favorite_animal__container {
+}
+.circle {
+  position: absolute;
+  width: 465px;
+  height: 465px;
+  left: calc(50% - 465px/2 + 239.5px);
+  top: 92px;
+  border-radius: 50%;
+  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+}
+.favorite_animal__title {
+  position: absolute;
+  width: 500.31px;
+  height: 400px;
+  left: calc(50% - 500.31px/2 + 330.15px);
+  top: 166px;
+  font-weight: 700;
+  font-size: 106.496px;
+  line-height: 75%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.favorite_animal__title span {
+  color: #FFEE2E;
+}
+.favorite_animal__buttons {
+  position: relative;
+  width: 298px;
+  height: 54px;
+  left: calc(50% - 298px/2 + 332px);
+  top: 626px;
+  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  border-radius: 25px;
+}
+.favorite_animal__button:hover {
+  background: #E47209;
+}
+.favorite_animal__button {
+  display: flex;
+  justify-content: center;
+  border-radius: 25px;
+  padding: 16px 1px 16px 5px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  text-transform: uppercase;  
+  color: #FFFFFF;
+  transition: all .5s;
 }
