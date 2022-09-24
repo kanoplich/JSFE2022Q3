@@ -95,9 +95,13 @@ body{
   color: #ffffff;
   list-style: none;
   margin: 0 29px;
+  transition: all .5s ease;
+}
+.menu__link:hover:not(.active) {
+  color:#E47209;
 }
 .active {
-  color: orange;
+  color:  #FE9013;
 }
 .designed__link {
 }
@@ -106,8 +110,11 @@ body{
   font-weight: 500;
   font-size: 16px;
   line-height: 140%;
+  transition: all .5s ease;
 }
-
+.designed__link a:hover {
+  color:#E47209;
+}
 
 /* Favorite animal */
 
@@ -146,7 +153,7 @@ body{
 .favorite_animal__title span {
   color: #FFEE2E;
 }
-.favorite_animal__buttons {
+.favorite_animal__btn {
   position: relative;
   display: flex;
   justify-content: center;
@@ -321,7 +328,7 @@ body{
   height: 38px;
   margin: 8px 8px 0px 0px;
 }
-.pets__buttons {
+.pets__btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -332,6 +339,7 @@ body{
   margin-top: 80px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 100px;
 }
 .pets__button {
   display: flex;
@@ -352,7 +360,7 @@ body{
 .pets__button:hover {
   background: #E47209;
 }
-.pets__buttons_left {
+.pets__btn_left {
   position: absolute;
   width: 62px;
   height: 62px;
@@ -361,8 +369,10 @@ body{
   border-radius: 50%;
   background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
 }
-
 .pets__button_left {
+  background-image: url("../../assets/icons/Vector_left.svg");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -375,7 +385,7 @@ body{
 .pets__button_left:hover {
   background: #E47209;
 }
-.pets__buttons_right {
+.pets__btn_right {
   position: absolute;
   width: 62px;
   height: 62px;
@@ -386,6 +396,9 @@ body{
   transition: all .5s ease;
 }
 .pets__button_right {
+  background-image: url("../../assets/icons/Vector_right.svg");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -415,4 +428,188 @@ body{
   height: 275px;
   right: 0;
   top: 2334px;
+}
+
+/* Pick and feed a friend */
+
+.friend {
+  background: linear-gradient(315.75deg, rgba(254, 210, 144, 0.7) 30.06%, #FEBDAB 100.95%, rgba(254, 210, 144, 0.7) 106.36%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #E0D8F0 80.49%, #EAF7FE 127.9%, #EAF7FE 149.54%), linear-gradient(315.75deg, rgba(254, 189, 171, 0.74) 30.06%, rgba(243, 169, 248, 0.66) 50.74%, #E0D8F0 80.49%, #EAF7FE 127.9%, #EAF7FE 149.54%);
+  height: 1004px;
+  padding-top: 69px;
+}
+.friend__container {
+  height: 835px;
+  background: rgba(253, 253, 255, 0.52);
+  backdrop-filter: blur(2px);
+  border-radius: 20px;
+}
+.friend__title {
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 120%;
+  text-align: center;
+  color: #FE9013;
+  padding-top: 41px;
+}
+.friend__paragraph1 {
+  margin: 30px 0px 0px 99px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 120%;
+  color: #333B41;
+}
+.friend__paragraph2 {
+  margin: 42px 0px 0px 99px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 130%;
+  color: #333B41;
+}
+.friend__paragraph3 {
+  width: 863px;
+  margin: 11px 0px 0px 99px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  color: #333B41;
+}
+.friend__subtitle {
+  margin-top: 60px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 130%;
+  color: #333B41;
+  padding-bottom: 38px;
+}
+.friend__cards {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 764px;
+}
+.friend__cards p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #333B41;
+  margin-top: 30px;
+}
+.card1 {
+  width: 168px;
+  height: 244px;
+}
+.card1__picture {
+  position: relative;
+  background-image: url("../../assets/icons/pay.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  width: 168px;
+  height: 168px;
+  
+}
+.card1__picture::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  border-radius: 5px;
+  z-index: -1;
+}
+.card2 {
+  width: 168px;
+  height: 244px;
+}
+.card2__picture {
+  position: relative;
+  background-image: url("../../assets/icons/zoo.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  width: 168px;
+  height: 168px;
+}
+.card2__picture::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  border-radius: 5px;
+  z-index: -1;
+}
+.card3 {
+  width: 168px;
+  height: 244px;
+}
+.card3__picture {
+  position: relative;
+  background-image: url("../../assets/icons/monkey.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  width: 168px;
+  height: 168px;
+}
+.card3__picture::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  border-radius: 5px;
+  z-index: -1;
+}
+.card__vector1 {
+  background-image: url("../../assets/icons/Vector.svg");
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 37px;
+  margin-bottom: 85px;
+}
+.card__vector2 {
+  background-image: url("../../assets/icons/Vector.svg");
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 37px;
+  margin-bottom: 90px;
+}
+.friend__btn {
+  margin-top: 60px;
+  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  border-radius: 25px;
+  width: 298px;
+  height: 54px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.friend__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 5px;
+  width: 298px;
+  height: 54px;
+  border-radius: 25px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  transition: all .5s ease;
+}
+.friend__button:hover {
+  background: #E47209;
 }
