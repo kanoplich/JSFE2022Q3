@@ -361,6 +361,13 @@ body{
   color: #BDBDBD;
   padding-left: 8px;
 }
+.email:invalid {
+  border: 1px solid #D31414;
+  color: #D31414;
+}
+.email:valid {
+  border: 1px solid #4B9200;
+}
 .submit {
   cursor: pointer;
   width: 129px;
@@ -373,6 +380,14 @@ body{
   line-height: 140%;
   margin-left: 5px;
   color: #000000;
+}
+.submit:invalid {
+  border: 1px solid #D31414;
+  color: #D31414;
+}
+.submit:valid {
+  border: 1px solid #4B9200;
+  color: #4B9200;
 }
 .footer__logo{
   margin: 1px 0px 66px 0px;
@@ -425,6 +440,7 @@ body{
   padding-top: 44px;
 }
 .facebook {
+  display: inline-block;
   background-image: url("../../assets/icons/facebook.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -434,14 +450,8 @@ body{
   height: 26px;
   margin-bottom: 10px;
 }
-.facebook a {
-  margin-left: 38px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 140%;
-  color: #FFFFFF;
-}
 .twitter {
+  display: inline-block;
   background-image: url("../../assets/icons/twitter.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -451,7 +461,9 @@ body{
   height: 26px;
   margin-bottom: 10px;
 }
-.twitter a {
+li a span{
+  display: block;
+  padding-top: 5px;
   margin-left: 38px;
   font-weight: 400;
   font-size: 16px;
@@ -459,6 +471,7 @@ body{
   color: #FFFFFF;
 }
 .instagram {
+  display: inline-block;
   background-image: url("../../assets/icons/instagram.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -468,14 +481,8 @@ body{
   height: 26px;
   margin-bottom: 10px;
 }
-.instagram a {
-  margin-left: 38px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 140%;
-  color: #FFFFFF;
-}
 .youtube {
+  display: inline-block;
   background-image: url("../../assets/icons/youtube.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -483,13 +490,7 @@ body{
   border-radius: 50%;
   width: 26px;
   height: 26px;
-}
-.youtube a {
-  margin-left: 38px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 140%;
-  color: #FFFFFF;
+  margin-bottom: 10px;
 }
 .footer__item {
   display: flex;
@@ -497,6 +498,7 @@ body{
   font-size: 16px;
   line-height: 140%;
   margin-left: 200px;
+  padding-bottom: 10px;
 }
 .footer__link {
   color: #ffffff;
@@ -522,4 +524,5 @@ body{
   font-size: 16px;
   line-height: 130%;
   color: #FFFFFF;
+  padding-bottom: 10px;
 }

@@ -355,17 +355,12 @@ body{
 }
 .pets__btn_left {
   position: absolute;
-  width: 62px;
-  height: 62px;
   right: 1400px;
   top: 1906px;
   border-radius: 50%;
   background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
 }
 .pets__button_left {
-  background-image: url("../../assets/icons/Vector_left.svg");
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -373,25 +368,18 @@ body{
   width: 62px;
   height: 62px;
   transition: all .5s ease;
-  z-index: 1;
 }
 .pets__button_left:hover {
   background: #E47209;
 }
 .pets__btn_right {
   position: absolute;
-  width: 62px;
-  height: 62px;
   right: 140px;
   top: 1906px;
   border-radius: 50%;
   background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
-  transition: all .5s ease;
 }
 .pets__button_right {
-  background-image: url("../../assets/icons/Vector_right.svg");
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -399,7 +387,6 @@ body{
   width: 62px;
   height: 62px;
   transition: all .5s ease;
-  z-index: 1;
 }
 .pets__button_right:hover {
   background: #E47209;
@@ -703,11 +690,18 @@ body{
   right: -1px;
   background: linear-gradient(-45deg, #FEBDAB 24%,#F3A9F8 66%,#E0D8F0 100%, #EAF7FE 100%, #EAF7FE 100%);
   border-radius: 5px;
+  z-index: -1;
 }
-.testimonials__scroll {
-  background: #F5F7F6;
-  height: 6px;
-  width: 597px;
+.testimonials__progress > span {
+  cursor: pointer;
+  display: block;
+  background: #FE9013;
+  border-radius: 5px;
+  width: 115.19px;
+  height: 8px;
+}
+.testimonials__progress > span:hover{
+  background: #E47209;
 }
 .testimonials__btn {
   background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
@@ -777,17 +771,32 @@ body{
   color: #BDBDBD;
   padding-left: 8px;
 }
+.email:invalid {
+  border: 1px solid #D31414;
+  color: #D31414;
+}
+.email:valid {
+  border: 1px solid #4B9200;
+}
 .submit {
   cursor: pointer;
   width: 129px;
   height: 42px;
   background: #F1F3F2;
-  border: 1px solid #4B9200;
+  border: 1px solid #333B41;
   border-radius: 5px;
   font-weight: 400;
   font-size: 16px;
   line-height: 140%;
   margin-left: 5px;
+  color: #333B41;
+}
+.submit:invalid {
+  border: 1px solid #D31414;
+  color: #D31414;
+}
+.submit:valid {
+  border: 1px solid #4B9200;
   color: #4B9200;
 }
 .footer__logo{
@@ -841,6 +850,7 @@ body{
   padding-top: 44px;
 }
 .facebook {
+  display: inline-block;
   background-image: url("../../assets/icons/facebook.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -850,14 +860,8 @@ body{
   height: 26px;
   margin-bottom: 10px;
 }
-.facebook a {
-  margin-left: 38px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 140%;
-  color: #FFFFFF;
-}
 .twitter {
+  display: inline-block;
   background-image: url("../../assets/icons/twitter.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -867,7 +871,9 @@ body{
   height: 26px;
   margin-bottom: 10px;
 }
-.twitter a {
+li a span{
+  display: block;
+  padding-top: 5px;
   margin-left: 38px;
   font-weight: 400;
   font-size: 16px;
@@ -875,6 +881,7 @@ body{
   color: #FFFFFF;
 }
 .instagram {
+  display: inline-block;
   background-image: url("../../assets/icons/instagram.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -884,14 +891,8 @@ body{
   height: 26px;
   margin-bottom: 10px;
 }
-.instagram a {
-  margin-left: 38px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 140%;
-  color: #FFFFFF;
-}
 .youtube {
+  display: inline-block;
   background-image: url("../../assets/icons/youtube.svg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
@@ -899,13 +900,7 @@ body{
   border-radius: 50%;
   width: 26px;
   height: 26px;
-}
-.youtube a {
-  margin-left: 38px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 140%;
-  color: #FFFFFF;
+  margin-bottom: 10px;
 }
 .footer__item {
   display: flex;
@@ -913,6 +908,7 @@ body{
   font-size: 16px;
   line-height: 140%;
   margin-left: 200px;
+  padding-bottom: 10px;
 }
 .footer__link {
   color: #ffffff;
@@ -938,4 +934,5 @@ body{
   font-size: 16px;
   line-height: 130%;
   color: #FFFFFF;
+  padding-bottom: 10px;
 }
