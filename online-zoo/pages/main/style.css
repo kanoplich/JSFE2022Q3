@@ -322,7 +322,7 @@ body{
   margin: 10px 12px 0px 0px;
 }
 .cards__food_meat {
-  background-image: url("../../assets/icons/meet-fish_icon.svg");
+  background-image: url("../../assets/icons/meet_fish_icon.svg");
   background-repeat: no-repeat;
   width: 48px;
   height: 38px;
@@ -612,4 +612,134 @@ body{
 }
 .friend__button:hover {
   background: #E47209;
+}
+
+/* Testimonials */
+
+.testimonials {
+  padding-top: 140px;
+}
+.testimonials__title {
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 130%;
+  text-align: center;
+  color: #333B41;
+  margin-bottom: 47px;
+}
+.testimonials__cards_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.testimonials__cards {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  background: #F1F3F2;
+  border-radius: 20px;
+  width: 266px;
+  height: 389px;
+}
+.testimonials__cards::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  left: -2px;
+  right: -2px;
+  background: linear-gradient(-45deg, #FEBDAB 24%,#F3A9F8 66%,#E0D8F0 100%, #EAF7FE 100%, #EAF7FE 100%);
+  border-radius: 20px;
+  z-index: -1;
+}
+.testimonials__cards_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.testimonials__img {
+  margin: 15px 10px 11px 16px;
+}
+.testimonials__cards_subtitle {
+  margin-top: 5px;
+}
+.testimonials__cards_name {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  color: #000000;
+}
+.testimonials__cards_local {
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 120%;
+  color: #BDBDBD;
+}
+.testimonials__cards_description {
+  margin: 0px 13px 19px 16px;
+  overflow: hidden;
+  height: 309px;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 120%;
+  color: #767474;
+}
+.testimonials__progress {
+  position: relative;
+  background: #F5F7F6;
+  border-radius: 5px;
+  width: 599px;
+  height: 8px;
+  margin-top: 21px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.testimonials__progress::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  background: linear-gradient(-45deg, #FEBDAB 24%,#F3A9F8 66%,#E0D8F0 100%, #EAF7FE 100%, #EAF7FE 100%);
+  border-radius: 5px;
+}
+.testimonials__scroll {
+  background: #F5F7F6;
+  height: 6px;
+  width: 597px;
+}
+.testimonials__btn {
+  background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+  border-radius: 5px;
+  margin-top: 31px;
+  width: 298px;
+  height: 54px;
+}
+.testimonials__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 140%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  width: 298px;
+  height: 54px;
+  border-radius: 5px;
+  transition: all .5s ease;
+}
+.testimonials__button:hover {
+  background: #E47209;
+}
+.testimonials__flower {
+  background-image: url("../../assets/images/leav_foto.png");
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 300.92px;
+  height: 295.45px;
+  left: 1352.67px;
+  top: 4258.88px;
 }
