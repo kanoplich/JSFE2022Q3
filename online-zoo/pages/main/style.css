@@ -80,16 +80,12 @@ body{
   top: 22.64px;
   left: 10.23px;
 }
-.header__menu {
-}
 .menu__item {
   display: flex;
   font-weight: 500;
   font-size: 16px;
   line-height: 140%;
   margin-right: 375px;
-}
-.menu__list {
 }
 .menu__link {
   color: #ffffff;
@@ -102,8 +98,6 @@ body{
 }
 .active {
   color:  #FE9013;
-}
-.designed__link {
 }
 .designed__link a{
   color: #ffffff;
@@ -930,7 +924,6 @@ body{
 .active {
   color:  #FE9013;
 }
-
 .footer__name {
   font-weight: 100;
   font-size: 16px;
