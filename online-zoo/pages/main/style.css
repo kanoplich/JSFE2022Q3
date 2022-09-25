@@ -28,6 +28,9 @@ h6 {
   font-weight: inherit;
   font-size: inherit;
 }
+html {
+  scroll-behavior: smooth;
+}
 body{
   font-family: 'Roboto', sans-serif;
   font-style: normal;
@@ -113,14 +116,12 @@ body{
 /* Favorite animal */
 
 .favorite_animal{
-  background: url("../../assets/images/Giant\ Panda.png");
+  background: url("../../assets/images/Giant_Panda.png");
   background-repeat: no-repeat;
   position: relative;
   margin-top: -80px;
   width: 1600px;
   height: 780px;
-}
-.favorite_animal__container {
 }
 .circle {
   position: absolute;
@@ -159,7 +160,6 @@ body{
   background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
   border-radius: 25px;
 }
-
 .favorite_animal__button {
   display: flex;
   justify-content: center;
@@ -190,7 +190,6 @@ body{
   top: 792px;
   left: 1395px;
 }
-
 .backstage {
   padding-top: 140px;
 }
@@ -199,7 +198,7 @@ body{
   justify-content: space-between;
 }
 .backstage__picture {
-  background-image: url("../../assets/images/bamboo-cap.png");
+  background-image: url("../../assets/images/bamboo_cap.png");
   background-repeat: no-repeat;
   width: 609px;
   height: 403px;
@@ -455,6 +454,13 @@ body{
 .friend__paragraph2 {
   margin: 42px 0px 0px 99px;
   font-weight: 500;
+  font-size: 16px;
+  line-height: 130%;
+  color: #333B41;
+}
+.friend__paragraph3 a {
+  border-bottom:1px solid #FE9013;
+  font-weight: 400;
   font-size: 16px;
   line-height: 130%;
   color: #333B41;
@@ -746,15 +752,11 @@ body{
   background-color: #111115;
   height: 443px;
 }
-.footer__container {
-}
 .footer__form_wrapper {
   padding-top: 40px;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-}
-.footer__form {
 }
 .form__title {
   font-weight: 400;
