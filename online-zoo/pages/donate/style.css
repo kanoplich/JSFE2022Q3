@@ -229,16 +229,47 @@ body{
   margin-left: auto;
   margin-right: auto;
   margin-top: 16px;
+  position: relative;
+}
+.wrapper__progress_line {
+  position: absolute;
+  left: 31px;
+  top: 12px;
+  width: 915px;
+  height: 2px;
+  background: #72828E;
 }
 .wrapper__count {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  width: 955px;
-  margin: 0 90px;
+  width: 915px;
 }
 .count {
-  margin-top: 15px;
+  position: relative;
+  display: block;
+  cursor: pointer;
+  margin-top: -5px;
+  background: #FFEE2E;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+.count:before {
+  content: '';
+  position: absolute;
+  display: block;
+  top: -15px;
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  border-radius: 50%;
+}
+.count span {
+  cursor: default;
+  display: inline-block;
+  margin-left: -30px;
+  margin-top: 35px;
   font-weight: 500;
   font-size: 26px;
   line-height: 140%;
@@ -250,10 +281,25 @@ body{
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
+}
+.form__dollar {
+  position: absolute;
+  background-image: url("../../assets/icons/dollar.svg");
+  background-repeat: no-repeat;
+  width: 10px;
+  height: 20px;
+  top: 116px;
+  left: 694px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 .wrapper__input_number {
   padding-left: 10px;
-  margin-top: 48px;
+  margin-top: 100px;
   border-radius: 5px;
   width: 268px;
   height: 54px;
@@ -263,6 +309,7 @@ body{
   line-height: 140%;
   color: #929699;
   margin-bottom: 25px;
+  background-color: inherit;
 }
 .form__wrapper {
   display: flex;
@@ -270,14 +317,15 @@ body{
   width: 218px;
   padding-bottom: 32px;
 }
-/* .form__radio input[type=radio] {
+.form__radio input[type=radio] {
+  display: none;
 }
-.form_radio label {
+.form__radio label {
 	display: inline-block;
 	cursor: pointer;
 	position: relative;
-	padding-left: 25px;
-	margin-right: 0;
+	padding-left: 30px;
+	margin-right: 15px;
 	line-height: 18px;
 	user-select: none;
 }
@@ -293,8 +341,8 @@ body{
   
 }
 .form__radio input[type=radio]:checked + label:before {
-	background: url(/img/radio-2.png) 0 0 no-repeat;
-} */
+	background: url("../../assets/icons/elem1.svg") 0 0 no-repeat;
+}
 .friend__btn {
   background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
   border-radius: 25px;
