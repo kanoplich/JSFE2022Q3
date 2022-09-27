@@ -672,16 +672,23 @@ body{
   color: #767474;
 }
 .testimonials__progress {
+}
+input[type="range"] {
+  -webkit-appearance: none;
+  outline: none;
+  cursor: pointer;
   position: relative;
   background: #F5F7F6;
   border-radius: 5px;
   width: 599px;
   height: 8px;
   margin-top: 23px;
+  display: block;
   margin-left: auto;
   margin-right: auto;
+
 }
-.testimonials__progress::before {
+input[type="range"]::before {
   content: "";
   position: absolute;
   top: -1px;
@@ -692,15 +699,18 @@ body{
   border-radius: 5px;
   z-index: -1;
 }
-.testimonials__progress > span {
-  cursor: pointer;
-  display: block;
+input[type="range"]::-webkit-slider-thumb-track {
+  -webkit-appearance: none;
+
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
   background: #FE9013;
   border-radius: 5px;
   width: 115.19px;
   height: 8px;
 }
-.testimonials__progress > span:hover{
+input[type="range"]::-webkit-slider-thumb:hover{
   background: #E47209;
 }
 .testimonials__btn {
