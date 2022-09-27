@@ -671,8 +671,6 @@ body{
   line-height: 120%;
   color: #767474;
 }
-.testimonials__progress {
-}
 input[type="range"] {
   -webkit-appearance: none;
   outline: none;
@@ -701,7 +699,6 @@ input[type="range"]::before {
 }
 input[type="range"]::-webkit-slider-thumb-track {
   -webkit-appearance: none;
-
 }
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
