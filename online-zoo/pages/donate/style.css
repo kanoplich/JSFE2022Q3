@@ -30,6 +30,7 @@ h6 {
 }
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 body{
   font-family: 'Roboto', sans-serif;
@@ -54,20 +55,19 @@ body{
   z-index: 1;
 }
 .header__img {
-  position: absolute;
-  left: 0;
-  top: 80px;
-  background-image: url("../../assets/images/panda_bg.png");
+  background-image: url("../../assets/images/Giant_Panda.png");
   background-repeat: no-repeat;
-  height: 387px;
-  width: 1600px;
+  background-position: center center;
+  background-size: 100%;
+  height: 386px;
+  max-width: 100%;
 }
 .header__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 14px;
-
+  padding-bottom: 13px;
 }
 .header__logo{
   position: relative;
@@ -578,3 +578,81 @@ li a span{
 
 /* Media */
 
+@media screen and (max-width: 1280px) {
+  .container{
+    width: calc(100% - 60px);
+  }
+  .header__img {
+    background-image: url("../../assets/images/panda_bg1000.png");
+    height: 390px;
+  }
+  .menu__item {
+    margin-right: 200px;
+  }
+  .menu__link {
+    margin: 0 24px;
+  }
+  .friend {
+    height: 1720px;
+  }
+  .friend__container {
+    padding-top: 40px;
+  }
+  .friend__title {
+    max-width: 775px;
+  }
+  .friend__paragraph {
+    margin-top: 30px;
+  }
+  .friend__subtitle {
+    margin-top: 44px;
+  }
+  .friend__wrapper {
+    margin-top: 40px;
+    height: 918px;
+  }
+  .wrapper__title {
+    padding: 20px 10px 0px 0px;
+  }
+  .wrapper__title_text {
+    margin: 10px 0px 0px 49px;
+  }
+  .wrapper__amount {
+    margin-left: 65px;
+  }
+  .wrapper__progress_bar {
+    width: 810px;
+  }
+  .wrapper__progress_line {
+    left: 11px;
+    width: 785px;
+  }
+  .wrapper__count {
+    width: 785px;
+  }
+  .wrapper__count div:nth-child(1) {
+    display: none;
+  }
+  .count span {
+    margin-left: -10px;
+    margin-top: 30px;
+  }
+  .form__dollar {
+    position: absolute;
+    background-image: url("../../assets/icons/dollar.svg");
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 20px;
+    top: 116px;
+    left: 584px;
+  }
+  .footer__form {
+    margin-right: 34px;
+  }
+  .footer__item {
+    margin-left: 200px;
+  }
+  .footer__link {
+    margin: 0 24px;
+  }
+}
