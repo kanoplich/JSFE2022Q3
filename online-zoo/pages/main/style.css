@@ -63,7 +63,6 @@ body{
   justify-content: space-between;
   align-items: center;
   padding-top: 14px;
-
 }
 .header__logo{
   position: relative;
@@ -82,11 +81,14 @@ body{
   font-size: 19.0145px;
   line-height: 120%;
 }
-.bamboo-icon {
+.bamboo-icon_header {
   cursor: pointer;
   position: absolute;
   top: 22.64px;
   left: 10.23px;
+}
+.header__burger__menu {
+  display: none;
 }
 .menu__item {
   display: flex;
@@ -203,7 +205,7 @@ body{
 .backstage__content {
   display: flex;
   flex-direction: column;
-  width: 465px;
+  max-width: 465px;
   height: 400px;
 }
 .backstage__title {
@@ -444,16 +446,16 @@ body{
   line-height: 130%;
   color: #333B41;
 }
-.friend__paragraph3 a {
-  border-bottom:1px solid #FE9013;
+.friend__paragraph3 {
+  max-width: 863px;
+  margin: 11px 0px 0px 99px;
   font-weight: 400;
   font-size: 16px;
   line-height: 130%;
   color: #333B41;
 }
-.friend__paragraph3 {
-  width: 863px;
-  margin: 11px 0px 0px 99px;
+.friend__paragraph3 a {
+  border-bottom:1px solid #FE9013;
   font-weight: 400;
   font-size: 16px;
   line-height: 130%;
@@ -813,8 +815,14 @@ input[type="range"]::-webkit-slider-thumb:hover{
   border: 1px solid #FFFFFF;
   border-radius: 2px;
 }
+.bamboo-icon_footer {
+  cursor: pointer;
+  position: absolute;
+  top: 22.64px;
+  left: 10.23px;
+}
 .footer__logo__title {
-  margin-top: .5px;
+  margin-top: 0.5px;
   text-align: center;
 }
 .footer__logo__title a {
@@ -1150,5 +1158,368 @@ li a span{
   }
   .footer__link {
     margin: 0 24px;
+  }
+}
+
+@media screen and (max-width: 999px) {
+  .container{
+    width: calc(100% - 40px);
+  }
+  .menu__item {
+    margin-right: 100px;
+  }
+  .header{
+    background-image: url("../../assets/images/Giant_Panda768.png");
+    height: 373px;
+  }
+  .header__item {
+    height: 34px;
+  }
+  .header__container {
+    padding: 0px;
+  }
+  .header__logo{
+    width: 46.86px;
+    height: 29.03px;
+    border: none;
+    border-radius: none;
+    line-height: 95%;
+  }
+  .header__logo__title {
+    margin-top: 2px;
+  }
+  .header__logo__title a {
+    font-size: 12.2899px;
+    line-height: 0;
+  }
+  .bamboo-icon_header {
+    cursor: pointer;
+    position: absolute;
+    width: 8.54px;
+    height: 13.56px;
+    left: 3.48px;
+    top: 16.99px;
+  }
+  .circle {
+    width: 237.6px;
+    height: 237.6px;
+    left: calc(50% - 237.6px/2 + 130.44px);
+    top: 44.23px;
+  }
+  .favorite_animal__title {
+    font-size: 85px;
+    left: calc(50% - 255.64px/2 + 176.76px);
+    top: 82.04px;
+    font-size: 54.2894px;
+    line-height: 75%;
+    max-width: 255px;
+    text-align: center;
+  }
+  .favorite_animal__btn {
+    left: calc(50% - 298px/2 - 151px);
+    top: 279px;
+  }
+  .header__menu {
+    display: none;
+  }
+  .designed__link {
+    display: none;
+  }
+  .header__burger {
+    position: relative;
+    z-index: 3;
+    display: block;
+    width: 18px;
+    height: 10px;
+    margin-top: 5px;
+  }
+  .header__burger:before,
+  .header__burger:after {
+    content: '';
+    background-color: #FFFFFF;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    left: 0;
+    transition: all 0.5s ease 0s;
+  }
+  .header__burger:before {
+    top: 0;
+  }
+  .header__burger:after {
+    bottom: 0;
+  }
+  .header__burger span {
+    position: absolute;
+    background-color: #FFFFFF;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    top: 4px;
+    transition: all 0.3s ease 0s;
+  }
+  .header__burger.active {
+    position: fixed;
+    z-index: 3;
+    display: block;
+    width: 18px;
+    height: 10px;
+    margin-right: 53px;
+    right: 0;
+  }
+  .header__burger.active:before {
+    transform: rotate(90deg);
+    top: 10px;
+    left: 10px;
+  }
+  .header__burger.active:after {
+    transform: rotate(90deg);
+    bottom: 10px;
+    left: -10px;
+  }
+  .header__burger.active span {
+    transform: rotate(90deg);
+  }
+  .backstage__flower {
+    display: block;
+    background-image: url("../../assets/images/flower_foto768.png");
+    right: -100px;
+    top: 368px;
+    width: 231px;
+    height: 476px;
+  }
+  .backstage__picture {
+    display: none;
+  }
+  .backstage__content {
+    max-width: 492px;
+  }
+  .backstage {
+    padding-top: 60px;
+  }
+  .backstage__container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .backstage__title {
+    padding-bottom: 20px;
+  }
+  .backstage__subtitle {
+    padding: 30px 0px 20px 5px;
+  }
+  .backstage__content {
+    width: 495px;
+  }
+  .pets {
+    padding-top: 20px;
+  }
+  .pets__cards__wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+  .pets__cards__wrapper :nth-child(5) {
+    display: none;
+  }
+  .pets__cards__wrapper :nth-child(6) {
+    display: none;
+  }
+  .pets__cards {
+    width: 285px;
+    height: 332px;
+  }
+  .picture {
+    width: 285px;
+  }
+  .cards__name {
+    margin: 6px 0px 0px 11px;
+  }
+  .name {
+    font-size: 12.4695px;
+  }
+  .country {
+    font-size: 11.6901px;
+  }
+  .cards__food_banana{
+    background-image: url("../../assets/icons/banana-bamboo_icon768.svg");
+    background-repeat: no-repeat;
+    width: 25.72px;
+    height: 28.84px;
+    margin: 8px 9px 0px 0px;
+  }
+  .cards__food_meat {
+    background-image: url("../../assets/icons/meet_fish_icon768.svg");
+    width: 37.41px;
+    height: 29.62px;
+    margin: 6px 6px 0px 0px;
+  }
+  .pets__btn {
+    margin-top: 60px;
+    margin-bottom: 100px;
+  }
+  .pets__btn_left {
+    left: 244px;
+    top: 1225px;
+  }
+  .pets__btn_right {
+    right: 243px;
+    top: 1225px;
+  }
+  .pets_flower1{
+    background-image: url("../../assets/images/palm_foto768.png");
+    left: 0;
+    top: 1650px;
+  }
+  .pets_flower2 {
+    background-image: url("../../assets/images/strelitzia768.png");
+    right: -195px;
+    top: 1720px;
+  }
+  .friend {
+    height: 781px;
+    padding-top: 20px;
+  }
+  .friend__container {
+    height: 741px;
+    max-width: 640px;
+    width: 100%;
+  }
+  .friend__title {
+    font-size: 42px;
+    padding-top: 10px;
+  }
+  .friend__paragraph1 {
+    margin: 22px 0px 0px 20px;
+    font-size: 22px;
+  }
+  .friend__paragraph2 {
+    margin: 20px 0px 0px 20px;
+    max-width: 600px;
+    font-size: 16px;
+  }
+  .friend__paragraph3 {
+    max-width: 600px;
+    margin: 11px 0px 0px 20px;
+    font-size: 16px;
+  }
+  .friend__subtitle {
+    margin-top: 30px;
+    padding-bottom: 20px;
+  }
+  .friend__btn {
+    margin-top: 40px;
+  }
+  .friend__cards {
+    position: relative;
+    width: 590px;
+    margin-left: 20px;
+  }
+  .card__vector1 {
+    background-image: url("../../assets/icons/arrow.svg");
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 0;
+    position: absolute;
+    left: 140px;
+    top: -17px;
+    z-index: 10;
+  }
+  .card__vector2 {
+    background-image: url("../../assets/icons/arrow.svg");
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 0;
+    position: absolute;
+    left: 345px;
+    top: -17px;
+    z-index: 10;
+  }
+  .testimonials {
+    padding-top: 60px;
+  }
+  .testimonials__cards_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+  }
+  .testimonials__cards {
+    width: 600px;
+    height: 109px;
+    margin-bottom: 15px;
+  }
+  .testimonials__cards_description {
+    margin: 0px 29px 8px 18px;
+    overflow: hidden;
+    height: 39px;
+    line-height: 120%;
+  }
+  input[type="range"] {
+    display: none;
+  }
+  .testimonials__btn {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 28px;
+    margin-bottom: 80px;
+    width: 240px;
+  }
+  .testimonials__button {
+    width: 240px;
+  }
+  .testimonials__flower {
+    background-image: url("../../assets/images/leav_foto768.png");
+    right: -183px;
+    top: 3170.2px;
+  }
+  .footer {
+    height: 282px;
+  }
+  .footer__form {
+    display: none;
+  }
+  .instagram,
+  .facebook,
+  .twitter {
+    margin-bottom: 20px;
+  }
+  .instagram span {
+    display: none;
+  }
+  .facebook span {
+    display: none;
+  }
+  .youtube span {
+    display:  none;
+  }
+  .twitter span {
+    display: none;
+  }
+  .footer__form_wrapper {
+    padding-top: 10px;
+  }
+  .footer__logo{
+    margin: 1px 0px 30px 0px;
+  }
+  .footer__item {
+    margin: 0;
+  }
+  .footer__nav_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 67px;
+  }
+  .footer__social {
+    padding-top: 0px;
+    position: absolute;
+    right: 25px;
+    margin-bottom: 75px;
+  }
+  .footer__link {
+    margin: 0 18px;
   }
 }
