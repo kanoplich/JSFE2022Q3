@@ -1546,12 +1546,6 @@ li a span{
     height: 187px;
     margin-top: 34px;
   }
-  .header__item {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
   .circle {
     width: 119.09px;
     height: 119.09px;
@@ -1580,7 +1574,7 @@ li a span{
     height: 217px;
   }
   .backstage__content {
-    max-width: 492px;
+    max-width: calc(95%);
   }
   .backstage {
     padding-top: 60px;
