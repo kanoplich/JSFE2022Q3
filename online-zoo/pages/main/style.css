@@ -39,8 +39,15 @@ body{
 .container{
   margin: 0 auto;
   max-width: 1160px;
+  width: 100%;
 }
-
+.wrapper {
+  margin: 0 auto;
+  max-width: 1600px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
 /* Header */
 
 .header{
@@ -95,7 +102,7 @@ body{
   font-weight: 500;
   font-size: 16px;
   line-height: 140%;
-  margin-right: 340px;
+  margin-right: 390px;
 }
 .menu__link {
   color: #ffffff;
@@ -1012,7 +1019,7 @@ li a span{
     height: 584px;
   }
   .menu__item {
-    margin-right: 200px;
+    margin-right: 215px;
   }
   .menu__link {
     margin: 0 24px;
@@ -1174,6 +1181,10 @@ li a span{
   }
   .header__item {
     height: 34px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
   .header__container {
     padding: 0px;
@@ -1482,9 +1493,10 @@ li a span{
   .footer__form {
     display: none;
   }
-  .instagram,
-  .facebook,
-  .twitter {
+  .instagram {
+    margin-bottom: 20px;
+  }
+  .facebook {
     margin-bottom: 20px;
   }
   .instagram span {
@@ -1506,7 +1518,7 @@ li a span{
     margin: 1px 0px 30px 0px;
   }
   .footer__item {
-    margin: 0;
+    margin-left: -15px;
   }
   .footer__nav_wrapper {
     display: flex;
@@ -1517,8 +1529,8 @@ li a span{
   .footer__social {
     padding-top: 0px;
     position: absolute;
-    right: 25px;
-    margin-bottom: 75px;
+    right: 22px;
+    margin-bottom: 85px;
   }
   .footer__link {
     margin: 0 18px;
