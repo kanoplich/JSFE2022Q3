@@ -5,6 +5,7 @@ const BODY = document.querySelector('body');
 const burger = () => {
   BURGER.classList.toggle('active');
   BURGER_MENU.classList.toggle('active');
+  SHADOW.classList.toggle('active');
   BODY.classList.toggle('lock');
 };
 
