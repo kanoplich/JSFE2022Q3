@@ -30,7 +30,6 @@ h6 {
 }
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
 }
 body{
   font-family: 'Roboto', sans-serif;
@@ -93,6 +92,9 @@ body{
   position: absolute;
   top: 22.64px;
   left: 10.23px;
+}
+.header__burger__menu {
+  display: none;
 }
 .header__burger__menu {
   display: none;
@@ -247,12 +249,41 @@ body{
 .pets {
   padding-top: 180px;
 }
+.pets__container {
+  position: relative;
+  width: 1160px;
+  height: 872px;
+  overflow: hidden;
+}
 .pets__cards__wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  left: -1160px;
+}
+.pets__cards__body {
   display: grid;
   justify-items: center; 
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  grid-gap: 20px 30px;
+  grid-gap: 20px 31px;
+}
+@keyframes move-right {
+  from {left: -1160px;}
+  to {left: -2320px;}
+}
+.transition-right {
+  animation-name: move-right;
+  animation-duration: 1.2s;
+}
+@keyframes move-left {
+  from {left: -1160px;}
+  to {left: 0px;}
+}
+.transition-left {
+  animation-name: move-left;
+  animation-duration: 1.2s;
 }
 .pets__cards {
   cursor: pointer;
@@ -271,7 +302,7 @@ body{
   width: 100%;
   height: 100%;
   opacity: 0;
-  background: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, .5);
   transition: all .5s ease;
   z-index: 1;
 }
@@ -289,7 +320,7 @@ body{
 }
 .cards__title {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -369,6 +400,7 @@ body{
   background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
 }
 .pets__button_left {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -388,6 +420,7 @@ body{
   background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
 }
 .pets__button_right {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -754,6 +787,15 @@ input[type="range"]::-webkit-slider-thumb:hover{
   top: 4258.88px;
   z-index: -1;
 }
+.popup1 {
+  display: none;
+}
+.popup2 {
+  display: none;
+}
+.popup3 {
+  display: none;
+}
 
 /* Footer */
 
@@ -988,8 +1030,11 @@ li a span{
 }
 
 @media screen and (max-width: 1440px) {
-  .pets__cards__wrapper {
-    grid-gap: 92px 29px;
+  .pets__container {
+    height: 944px;
+  }
+  .pets__cards__body {
+    grid-gap: 92px 31px;
   }
   .pets__btn_right {
     top: 1946px;
@@ -1065,6 +1110,27 @@ li a span{
   .pets {
     padding-top: 140px;
   }
+  .pets__container {
+    position: relative;
+    width: 944px;
+    height: 872px;
+    overflow: hidden;
+  }
+  .pets__cards__wrapper {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: -944px;
+  }
+  @keyframes move-right {
+    from {left: -944px;}
+    to {left: -1888px;}
+  }
+  @keyframes move-left {
+    from {left: -944px;}
+    to {left: 0px;}
+  }
   .pets__cards {
     width: 294px;
     height: 354px;
@@ -1086,11 +1152,11 @@ li a span{
   }
   .pets_flower1{
     left: 0;
-    top: 2123px;
+    top: 2195px;
   }
   .pets_flower2 {
-    right: -125px;
-    top: 2145px;
+    right: -127px;
+    top: 2217px;
   }
   .friend {
     height: 876px;
@@ -1154,8 +1220,8 @@ li a span{
     margin-bottom: 140px;
   }
   .testimonials__flower {
-    right: -103px;
-    top: 3808px;
+    right: -105px;
+    top: 3880px;
   }
   .footer__form {
     margin-right: 34px;
@@ -1171,6 +1237,9 @@ li a span{
 @media screen and (max-width: 999px) {
   .container{
     width: calc(100% - 40px);
+  }
+  body.lock {
+    overflow: hidden;
   }
   .menu__item {
     margin-right: 100px;
@@ -1237,6 +1306,7 @@ li a span{
     display: none;
   }
   .header__burger {
+    cursor: pointer;
     position: relative;
     z-index: 3;
     display: block;
@@ -1253,7 +1323,7 @@ li a span{
     height: 2px;
     border-radius: 2px;
     left: 0;
-    transition: all 0.5s ease 0s;
+    transition: all 0.5s ease;
   }
   .header__burger:before {
     top: 0;
@@ -1269,7 +1339,7 @@ li a span{
     height: 2px;
     border-radius: 2px;
     top: 4px;
-    transition: all 0.3s ease 0s;
+    transition: all 0.3s ease;
   }
   .header__burger.active {
     position: fixed;
@@ -1277,21 +1347,72 @@ li a span{
     display: block;
     width: 18px;
     height: 10px;
-    margin-right: 53px;
+    margin-right: 20px;
     right: 0;
   }
   .header__burger.active:before {
-    transform: rotate(90deg);
-    top: 10px;
-    left: 10px;
+    transform: rotate(45deg);
+    top: 4px;
+    background-color: #FE9013;
+    border-radius: 2px;
   }
   .header__burger.active:after {
-    transform: rotate(90deg);
-    bottom: 10px;
-    left: -10px;
+    transform: rotate(-45deg);
+    bottom: 4px;
+    background-color: #FE9013;
+    border-radius: 2px;
   }
   .header__burger.active span {
-    transform: rotate(90deg);
+    transform: scale(0);
+  }
+  .header__logo__burger{
+    position: relative;
+    width: 65.6px;
+    height: 41.6px;
+    border: 1px solid #FE9013;
+    border-radius: 2px;
+    margin: 10px 0 30px 10px;
+  }
+  .header__logo__title__burger {
+    margin-top: .5px;
+    text-align: center;
+  }
+  .header__logo__title__burger a {
+    color: #FE9013;
+    font-weight: 400;
+    font-size: 15.2116px;
+    line-height: 120%;
+  }
+  .bamboo-icon_header__burger {
+    cursor: pointer;
+    position: absolute;
+    top: 18.64px;
+    left: 7.23px;
+  }
+  .header__burger__menu {
+    position: fixed;
+    background-color: #FFFFFF;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 330px;
+    display: flex;
+    flex-direction: column;
+    transition: all .5s ease;
+  }
+  .header__burger__menu.active {
+    top: 0;
+    right: 0;
+    transition: all .5s ease;
+  }
+  .menu__burger__list {
+    padding: 0 0 15px 10px;
+  }
+  .menu__burger__link {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 140%;
+    color: #333B41;
   }
   .backstage__flower {
     display: block;
@@ -1326,7 +1447,7 @@ li a span{
   .pets {
     padding-top: 20px;
   }
-  .pets__cards__wrapper {
+  .pets__cards__body {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
   }
@@ -1335,6 +1456,27 @@ li a span{
   }
   .pets__cards__wrapper :nth-child(6) {
     display: none;
+  }
+  .pets__container {
+    position: relative;
+    width: 601px;
+    height: 757px;
+    overflow: hidden;
+  }
+  .pets__cards__wrapper {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: -601px;
+  }
+  @keyframes move-right {
+    from {left: -601px;}
+    to {left: -1202px;}
+  }
+  @keyframes move-left {
+    from {left: -570px;}
+    to {left: 0px;}
   }
   .pets__cards {
     width: 285px;
@@ -1535,6 +1677,107 @@ li a span{
   .footer__link {
     margin: 0 18px;
   }
+  .popup {
+    position: fixed;
+    cursor: pointer;
+    display: none;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .7);
+  }
+  .popup1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  .popup2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  .popup3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+  .testimonials__cards_popup {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    background: #F1F3F2;
+    border-radius: 20px;
+    width: 266px;
+    height: 389px;
+  }
+  .testimonials__cards_popup::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    left: -2px;
+    right: -2px;
+    background: linear-gradient(-45deg, #FEBDAB 24%,#F3A9F8 66%,#E0D8F0 100%, #EAF7FE 100%, #EAF7FE 100%);
+    border-radius: 20px;
+    z-index: -1;
+  }
+  .testimonials__cards_title_popup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .testimonials__img_popup {
+    margin: 15px 10px 11px 16px;
+  }
+  .testimonials__cards_subtitle_popup {
+    margin-top: 5px;
+  }
+  .testimonials__cards_name_popup {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    color: #000000;
+  }
+  .testimonials__cards_local_popup {
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 120%;
+    color: #BDBDBD;
+  }
+  .testimonials__cards_description_popup {
+    margin: 0px 13px 19px 16px;
+    overflow: hidden;
+    height: 309px;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 120%;
+    color: #767474;
+  }
+  .testimonials__cards_popup_close {
+    position: absolute;
+    top: 15px;
+    right: 5px;
+    cursor: pointer;
+    background-image: url("../../assets/icons/close.svg");
+    background-repeat: no-repeat;
+    width: 14px;
+    height: 14px;
+    margin: 0 10px 10px 0;
+  }
 }
 
 @media screen and (max-width: 639px) {
@@ -1545,6 +1788,9 @@ li a span{
     background-image: url("../../assets/images/Giant_Panda320.png");
     height: 187px;
     margin-top: 34px;
+  }
+  .header__burger.active {
+    margin-right: 10px;
   }
   .circle {
     width: 119.09px;
@@ -1601,10 +1847,23 @@ li a span{
   .pets {
     padding-top: 44px;
   }
-  .pets__cards__wrapper {
+  .pets__cards__body {
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(1, 1fr);
     gap: 20px;
+  }
+  .pets__container {
+    position: relative;
+    width: 285px;
+    height: 1388px;
+    overflow: hidden;
+  }
+  .pets__cards__wrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 0;
   }
   .pets__btn {
     margin-top: 20px;

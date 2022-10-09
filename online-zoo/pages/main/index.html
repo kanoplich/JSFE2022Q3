@@ -20,7 +20,7 @@
               <a href="#!">PetStory online</a>
             </h1>
           </div>
-          <div class="header__burger">
+          <div class="header__burger" id="header__burger">
             <span></span>
           </div>
           <nav class="header__menu">
@@ -47,10 +47,16 @@
           </div>
         </div>
         <div class="header__burger__container">
-          <nav class="header__burger__menu">
+          <nav class="header__burger__menu" id="header__burger__menu">
+            <div class="header__logo__burger">
+              <h1 class="header__logo__title__burger"><img class="bamboo-icon_header__burger" src="../../assets/icons/bamboo__burger.svg"
+                  alt="bamboo_icon__burger">
+                <a href="#!">PetStory online</a>
+              </h1>
+            </div>
             <ul class="menu__burger__item">
               <li class="menu__burger__list">
-                <a class="menu__burger__link active" href="#about">About</a>
+                <a class="menu__burger__link" href="#about">About</a>
               </li>
               <li class="menu__burger__list">
                 <a class="menu__burger__link" href="#map">Map</a>
@@ -63,6 +69,9 @@
               </li>
               <li class="menu__burger__list">
                 <a class="menu__burger__link" href="#contact">Contact us</a>
+              </li>
+              <li class="menu__burger__list">
+                <a class="menu__burger__link" href="https://www.figma.com/file/jfEFwkXVj1WRq7sUHDr8os/PetStory-online">Designed by ©</a>
               </li>
             </ul>
           </nav>
@@ -96,77 +105,203 @@
       </section>
       <section class="pets">
         <div class="pets__container container">
-          <div class="pets__cards__wrapper">
-            <div class="pets__cards">
-              <img src="../../assets/images/pandas.png" alt="Giant pandas" class="picture">
-              <div class="cards__title">
-                <div class="cards__name">
-                  <h3 class="name">Giant pandas</h3>
-                  <h4 class="country">Native to Southwest China</h4>
+          <div class="pets__cards__wrapper" id="carousel">
+            <div class="pets__cards__body" id="item-left">
+              <div class="pets__cards">
+                <img src="../../assets/images/eagles.png" alt="Eagles" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Eagles</h3>
+                    <h4 class="country">Native to South America</h4>
+                  </div>
+                  <div class="cards__food_meat"></div>
                 </div>
-                <div class="cards__food_banana"></div>
+              </div>
+              <div class="pets__cards">
+                <img src="../../assets/images/pandas.png" alt="Giant pandas" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Giant pandas</h3>
+                    <h4 class="country">Native to Southwest China</h4>
+                  </div>
+                  <div class="cards__food_banana"></div>
+                </div>
+              </div>
+              <div class="pets__cards">
+                <img src="../../assets/images/sloth.png" alt="Two-toed sloth" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Two-toed sloth</h3>
+                    <h4 class="country">Mesoamerica, South America</h4>
+                  </div>
+                  <div class="cards__food_banana"></div>
+                </div>
+              </div>
+              <div class="pets__cards">
+                <img src="../../assets/images/cheetahs.png" alt="Cheetahs" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Cheetahs</h3>
+                    <h4 class="country">Native to Africa</h4>
+                  </div>
+                  <div class="cards__food_meat"></div>
+                </div>
+              </div>
+              <div class="pets__cards">
+                <img src="../../assets/images/penguins.png" alt="Penguins" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Penguins</h3>
+                    <h4 class="country">Native to Antarctica</h4>
+                  </div>
+                  <div class="cards__food_meat"></div>
+                </div>
+              </div>
+              <div class="pets__cards">
+                <img src="../../assets/images/gorillas.png" alt="Gorillas" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Gorillas</h3>
+                    <h4 class="country">Native to Congo</h4>
+                  </div>
+                  <div class="cards__food_banana"></div>
+                </div>
               </div>
             </div>
-            <div class="pets__cards">
-              <img src="../../assets/images/eagles.png" alt="Eagles" class="picture">
-              <div class="cards__title">
-                <div class="cards__name">
-                  <h3 class="name">Eagles</h3>
-                  <h4 class="country">Native to South America</h4>
+            <div class="pets__cards__body" id="item-active">
+              <div class="pets__cards">
+                <img src="../../assets/images/pandas.png" alt="Giant pandas" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Giant pandas</h3>
+                    <h4 class="country">Native to Southwest China</h4>
+                  </div>
+                  <div class="cards__food_banana"></div>
                 </div>
-                <div class="cards__food_meat"></div>
+              </div>
+              <div class="pets__cards">
+                <img src="../../assets/images/eagles.png" alt="Eagles" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Eagles</h3>
+                    <h4 class="country">Native to South America</h4>
+                  </div>
+                  <div class="cards__food_meat"></div>
+                </div>
+              </div>
+              <div class="pets__cards">
+                <img src="../../assets/images/gorillas.png" alt="Gorillas" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Gorillas</h3>
+                    <h4 class="country">Native to Congo</h4>
+                  </div>
+                  <div class="cards__food_banana"></div>
+                </div>
+              </div>
+              <div class="pets__cards">
+                <img src="../../assets/images/sloth.png" alt="Two-toed sloth" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Two-toed sloth</h3>
+                    <h4 class="country">Mesoamerica, South America</h4>
+                  </div>
+                  <div class="cards__food_banana"></div>
+                </div>
+              </div>
+              <div class="pets__cards">
+                <img src="../../assets/images/alligators.png" alt="Alligators" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Alligators</h3>
+                    <h4 class="country">Native to Southeastern U. S.</h4>
+                  </div>
+                  <div class="cards__food_meat"></div>
+                </div>
+              </div>
+              <div class="pets__cards">
+                <img src="../../assets/images/penguins.png" alt="Penguins" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Penguins</h3>
+                    <h4 class="country">Native to Antarctica</h4>
+                  </div>
+                  <div class="cards__food_meat"></div>
+                </div>
               </div>
             </div>
-            <div class="pets__cards">
-              <img src="../../assets/images/gorillas.png" alt="Gorillas" class="picture">
-              <div class="cards__title">
-                <div class="cards__name">
-                  <h3 class="name">Gorillas</h3>
-                  <h4 class="country">Native to Congo</h4>
+            <div class="pets__cards__body" id="item-right">
+              <div class="pets__cards">
+                <img src="../../assets/images/penguins.png" alt="Penguins" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Penguins</h3>
+                    <h4 class="country">Native to Antarctica</h4>
+                  </div>
+                  <div class="cards__food_meat"></div>
                 </div>
-                <div class="cards__food_banana"></div>
               </div>
-            </div>
-            <div class="pets__cards">
-              <img src="../../assets/images/sloth.png" alt="Two-toed sloth" class="picture">
-              <div class="cards__title">
-                <div class="cards__name">
-                  <h3 class="name">Two-toed sloth</h3>
-                  <h4 class="country">Mesoamerica, South America</h4>
+              <div class="pets__cards">
+                <img src="../../assets/images/eagles.png" alt="Eagles" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Eagles</h3>
+                    <h4 class="country">Native to South America</h4>
+                  </div>
+                  <div class="cards__food_meat"></div>
                 </div>
-                <div class="cards__food_banana"></div>
               </div>
-            </div>
-            <div class="pets__cards">
-              <img src="../../assets/images/cheetahs.png" alt="Cheetahs" class="picture">
-              <div class="cards__title">
-                <div class="cards__name">
-                  <h3 class="name">Cheetahs</h3>
-                  <h4 class="country">Native to Africa</h4>
+              <div class="pets__cards">
+                <img src="../../assets/images/gorillas.png" alt="Gorillas" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Gorillas</h3>
+                    <h4 class="country">Native to Congo</h4>
+                  </div>
+                  <div class="cards__food_banana"></div>
                 </div>
-                <div class="cards__food_meat"></div>
               </div>
-            </div>
-            <div class="pets__cards">
-              <img src="../../assets/images/penguins.png" alt="Penguins" class="picture">
-              <div class="cards__title">
-                <div class="cards__name">
-                  <h3 class="name">Penguins</h3>
-                  <h4 class="country">Native to Antarctica</h4>
+              <div class="pets__cards">
+                <img src="../../assets/images/sloth.png" alt="Two-toed sloth" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Two-toed sloth</h3>
+                    <h4 class="country">Mesoamerica, South America</h4>
+                  </div>
+                  <div class="cards__food_banana"></div>
                 </div>
-                <div class="cards__food_meat"></div>
+              </div>
+              <div class="pets__cards">
+                <img src="../../assets/images/cheetahs.png" alt="Cheetahs" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Cheetahs</h3>
+                    <h4 class="country">Native to Africa</h4>
+                  </div>
+                  <div class="cards__food_meat"></div>
+                </div>
+              </div>
+              <div class="pets__cards">
+                <img src="../../assets/images/pandas.png" alt="Giant pandas" class="picture">
+                <div class="cards__title">
+                  <div class="cards__name">
+                    <h3 class="name">Giant pandas</h3>
+                    <h4 class="country">Native to Southwest China</h4>
+                  </div>
+                  <div class="cards__food_banana"></div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="pets__btn">
-            <a href="#!" class="pets__button">Choose your favorite</a>
-          </div>
-          <div class="pets__btn_left">
-            <a href="#!" class="pets__button_left"><img src="../../assets/icons/Vector_left.svg" alt="vector"></a>
-          </div>
-          <div class="pets__btn_right">
-            <a href="#!" class="pets__button_right"><img src="../../assets/icons/Vector_right.svg" alt="vector"></a>
-          </div>
+        </div>
+        <div class="pets__btn">
+          <a href="#!" class="pets__button">Choose your favorite</a>
+        </div>
+        <div class="pets__btn_left" id="btn_left">
+          <i class="pets__button_left"><img src="../../assets/icons/Vector_left.svg" alt="vector"></i>
+        </div>
+        <div class="pets__btn_right" id="btn_right">
+          <i class="pets__button_right"><img src="../../assets/icons/Vector_right.svg" alt="vector"></i>
         </div>
         <div class="pets_flower1"></div>
         <div class="pets_flower2"></div>
@@ -207,7 +342,7 @@
         <div class="testimonials__container container">
           <h2 class="testimonials__title">Testimonials</h2>
           <div class="testimonials__cards_wrapper">
-            <div class="testimonials__cards">
+            <div class="testimonials__cards" id="cards1">
               <div class="testimonials__cards_title">
                 <img src="../../assets/icons/user_icon.svg" alt="user" class="testimonials__img">
                 <div class="testimonials__cards_subtitle">
@@ -224,7 +359,7 @@
                 gouillas. Online zoo is one jf the ways to instill a love for animals.
               </p>
             </div>
-            <div class="testimonials__cards">
+            <div class="testimonials__cards" id="cards2">
               <div class="testimonials__cards_title">
                 <img src="../../assets/images/Ellipse2.png" alt="user" class="testimonials__img">
                 <div class="testimonials__cards_subtitle">
@@ -244,7 +379,7 @@
                 gouillas. Online zoo is one jf the ways to instill a love for animals.
               </p>
             </div>
-            <div class="testimonials__cards">
+            <div class="testimonials__cards" id="cards3">
               <div class="testimonials__cards_title">
                 <img src="../../assets/images/Ellipse3.png" alt="user" class="testimonials__img">
                 <div class="testimonials__cards_subtitle">
@@ -283,7 +418,7 @@
             </div>
           </div>
           <div class="testimonials__progress">
-            <input type="range" name="range" value="1" min="1" max="100">
+            <input type="range" name="range" id="range" value="1" min="1" max="8">
           </div>
           <div class="testimonials__btn">
             <a href="#!" class="testimonials__button">Leave feedback</a>
@@ -361,7 +496,75 @@
       </div>
     </footer>
   </div>
-  <script src="../main/script.js"></script>
+  <div class="popup1" id="popup1">
+    <div class="popup" id="closeView1"></div>
+    <div class="testimonials__cards_popup" id="group1">
+      <div class="testimonials__cards_title_popup">
+        <img src="../../assets/icons/user_icon.svg" alt="user" class="testimonials__img_popup">
+        <div class="testimonials__cards_subtitle_popup">
+          <div class="testimonials__cards_name_popup">Michael John</div>
+          <div class="testimonials__cards_local_popup">Local Austria &nbsp;•&nbsp; Today</div>
+        </div>
+        <div class="testimonials__cards_popup_close" id="close1"></div>
+      </div>
+      <p class="testimonials__cards_description_popup">The best online zoo I’ve met. My son delighted very much ljves to
+        watch gouillas. Online zoo is one jf the ways to instill a love for animals.The best online zoo I’ve met.
+        My son delighted very much ljves to watch gouillas. Online zoo is one jf the ways to instill a love for
+        animals.<br>
+        The best online zoo I’ve met. My son delighted very much ljves to watch gouillas. Online zoo is one jf the
+        ways to instill a love for animals.The best online zoo I’ve met. My son delighted very much ljves to watch
+        gouillas. Online zoo is one jf the ways to instill a love for animals.
+      </p>
+    </div>
+  </div>
+  <div class="popup2" id="popup2">
+    <div class="popup" id="closeView2"></div>
+    <div class="testimonials__cards_popup" id="group2">
+      <div class="testimonials__cards_title_popup">
+        <img src="../../assets/images/Ellipse2.png" alt="user" class="testimonials__img_popup">
+        <div class="testimonials__cards_subtitle_popup">
+          <div class="testimonials__cards_name_popup">Oskar Samborsky</div>
+          <div class="testimonials__cards_local_popup">Local Austria &nbsp;•&nbsp; Yesterday</div>
+        </div>
+        <div class="testimonials__cards_popup_close" id="close2"></div>
+      </div>
+      <p class="testimonials__cards_description_popup">Online zoo is one jf the ways to instill a love for animals.The
+        best online zoo I’ve met. My son delighted very much ljves to watch gouillas. Online zoo is one jf the
+        ways to instill a love for animals.The best online zoo I’ve met. My son delighted very much ljves to watch
+        gouillas.<br>
+        The best online zoo I’ve met. My son delighted very much ljves to watch gouillas. Online zoo is one jf the
+        ways to instill a love for animals.The best online zoo I’ve met. My son delighted very much ljves to watch
+        gouillas. Online zoo is one jf the ways to instill a love for animals.<br>
+        The best online zoo I’ve met. My son delighted very much ljves to watch gouillas. Online zoo is one jf the
+        ways to instill a love for animals.The best online zoo I’ve met. My son delighted very much ljves to watch
+        gouillas. Online zoo is one jf the ways to instill a love for animals.
+      </p>
+    </div>
+  </div>
+  <div class="popup3" id="popup3">
+    <div class="popup" id="closeView3"></div>
+    <div class="testimonials__cards_popup" id="group3">
+      <div class="testimonials__cards_title_popup">
+        <img src="../../assets/images/Ellipse3.png" alt="user" class="testimonials__img_popup">
+        <div class="testimonials__cards_subtitle_popup">
+          <div class="testimonials__cards_name_popup">Fredericka Michelin</div>
+          <div class="testimonials__cards_local_popup">Local Austria &nbsp;•&nbsp; Yesterday</div>
+        </div>
+        <div class="testimonials__cards_popup_close" id="close3"></div>
+      </div>
+      <p class="testimonials__cards_description_popup">The best online zoo I’ve met. My son delighted very much ljves to
+        watch gouillas. Online zoo is one jf the ways to instill a love for animals.The best online zoo I’ve met.
+        My son delighted very much ljves to watch gouillas. Online zoo is one jf the ways to instill a love for
+        animals.<br>
+        The best online zoo I’ve met. My son delighted very much ljves to watch gouillas. Online zoo is one jf the
+        ways to instill a love for animals.The best online zoo I’ve met.<br>
+        The best online zoo I’ve met. My son delighted very much ljves to watch gouillas. Online zoo is one jf the
+        ways to instill a love for animals.The best online zoo I’ve met. My son delighted very much ljves to watch
+        gouillas. Online zoo is one jf the ways to instill a love for animals.
+      </p>
+    </div>
+  </div>
+  <script type="module" src="../main/script.js"></script>
 </body>
 
 </html>
