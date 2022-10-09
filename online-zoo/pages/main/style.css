@@ -249,12 +249,41 @@ body{
 .pets {
   padding-top: 180px;
 }
+.pets__container {
+  position: relative;
+  width: 1160px;
+  height: 872px;
+  overflow: hidden;
+}
 .pets__cards__wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  left: -1160px;
+}
+.pets__cards__body {
   display: grid;
   justify-items: center; 
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  grid-gap: 20px 30px;
+  grid-gap: 20px 31px;
+}
+@keyframes move-right {
+  from {left: -1160px;}
+  to {left: -2320px;}
+}
+.transition-right {
+  animation-name: move-right;
+  animation-duration: 1.2s;
+}
+@keyframes move-left {
+  from {left: -1160px;}
+  to {left: 0px;}
+}
+.transition-left {
+  animation-name: move-left;
+  animation-duration: 1.2s;
 }
 .pets__cards {
   cursor: pointer;
@@ -358,6 +387,7 @@ body{
   color: #FFFFFF;
   border-radius: 25px;
   transition: all .5s ease;
+  z-index: 1;
 }
 .pets__button:hover {
   background: #E47209;
@@ -989,8 +1019,11 @@ li a span{
 }
 
 @media screen and (max-width: 1440px) {
-  .pets__cards__wrapper {
-    grid-gap: 92px 29px;
+  .pets__container {
+    height: 944px;
+  }
+  .pets__cards__body {
+    grid-gap: 92px 31px;
   }
   .pets__btn_right {
     top: 1946px;
@@ -1066,6 +1099,27 @@ li a span{
   .pets {
     padding-top: 140px;
   }
+  .pets__container {
+    position: relative;
+    width: 944px;
+    height: 872px;
+    overflow: hidden;
+  }
+  .pets__cards__wrapper {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: -944px;
+  }
+  @keyframes move-right {
+    from {left: -944px;}
+    to {left: -1888px;}
+  }
+  @keyframes move-left {
+    from {left: -944px;}
+    to {left: 0px;}
+  }
   .pets__cards {
     width: 294px;
     height: 354px;
@@ -1087,11 +1141,11 @@ li a span{
   }
   .pets_flower1{
     left: 0;
-    top: 2123px;
+    top: 2195px;
   }
   .pets_flower2 {
-    right: -125px;
-    top: 2145px;
+    right: -127px;
+    top: 2217px;
   }
   .friend {
     height: 876px;
@@ -1155,8 +1209,8 @@ li a span{
     margin-bottom: 140px;
   }
   .testimonials__flower {
-    right: -103px;
-    top: 3808px;
+    right: -105px;
+    top: 3880px;
   }
   .footer__form {
     margin-right: 34px;
@@ -1382,7 +1436,7 @@ li a span{
   .pets {
     padding-top: 20px;
   }
-  .pets__cards__wrapper {
+  .pets__cards__body {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
   }
@@ -1391,6 +1445,27 @@ li a span{
   }
   .pets__cards__wrapper :nth-child(6) {
     display: none;
+  }
+  .pets__container {
+    position: relative;
+    width: 601px;
+    height: 757px;
+    overflow: hidden;
+  }
+  .pets__cards__wrapper {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: -601px;
+  }
+  @keyframes move-right {
+    from {left: -601px;}
+    to {left: -1202px;}
+  }
+  @keyframes move-left {
+    from {left: -570px;}
+    to {left: 0px;}
   }
   .pets__cards {
     width: 285px;
@@ -1660,10 +1735,23 @@ li a span{
   .pets {
     padding-top: 44px;
   }
-  .pets__cards__wrapper {
+  .pets__cards__body {
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(1, 1fr);
     gap: 20px;
+  }
+  .pets__container {
+    position: relative;
+    width: 285px;
+    height: 1388px;
+    overflow: hidden;
+  }
+  .pets__cards__wrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 0;
   }
   .pets__btn {
     margin-top: 20px;
