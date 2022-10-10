@@ -46,22 +46,23 @@ body{
   margin: 0 auto;
   max-width: 1160px;
 }
-/* .shadow {
+.shadow {
+  cursor: pointer;
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 20;
-} */
+  width: 100%;
+  background-color: rgba(0, 0, 0, .7);
+}
 /* Header */
 
 .header {
   background-color: #000000;
   height: 80px;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 .friend__img {
   background-image: url("../../assets/images/Giant_Panda.png");
@@ -717,6 +718,7 @@ li a span{
     display: none;
   }
   .header__burger {
+    cursor: pointer;
     position: relative;
     z-index: 3;
     display: block;
