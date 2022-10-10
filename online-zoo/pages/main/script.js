@@ -83,9 +83,9 @@ const stopAnimation = (event) => {
   let arr = [];
 
   while(arr.length < 6) {
-    let num = randomNumber(0, 6);
+    let num = randomNumber(0, 9);
     if (arr.includes(num)) {
-      randomNumber(0, 6);
+      randomNumber(0, 9);
     } else {
       arr.push(num);
       const card = createCard(num);
