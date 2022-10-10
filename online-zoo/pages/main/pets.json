@@ -40,5 +40,23 @@
     "img": "../../assets/images/alligators.png",
     "country": "Native to Southeastern U. S.",
     "food": "cards__food_meat"
+  },
+  {
+    "name": "Polar bears",
+    "img": "../../assets/images/polarbear.jpg",
+    "country": "Native to Arctic Circle",
+    "food": "cards__food_meat"
+  },
+  {
+    "name": "Koala bears",
+    "img": "../../assets/images/koala.png",
+    "country": "Native to Australia",
+    "food": "cards__food_meat"
+  },
+  {
+    "name": "Tigers",
+    "img": "../../assets/images/tiger.jpg",
+    "country": "Native to Asia",
+    "food": "cards__food_meat"
   }
 ]
