@@ -656,6 +656,10 @@ body{
 .testimonials {
   padding-top: 140px;
 }
+.testimonials__container {
+  max-width: 1160px;
+  overflow: hidden;
+}
 .testimonials__title {
   font-weight: 400;
   font-size: 36px;
@@ -668,6 +672,10 @@ body{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all .5s ease;
+  max-width: 1156px;
+  margin: 0 auto;
+  column-gap: 30px;
 }
 .testimonials__cards {
   position: relative;
@@ -675,7 +683,7 @@ body{
   flex-wrap: wrap;
   background: #F1F3F2;
   border-radius: 20px;
-  width: 266px;
+  min-width: 266px;
   height: 389px;
 }
 .testimonials__cards::before {
@@ -696,6 +704,9 @@ body{
 }
 .testimonials__img {
   margin: 15px 10px 11px 16px;
+  height: 37px;
+  width: 37px;
+  border-radius: 50%;
 }
 .testimonials__cards_subtitle {
   margin-top: 5px;
@@ -1199,14 +1210,17 @@ li a span{
   .testimonials {
     padding-top: 105px;
   }
-  .testimonials__cards_wrapper :nth-child(4) {
-    display: none;
+  .testimonials__container {
+    max-width: 940px;
+  }
+  .testimonials__cards_wrapper {
+    max-width: 936px;
   }
   .testimonials__title {
     margin-bottom: 30px;
   }
   .testimonials__cards {
-    width: 291px;
+    min-width: 291px;
     height: 389px;
   }
   .testimonials__img {
@@ -1613,13 +1627,16 @@ li a span{
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
+    row-gap: 15px;
+    height: 357px;
+    overflow: hidden;
   }
   .testimonials__cards {
     cursor: pointer;
     max-width: 600px;
-    width: 100%;
-    height: 109px;
-    margin-bottom: 15px;
+    width: 98%;
+    height: 105px;
+    margin-top: 2px;
   }
   .testimonials__cards_description {
     margin: 0px 29px 8px 18px;
@@ -1633,7 +1650,7 @@ li a span{
   .testimonials__btn {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 28px;
+    margin-top: 38px;
     margin-bottom: 80px;
     width: 240px;
   }
@@ -1980,7 +1997,7 @@ li a span{
   .testimonials__btn {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 15px;
+    margin-top: 30px;
     margin-bottom: 60px;
     width: 240px;
   }
