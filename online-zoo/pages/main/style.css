@@ -1622,8 +1622,6 @@ li a span{
   .testimonials {
     padding-top: 60px;
   }
-  .testimonials__container {
-  }
   .testimonials__cards_wrapper {
     display: flex;
     justify-content: space-between;

@@ -106,81 +106,83 @@ CAROUSEL.addEventListener('animationend', stopAnimation);
 // -----------------------------------------------------------------------------------------------------------
 
 
-const CLOSE_VIEW1 = document.querySelector('#closeView1');
-const CLOSE_VIEW2 = document.querySelector('#closeView2');
-const CLOSE_VIEW3 = document.querySelector('#closeView3');
+// const CLOSE_VIEW1 = document.querySelector('#closeView1');
+// const CLOSE_VIEW2 = document.querySelector('#closeView2');
+// const CLOSE_VIEW3 = document.querySelector('#closeView3');
 
-const POPUP1 = document.querySelector('#popup1');
-const POPUP2 = document.querySelector('#popup2');
-const POPUP3 = document.querySelector('#popup3');
+// const POPUP1 = document.querySelector('#popup1');
+// const POPUP2 = document.querySelector('#popup2');
+// const POPUP3 = document.querySelector('#popup3');
 
-const CARDS1 = document.querySelector('#cards1');
-const CARDS2 = document.querySelector('#cards2');
-const CARDS3 = document.querySelector('#cards3');
+// const CARDS1 = document.querySelector('#cards1');
+// const CARDS2 = document.querySelector('#cards2');
+// const CARDS3 = document.querySelector('#cards3');
 
-const CLOSE1 = document.querySelector('#close1');
-const CLOSE2 = document.querySelector('#close2');
-const CLOSE3 = document.querySelector('#close3');
+// const CLOSE1 = document.querySelector('#close1');
+// const CLOSE2 = document.querySelector('#close2');
+// const CLOSE3 = document.querySelector('#close3');
 
-const mediaQuery = window.matchMedia('(max-width: 999px)');
+// const mediaQuery = window.matchMedia('(max-width: 999px)');
 
-const popupView1 = () => {
-  if (mediaQuery.matches) {
-    CLOSE_VIEW1.style.display = 'block';
-    POPUP1.style.display = 'flex';
-    BODY.classList.toggle('lock');
-  }
-};
+// const popupView1 = () => {
+//   if (mediaQuery.matches) {
+//     CLOSE_VIEW1.style.display = 'block';
+//     POPUP1.style.display = 'flex';
+//     BODY.classList.toggle('lock');
+//   }
+// };
 
-const popupClose1 = () => {
-  if (mediaQuery.matches) {
-    CLOSE_VIEW1.style.display = 'none';
-    POPUP1.style.display = 'none';
-    BODY.classList.toggle('lock');
-  }
-};
+// const popupClose1 = () => {
+//   if (mediaQuery.matches) {
+//     CLOSE_VIEW1.style.display = 'none';
+//     POPUP1.style.display = 'none';
+//     BODY.classList.toggle('lock');
+//   }
+// };
 
-const popupView2 = () => {
-  if (mediaQuery.matches) {
-    CLOSE_VIEW2.style.display = 'block';
-    POPUP2.style.display = 'flex';
-    BODY.classList.toggle('lock');
-  }
-};
+// const popupView2 = () => {
+//   if (mediaQuery.matches) {
+//     CLOSE_VIEW2.style.display = 'block';
+//     POPUP2.style.display = 'flex';
+//     BODY.classList.toggle('lock');
+//   }
+// };
 
-const popupClose2 = () => {
-  if (mediaQuery.matches) {
-    CLOSE_VIEW2.style.display = 'none';
-    POPUP2.style.display = 'none';
-    BODY.classList.toggle('lock');
-  }
-};
+// const popupClose2 = () => {
+//   if (mediaQuery.matches) {
+//     CLOSE_VIEW2.style.display = 'none';
+//     POPUP2.style.display = 'none';
+//     BODY.classList.toggle('lock');
+//   }
+// };
 
-const popupView3 = () => {
-  if (mediaQuery.matches) {
-    CLOSE_VIEW3.style.display = 'block';
-    POPUP3.style.display = 'flex';
-    BODY.classList.toggle('lock');
-  }
-};
+// const popupView3 = () => {
+//   if (mediaQuery.matches) {
+//     CLOSE_VIEW3.style.display = 'block';
+//     POPUP3.style.display = 'flex';
+//     BODY.classList.toggle('lock');
+//   }
+// };
 
-const popupClose3 = () => {
-  if (mediaQuery.matches) {
-    CLOSE_VIEW3.style.display = 'none';
-    POPUP3.style.display = 'none';
-    BODY.classList.toggle('lock');
-  }
-};
+// const popupClose3 = () => {
+//   if (mediaQuery.matches) {
+//     CLOSE_VIEW3.style.display = 'none';
+//     POPUP3.style.display = 'none';
+//     BODY.classList.toggle('lock');
+//   }
+// };
 
-CARDS1.addEventListener('click', popupView1);
-CLOSE1.addEventListener('click', popupClose1);
-CARDS2.addEventListener('click', popupView2);
-CLOSE2.addEventListener('click', popupClose2);
-CARDS3.addEventListener('click', popupView3);
-CLOSE3.addEventListener('click', popupClose3);
-CLOSE_VIEW1.addEventListener('click', popupClose1);
-CLOSE_VIEW2.addEventListener('click', popupClose2);
-CLOSE_VIEW3.addEventListener('click', popupClose3);
+// CARDS1.addEventListener('click', popupView1);
+// CLOSE1.addEventListener('click', popupClose1);
+// CARDS2.addEventListener('click', popupView2);
+// CLOSE2.addEventListener('click', popupClose2);
+// CARDS3.addEventListener('click', popupView3);
+// CLOSE3.addEventListener('click', popupClose3);
+// CLOSE_VIEW1.addEventListener('click', popupClose1);
+// CLOSE_VIEW2.addEventListener('click', popupClose2);
+// CLOSE_VIEW3.addEventListener('click', popupClose3);
+
+
 
 
 // -------------------------------------------------------------------------------------------------------
@@ -189,14 +191,14 @@ CLOSE_VIEW3.addEventListener('click', popupClose3);
 const CARDS = document.querySelector('#testimonials__cards_wrapper');
 const RANGE = document.querySelector('#range');
 
-const media = window.matchMedia('(min-width: 1281px)');
+const media1280 = window.matchMedia('(min-width: 1281px)');
 
-const scroll = () => {
-  if(media.matches) {
+const scroll = (e) => {
+  if(media1280.matches) {
     CARDS.style.transform = `translateX(${-296 * RANGE.value + 296}px)`;
   } else {
     CARDS.style.transform = `translateX(${-321 * RANGE.value + 321}px)`;
-  }
+  } 
 };
 
 RANGE.addEventListener('input', scroll);
