@@ -1,4 +1,4 @@
-import pets from "../main/pets.json" assert { type: "json"};
+import pets from "./pets.json" assert { type: "json"};
 
 
 const BURGER = document.querySelector('#header__burger');
@@ -182,4 +182,6 @@ CLOSE_VIEW1.addEventListener('click', popupClose1);
 CLOSE_VIEW2.addEventListener('click', popupClose2);
 CLOSE_VIEW3.addEventListener('click', popupClose3);
 
+
+// -------------------------------------------------------------------------------------------------------
 
