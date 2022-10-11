@@ -185,3 +185,18 @@ CLOSE_VIEW3.addEventListener('click', popupClose3);
 
 // -------------------------------------------------------------------------------------------------------
 
+
+const CARDS = document.querySelector('#testimonials__cards_wrapper');
+const RANGE = document.querySelector('#range');
+
+const media = window.matchMedia('(min-width: 1281px)');
+
+const scroll = () => {
+  if(media.matches) {
+    CARDS.style.transform = `translateX(${-296 * RANGE.value + 296}px)`;
+  } else {
+    CARDS.style.transform = `translateX(${-321 * RANGE.value + 321}px)`;
+  }
+};
+
+RANGE.addEventListener('input', scroll);
