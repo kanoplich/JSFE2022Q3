@@ -1,4 +1,4 @@
-[
+const pets = [
   {
     "name": "Giant pandas",
     "img": "../../assets/images/pandas.png",
@@ -60,3 +60,5 @@
     "food": "cards__food_meat"
   }
 ]
+
+export default pets

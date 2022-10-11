@@ -1,4 +1,4 @@
-import pets from "./pets.json" assert { type: "json"};
+import pets from "../../pages/main/pets.js" 
 
 
 const BURGER = document.querySelector('#header__burger');
