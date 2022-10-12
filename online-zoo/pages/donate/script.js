@@ -16,3 +16,30 @@ const burger = () => {
 
 BURGER.addEventListener('click', burger);
 SHADOW.addEventListener('click', burger);
+
+
+// ------------------------------------------------------------------------------------
+
+const COUNT = document.querySelectorAll('.count');
+const NUMBER = document.querySelector('#input_number');
+
+COUNT.forEach( (event) => {
+  event.addEventListener('input', () => {
+    NUMBER.value = event.value;
+  })
+});
+
+NUMBER.addEventListener('input', () => {
+  if (NUMBER.value > 9999) {
+    NUMBER.value = 9999;
+  }
+
+  COUNT.forEach( (event) => {
+    event.checked = false;
+    if (NUMBER.value === event.value) {
+      event.checked = true;
+    }
+  })
+});
+
+

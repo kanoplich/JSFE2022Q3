@@ -259,9 +259,9 @@ body{
   justify-content: space-between;
   width: 915px;
 }
-.count {
+.wrapper__count label {
   position: relative;
-  display: block;
+  display: inline-block;
   cursor: pointer;
   margin-top: -5px;
   background: #FFEE2E;
@@ -270,7 +270,17 @@ body{
   border-radius: 50%;
   margin-bottom: 5px;
 }
-.count:before {
+.wrapper__count label:before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  top: -15px;
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  border-radius: 50%;
+}
+.wrapper__count input[type=radio]:checked + label:before {
   content: '';
   position: absolute;
   display: block;
@@ -279,8 +289,12 @@ body{
   right: -15px;
   bottom: -15px;
   border-radius: 50%;
+  background-image: url("../../assets/icons/Union.svg");
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 40px;
 }
-.count span {
+.wrapper__count label span {
   cursor: default;
   display: inline-block;
   margin-left: -30px;
@@ -290,6 +304,9 @@ body{
   line-height: 140%;
   text-transform: uppercase;
   color: #333B41;
+}
+.wrapper__count input[type=radio]:checked + label span{
+  color: #FE9013;
 }
 .form {
   display: flex;
@@ -326,7 +343,7 @@ input[type=number]::-webkit-outer-spin-button {
   width: 218px;
   padding-bottom: 32px;
 }
-.form__radio input[type=radio] {
+input[type=radio] {
   display: none;
 }
 .form__radio label {
@@ -648,10 +665,6 @@ li a span{
   .wrapper__count div:nth-child(1) {
     display: none;
   }
-  .count span {
-    margin-left: -10px;
-    margin-top: 30px;
-  }
   .footer__form {
     margin-right: 34px;
   }
@@ -880,10 +893,6 @@ li a span{
   .wrapper__count div:nth-child(3) {
     display: none;
   }
-  .count span {
-    margin-left: -20px;
-    margin-top: 30px;
-  }
   .wrapper__input_number {
     padding-left: 5px;
     margin-top: 97px;
@@ -1073,7 +1082,7 @@ li a span{
   .wrapper__count div:nth-child(3) {
     display: none;
   }
-  .count {
+  .wrapper__count label {
     position: relative;
     display: block;
     cursor: pointer;
@@ -1084,7 +1093,7 @@ li a span{
     border-radius: 50%;
     margin-bottom: 5px;
   }
-  .count:before {
+  .wrapper__count label:before {
     content: '';
     position: absolute;
     display: block;
@@ -1094,11 +1103,21 @@ li a span{
     bottom: -15px;
     border-radius: 50%;
   }
-  .count span {
+  .wrapper__count label span {
     margin-left: -10px;
     margin-top: 15px;
     font-size: 13px;
     line-height: 140%;
+  }
+  .wrapper__count input[type=radio]:checked + label:before {
+    background-image: url("../../assets/icons/roller_icon.svg");
+    background-repeat: no-repeat;
+    top: -7.5px;
+    left: -7.5px;
+    right: -7.5px;
+    bottom: -7.5px;
+    height: 20px;
+    width: 20px;
   }
   .wrapper__input_number {
     padding-left: 5px;
