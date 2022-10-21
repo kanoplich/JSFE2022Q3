@@ -36,11 +36,21 @@ BODY.innerHTML = `  <div class="container">
 const PUZZLE_SIZE = document.querySelector('#size');
 const PUZZLE_CONTENT = document.querySelector('#puzzle__content');
 
+const shuffle = (arr) => {
+  return arr.sort(() => Math.round(Math.random() * 100) - 50);
+}
+
 const createPuzzle = (n) => {
+  let arr = [];
+  for(let i = 1; i < n; i++) {
+    arr.push(i);
+  }
+
+  arr = shuffle(arr);
   const puzzle = document.createElement('div');
   puzzle.classList.add('puzzle__item');
-  for(let i = 1; i < n; i++) {
-    puzzle.innerHTML += `<div class="item">${i}</div>`
+  for(let i = 0; i < arr.length; i++) {
+    puzzle.innerHTML += `<div class="item">${arr[i]}</div>`
   }
   return puzzle;
 }
