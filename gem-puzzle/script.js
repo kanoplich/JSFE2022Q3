@@ -54,9 +54,9 @@ const createPuzzle = (n) => {
   puzzle.classList.add('puzzle__item');
   for(let i = 0; i < arr.length; i++) {
     if(arr[i] == 0) {
-      puzzle.innerHTML += `<div class="item zero" id="${i}" style="order: ${i};"></div>`;
+      puzzle.innerHTML += `<div class="item zero" id="${arr[i]}" style="order: ${i};"></div>`;
     } else {
-      puzzle.innerHTML += `<div class="item" id="${i}" style="order: ${i};">${arr[i]}</div>`;
+      puzzle.innerHTML += `<div class="item" id="${arr[i]}" style="order: ${i};">${arr[i]}</div>`;
     }
   }
   return puzzle;
@@ -106,6 +106,20 @@ const findCoordinates = (number, matrix) => {
   return null;
 }
 
+const isWon = (arr, n) => {
+  n = n ** 2;
+  arr = arr.flat();
+  let arrWin = Array(n - 1).fill(0).map((item, i) => i + 1);
+  arrWin.push(0);
+
+  for(let i = 0; i < arrWin.length; i++) {
+    if(arrWin[i] !== arr[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 const isValidSwap = (coords1, coords2) => {
   const diffX = Math.abs(coords1.x - coords2.x);
   const diffY = Math.abs(coords1.y - coords2.y);
@@ -123,6 +137,15 @@ const swapCoords = (coord1, coord2, matrix) => {
   let num = matrix[coord1.y][coord1.x];
   matrix[coord1.y][coord1.x] = matrix[coord2.y][coord2.x];
   matrix[coord2.y][coord2.x] = num;
+
+  if (isWon(matrix, matrix.length)) {
+    const win = document.createElement('div');
+    win.innerHTML = `<span class="shadow">congratulations, you won</span>`;
+    BODY.append(win);
+    document.querySelector('.shadow').addEventListener('click', () => {
+      BODY.removeChild(win);
+    });
+  }
 }
 
 const moveItem = () => {
@@ -132,12 +155,12 @@ const moveItem = () => {
     element.addEventListener('click', () => {
       const elementNumber = Number(element.id);
       const zeroNumber = Number(document.querySelector('.zero').id);
+      const zeroElement = document.querySelector('.zero');
+      
       const elementCoords = findCoordinates(elementNumber, matrix);
       const zeroCoords = findCoordinates(zeroNumber, matrix);
       const isValid = isValidSwap(elementCoords, zeroCoords);
 
-      const zeroElement = document.querySelector('.zero');
-      console.log(element.style.order);
       if(isValid) {
         swapElement(element, zeroElement);
         swapCoords(elementCoords, zeroCoords, matrix);

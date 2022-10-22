@@ -7,8 +7,25 @@
   box-sizing: border-box;
 }
 body {
+  position: relative;
   font-family: Arial, Helvetica, sans-serif;
   background-color: snow;
+}
+.shadow {
+  cursor: pointer;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  background-color: gainsboro;
+  color: goldenrod;
+  font-size: 42px;
+  font-weight: 600;
 }
 h1 {
   display: flex;
@@ -110,17 +127,24 @@ select {
   align-items: center;
   width: 100%;
   height: 100%;
-  transition: transform .2s;
 }
 .zero {
   cursor: default;
   background-color: floralwhite;
-  border: none;
-  transition: transform .2s;
+  border: none;  
+}
+
+@media screen and (max-width: 675px) {
+  .shadow {
+    font-size: 24px;
+  }
 }
 @media screen and (max-width: 465px) {
   .container{
     width: calc(100% - 20px);
+  }
+  .shadow {
+    font-size: 18px;
   }
   .menu__container {
     display: flex;
