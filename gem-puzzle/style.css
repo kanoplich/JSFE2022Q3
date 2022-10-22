@@ -29,9 +29,9 @@ h1 {
 .puzzle__buttons {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 5vh;
-  gap: 4px;
+  gap: 5px;
 }
 .start,
 .save,
@@ -50,12 +50,19 @@ h1 {
 .form {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 5vh;
   font-size: 16px;
   font-weight: 600;
   text-transform: uppercase;
-  gap: 10px;
+  gap: 30px;
+  color: orange;
+}
+select {
+  color: orange;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
 }
 .puzzle__wrapper {
   display: flex;
@@ -91,8 +98,9 @@ h1 {
   height: 100%;
 }
 .item {
+  cursor: pointer;
   background-color: darkslategrey;
-  font-size: 24px;
+  font-size: 42px;
   font-weight: 400;
   color: floralwhite;
   border: 1px solid black;
@@ -102,8 +110,14 @@ h1 {
   align-items: center;
   width: 100%;
   height: 100%;
+  transition: transform .2s;
 }
-
+.zero {
+  cursor: default;
+  background-color: floralwhite;
+  border: none;
+  transition: transform .2s;
+}
 @media screen and (max-width: 465px) {
   .container{
     width: calc(100% - 20px);
@@ -117,6 +131,10 @@ h1 {
   .puzzle__buttons {
     flex-direction: column;
   }
+  .form {
+    margin-top: 0;
+    gap: 10px;
+  }
   .item {
     font-size: 18px;
   }
@@ -125,6 +143,9 @@ h1 {
 @media screen and (max-height: 800px) {
   .puzzle {
     width: 25em;
+  }
+  .item {
+    font-size: 18px;
   }
 }
 
