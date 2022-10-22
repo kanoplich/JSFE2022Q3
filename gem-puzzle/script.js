@@ -9,8 +9,12 @@ BODY.innerHTML = `  <div class="container">
                             <button class="result">Result</button>
                           </div>
                           <form class="form">
-                            <span class="moves">Moves: 100</span>
-                            <span class="time">Time: 100</span>
+                            <label for="text">Moves:
+                              <input type="text" name="move" id="move" size="2" value="0" readonly>
+                            </label>
+                            <label for="time">Time:
+                              <input type="text" name="time" id="time" size="1" value="0" readonly>
+                            </label>
                             <label for="size">Size:
                               <select name="size" id="size">
                                 <option value="3">3x3</option>
@@ -36,6 +40,8 @@ BODY.innerHTML = `  <div class="container">
 const PUZZLE_SIZE = document.querySelector('#size');
 const PUZZLE_CONTENT = document.querySelector('#puzzle__content');
 const START = document.querySelector('#start');
+const MOVES = document.querySelector('#move');
+const TIME = document.querySelector('#time');
 
 
 const shuffle = (arr) => {
@@ -131,6 +137,7 @@ const swapElement = (elem1, elem2) => {
   const num = elem1.style.order;
   elem1.style.order = elem2.style.order;
   elem2.style.order = num;
+  MOVES.value++;
 }
 
 const swapCoords = (coord1, coord2, matrix) => {
@@ -174,6 +181,7 @@ moveItem();
 const SIZE = document.querySelector('#size');
 
 const changePuzzle = () => {
+  MOVES.value = 0;
   let num = (+SIZE.value) ** 2;
   PUZZLE_CONTENT.innerHTML = '';
   PUZZLE_CONTENT.appendChild(createPuzzle(num));

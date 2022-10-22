@@ -22,7 +22,7 @@ body {
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
-  background-color: gainsboro;
+  background-color: inherit;
   color: goldenrod;
   font-size: 42px;
   font-weight: 600;
@@ -74,6 +74,11 @@ h1 {
   text-transform: uppercase;
   gap: 30px;
   color: orange;
+}
+input[type="text"] {
+  color: orange;
+  font-size: 16px;
+  font-weight: 600;
 }
 select {
   color: orange;
