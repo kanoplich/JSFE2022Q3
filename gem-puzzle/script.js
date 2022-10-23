@@ -5,9 +5,9 @@ BODY.innerHTML = `  <div class="container">
                         <div class="menu__container">
                           <div class="puzzle__buttons">
                             <button class="start" id="start">Shuffle and start</button>
-                            <button class="save">Save</button>
-                            <button class="load">Load</button>
-                            <button class="result">Result</button>
+                            <button class="save" id="save">Save</button>
+                            <button class="load" id="load">Load</button>
+                            <button class="result" id="result">Result</button>
                           </div>
                           <form class="form">
                             <label for="text">Moves:
@@ -45,8 +45,10 @@ const MOVES = document.querySelector('#move');
 const TIME = document.querySelector('#time');
 const SOUND_IMG = document.querySelector('#sound__img');
 const SOUND = document.querySelector('#sound');
+const SAVE = document.querySelector('#save');
+const LOAD = document.querySelector('#load');
+const RESULT = document.querySelector('#result');
 
-console.log(SOUND);
 
 const mute = () => {
   SOUND_IMG.classList.toggle('active');
@@ -59,14 +61,14 @@ let seconds = 0;
 let timer;
 
 const startTime = () => {
-
   clearInterval(timer);
   timer = setInterval(() => {
     seconds += 1;
     let dateTimer = new Date(0);
     dateTimer.setSeconds(seconds)
     TIME.innerHTML = 'TIME: ' + ('0' + dateTimer.getMinutes()).slice(-2) + ':' + 
-                     ('0' + dateTimer.getSeconds()).slice(-2); 
+                     ('0' + dateTimer.getSeconds()).slice(-2);
+
   }, 1000);
 }
 
@@ -85,13 +87,14 @@ const shuffle = (arr) => {
 }
 
 const createPuzzle = (n) => {
-  
+  startTime()
   let arr = [];
   for(let i = 0; i < n; i++) {
     arr.push(i);
   }
 
   arr = shuffle(arr);
+
   const puzzle = document.createElement('div');
   puzzle.classList.add('puzzle__item');
   for(let i = 0; i < arr.length; i++) {
@@ -174,6 +177,7 @@ const swapElement = (elem1, elem2) => {
   elem1.style.order = elem2.style.order;
   elem2.style.order = num;
   MOVES.value++;
+
   if(SOUND_IMG.classList.contains('active')) {
     SOUND.play();
   }
@@ -237,4 +241,20 @@ SIZE.addEventListener('change', changePuzzle);
 START.addEventListener('click', changePuzzle);
 
 // ------------------------------------------------------------------------------------------------------------
+
+
+
+const saveGame = () => {
+  localStorage.setItem('move', MOVES.value);
+  localStorage.setItem('second', seconds);
+  stopTime();
+}
+
+const loadGame = () => {
+  MOVES.value = localStorage.getItem('move');
+}
+
+SAVE.addEventListener('click', saveGame);
+LOAD.addEventListener('click', loadGame);
+
 
