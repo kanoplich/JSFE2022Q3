@@ -22,9 +22,9 @@ body {
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
-  background-color: inherit;
+  background-color: rgba(192,192,192, 0.7);
   color: goldenrod;
-  font-size: 42px;
+  font-size: 48px;
   font-weight: 600;
 }
 h1 {
@@ -40,7 +40,7 @@ h1 {
   margin: 0 auto;
 }
 .menu__container {
-  max-width: 30em;
+  max-width: 45em;
   margin: 0 auto;
 }
 .puzzle__buttons {
@@ -52,7 +52,8 @@ h1 {
 }
 .start,
 .save,
-.result {
+.result,
+.load {
   cursor: pointer;
   border: none;
   text-transform: uppercase;
@@ -66,7 +67,7 @@ h1 {
 }
 .form {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
   margin-top: 5vh;
   font-size: 16px;
@@ -74,6 +75,9 @@ h1 {
   text-transform: uppercase;
   gap: 30px;
   color: orange;
+  max-width: 35em;
+  margin-left: auto;
+  margin-right: auto;
 }
 input[type="text"] {
   color: orange;
@@ -138,10 +142,26 @@ select {
   background-color: floralwhite;
   border: none;  
 }
+.sound__img {
+  cursor: pointer;
+  background-image: url("./assets/svg/off.svg");
+  background-repeat: no-repeat;
+  height: 25px;
+  width: 25px;
+  color: orange;
+}
+.active {
+  cursor: pointer;
+  background-image: url("./assets/svg/on.svg");
+  background-repeat: no-repeat;
+  height: 25px;
+  width: 25px;
+  color: orange;
+}
 
 @media screen and (max-width: 675px) {
   .shadow {
-    font-size: 24px;
+    font-size: 36px;
   }
 }
 @media screen and (max-width: 465px) {
@@ -149,7 +169,7 @@ select {
     width: calc(100% - 20px);
   }
   .shadow {
-    font-size: 18px;
+    font-size: 28px;
   }
   .menu__container {
     display: flex;
@@ -163,6 +183,8 @@ select {
   .form {
     margin-top: 0;
     gap: 10px;
+    justify-content: flex-start;
+    margin-top: 5vh;
   }
   .item {
     font-size: 18px;

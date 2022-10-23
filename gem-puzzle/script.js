@@ -6,15 +6,14 @@ BODY.innerHTML = `  <div class="container">
                           <div class="puzzle__buttons">
                             <button class="start" id="start">Shuffle and start</button>
                             <button class="save">Save</button>
+                            <button class="load">Load</button>
                             <button class="result">Result</button>
                           </div>
                           <form class="form">
                             <label for="text">Moves:
-                              <input type="text" name="move" id="move" size="2" value="0" readonly>
+                              <input type="text" name="move" id="move" size="1" value="0" readonly>
                             </label>
-                            <label for="time">Time:
-                              <input type="text" name="time" id="time" size="1" value="0" readonly>
-                            </label>
+                            <span class="time" id="time">Time: 00:00</span>
                             <label for="size">Size:
                               <select name="size" id="size">
                                 <option value="3">3x3</option>
@@ -25,6 +24,8 @@ BODY.innerHTML = `  <div class="container">
                                 <option value="8">8x8</option>
                               </select>
                             </label>
+                            <span class="sound__img" id="sound__img"></span>
+                            <audio id="sound" src="./assets/audio/knopka.mp3"></audio>
                           </form>
                         </div>
                         <div class="puzzle__wrapper">
@@ -42,7 +43,42 @@ const PUZZLE_CONTENT = document.querySelector('#puzzle__content');
 const START = document.querySelector('#start');
 const MOVES = document.querySelector('#move');
 const TIME = document.querySelector('#time');
+const SOUND_IMG = document.querySelector('#sound__img');
+const SOUND = document.querySelector('#sound');
 
+console.log(SOUND);
+
+const mute = () => {
+  SOUND_IMG.classList.toggle('active');
+}
+
+
+SOUND_IMG.addEventListener('click', mute);
+
+let seconds = 0;
+let timer;
+
+const startTime = () => {
+
+  clearInterval(timer);
+  timer = setInterval(() => {
+    seconds += 1;
+    let dateTimer = new Date(0);
+    dateTimer.setSeconds(seconds)
+    TIME.innerHTML = 'TIME: ' + ('0' + dateTimer.getMinutes()).slice(-2) + ':' + 
+                     ('0' + dateTimer.getSeconds()).slice(-2); 
+  }, 1000);
+}
+
+const resetTime = () => {
+  clearInterval(timer);
+  seconds = 0;
+  TIME.innerHTML = 'TIME: 00:00';
+}
+
+const stopTime = () => {
+  clearInterval(timer);
+}
 
 const shuffle = (arr) => {
   return arr.sort(() => Math.round(Math.random() * 100) - 50);
@@ -138,6 +174,9 @@ const swapElement = (elem1, elem2) => {
   elem1.style.order = elem2.style.order;
   elem2.style.order = num;
   MOVES.value++;
+  if(SOUND_IMG.classList.contains('active')) {
+    SOUND.play();
+  }
 }
 
 const swapCoords = (coord1, coord2, matrix) => {
@@ -146,8 +185,9 @@ const swapCoords = (coord1, coord2, matrix) => {
   matrix[coord2.y][coord2.x] = num;
 
   if (isWon(matrix, matrix.length)) {
+    stopTime();
     const win = document.createElement('div');
-    win.innerHTML = `<span class="shadow">congratulations, you won</span>`;
+    win.innerHTML = `<span class="shadow">congratulations</span>`;
     BODY.append(win);
     document.querySelector('.shadow').addEventListener('click', () => {
       BODY.removeChild(win);
@@ -182,6 +222,9 @@ const SIZE = document.querySelector('#size');
 
 const changePuzzle = () => {
   MOVES.value = 0;
+  resetTime();
+  startTime();
+
   let num = (+SIZE.value) ** 2;
   PUZZLE_CONTENT.innerHTML = '';
   PUZZLE_CONTENT.appendChild(createPuzzle(num));
@@ -194,5 +237,4 @@ SIZE.addEventListener('change', changePuzzle);
 START.addEventListener('click', changePuzzle);
 
 // ------------------------------------------------------------------------------------------------------------
-
 
