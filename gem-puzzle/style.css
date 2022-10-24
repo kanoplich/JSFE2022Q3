@@ -83,12 +83,14 @@ input[type="text"] {
   color: orange;
   font-size: 16px;
   font-weight: 600;
+  background-color: snow;
 }
 select {
   color: orange;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+  background-color: snow;
 }
 .puzzle__wrapper {
   display: flex;

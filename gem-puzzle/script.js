@@ -11,7 +11,7 @@ BODY.innerHTML = `  <div class="container">
                           </div>
                           <form class="form">
                             <label for="text">Moves:
-                              <input type="text" name="move" id="move" size="1" value="0" readonly>
+                              <input type="text" name="move" id="move" size="2" value="0" readonly>
                             </label>
                             <span class="time" id="time">Time: 00:00</span>
                             <label for="size">Size:
@@ -176,6 +176,7 @@ const swapElement = (elem1, elem2) => {
   const num = elem1.style.order;
   elem1.style.order = elem2.style.order;
   elem2.style.order = num;
+
   MOVES.value++;
 
   if(SOUND_IMG.classList.contains('active')) {
@@ -234,6 +235,7 @@ const changePuzzle = () => {
   PUZZLE_CONTENT.appendChild(createPuzzle(num));
   document.querySelector('.puzzle__item').style.gridTemplateColumns = `repeat(${SIZE.value}, 1fr)`;
   document.querySelector('.puzzle__item').style.gridTemplateRows = `repeat(${SIZE.value}, 1fr)`;
+
   moveItem();
 }
 
@@ -248,13 +250,28 @@ const saveGame = () => {
   localStorage.setItem('move', MOVES.value);
   localStorage.setItem('second', seconds);
   stopTime();
+
 }
 
 const loadGame = () => {
   MOVES.value = localStorage.getItem('move');
+  seconds = +localStorage.getItem('second');
+  startTime();
 }
 
 SAVE.addEventListener('click', saveGame);
 LOAD.addEventListener('click', loadGame);
 
 
+// ------------------------------------------------------------------------------------------------------------------------
+
+
+console.log(`Реализовано:
+            Верстка, дизайн, адаптивный интерфейс: +10;
+            В начальном состоянии игры рамка заполняется случайно сгенерированными и перетасованными числами: +10;
+            При нажатии на плитку рядом с пустой ячейкой плитка перемещается в пустую ячейку: +10;
+            Игру можно перезапустить без перезагрузки страницы: +10;
+            Отображается продолжительность игры и количество ходов: +10;
+            Звуковое сопровождение (вкл/выкл) движения плитки: +10;
+            Реализован выбор разных размеров рамки(от 3х3 до 8х8): +10;
+Итого: 70 баллов`); 
