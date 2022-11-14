@@ -17,11 +17,8 @@
   justify-content: space-between;
   align-items: center;
 }
-.header__logo {
+.header__logo img {
   margin-top: 20px;
-  background-image: url('../../img/logo.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
   height: 60px;
   width: 220px;
 }
@@ -49,8 +46,7 @@
   color: #ffffff;
   font-family: 'Lato', sans-serif;
   font-size: 48px;
-  margin-top: 60px;
-  
+  margin: 30px 0 50px 0;
 }
 .content__title span {
   color: #00bc8c;
