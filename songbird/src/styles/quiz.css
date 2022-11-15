@@ -79,6 +79,9 @@
   margin-top: 20px;
 }
 .game__audio-player_controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .play-button {
   cursor: pointer;
@@ -95,7 +98,24 @@
   width: 24px;
   height: 24px;
 }
-.timebar {
+.time_bar {
+  width: 90%;
+}
+.time_bar-track {
+  position: relative;
+  height: 4px;
+  background-color: #7d7d7d;
+}
+.time_bar-circle {
+  position: absolute;
+  left: 0;
+  top: -4px;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background-color: #7d7d7d;
+}
+.time_bar-info {
 }
 .answer {
 }
@@ -167,6 +187,9 @@
   .container {
     width: calc(100% - 40px);
   }
+  .time_bar {
+    width: 80%;
+  }
   .answer__colum {
     max-width: 710px;
     width: 100%;
@@ -193,6 +216,9 @@
   .game__player {
     max-width: calc(100% - 20px);
     width: 100%;
+  }
+  .time_bar {
+    width: 85%;
   }
 
 }
