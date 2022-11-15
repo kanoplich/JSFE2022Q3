@@ -1,3 +1,4 @@
-import './pages/home/index.html';
-import './pages/home/index.css';
-import './pages/home/index';
+import './pages/index.html';
+import './styles/index.css';
+import './styles/quiz.css';
+import './modules/index.js';

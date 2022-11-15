@@ -1,30 +1,15 @@
-@import '../../libs/normalize.css';
-
-.wrapper {
-  background-color: #2d2d2d;
-  min-height: 100vh;
-}
-.container {
-  max-width: 1200px;
-  width: calc(100% - 60px);
-  margin: 0 auto;
-}
-.header {
-}
-.header__container {
-}
-.header__top-panel {
+.header__quiz__top-panel {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
 }
-.header__logo img {
+.header__quiz__logo img {
   margin-top: 20px;
   height: 60px;
   width: 220px;
 }
-.header__score {
+.header__quiz__score {
   font-family: 'Lato', sans-serif;
   font-size: 20px;
   color: #ffffff;
@@ -98,8 +83,6 @@
 .play-button {
   cursor: pointer;
   position: relative;
-  background: url('../../img/play.svg');
-  background-repeat: no-repeat;
   width: 40px;
   height: 40px;
   border: 2px solid #008966;

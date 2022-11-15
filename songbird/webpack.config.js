@@ -27,7 +27,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src', 'pages/home/index.html')
+      filename: 'index.html',
+      template: path.resolve(__dirname, 'src', 'pages/index.html')
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'quiz.html',
+      template: path.resolve(__dirname, 'src', 'pages/quiz.html')
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
