@@ -1,3 +1,17 @@
+@import '../libs/normalize.css';
+
+.wrapper {
+  background-color: #2d2d2d;
+  min-height: 100vh;
+}
+.container {
+  max-width: 1200px;
+  width: calc(100% - 60px);
+  margin: 0 auto;
+}
+
+/* -------------------------------------------- */
+
 .header__quiz__top-panel {
   display: flex;
   justify-content: space-between;
@@ -84,21 +98,23 @@
   justify-content: space-between;
 }
 .play-button {
+  background-image: url('../img/play.svg');
+  background-repeat: no-repeat;
   cursor: pointer;
   position: relative;
   width: 40px;
   height: 40px;
-  border: 2px solid #008966;
-  border-radius: 50%;
 }
-.play-button svg {
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  width: 24px;
-  height: 24px;
+.stop {
+  background-image: url('../img/pause.svg');
+  background-repeat: no-repeat;
+  cursor: pointer;
+  position: relative;
+  width: 40px;
+  height: 40px;
 }
 .time_bar {
+  position: relative;
   width: 90%;
 }
 .time_bar-track {
@@ -106,7 +122,13 @@
   height: 4px;
   background-color: #7d7d7d;
 }
+.time_bar-track_underline {
+  background-color: #00bc8c;
+  width: 0%;
+  height: 4px;
+}
 .time_bar-circle {
+  cursor: pointer;
   position: absolute;
   left: 0;
   top: -4px;
@@ -116,6 +138,12 @@
   background-color: #7d7d7d;
 }
 .time_bar-info {
+  position: absolute;
+  left: 0;
+  top: 15px;
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
 }
 .answer {
 }
@@ -123,6 +151,11 @@
   display: flex;
   margin-top: 30px;
   gap: 50px;
+}
+.answer__colum_question {
+  width: 575px;
+  border-radius: 6px;
+  border: 1px solid #5d5d5d;
 }
 .answer__colum {
   width: 575px;
