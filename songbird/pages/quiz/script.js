@@ -1,7 +1,7 @@
-import birdsData from "./birds.js";
+import birdsData from "../home/birds.js";
 
 const AUDIO = document.querySelector('#audio');
-const TIME = document.querySelector('#time_bar-track');
+const TIME__BAR = document.querySelector('#time_bar-track');
 const TIME_UNDERLINE = document.querySelector('#time_bar-track_underline');
 const TIME_CIRCLE = document.querySelector('#time_bar-circle');
 const PLAY = document.querySelector('#play-button');
@@ -12,6 +12,37 @@ const ANSWER = document.querySelectorAll('.answer__list');
 
 let num = 0;
 let guess_num;
+
+function audioPlayer() {
+  if(AUDIO.paused) {
+    PLAY.classList.add('stop');
+    AUDIO.play();
+    startInterval();
+  } else {
+    PLAY.classList.remove('stop');
+    AUDIO.pause();
+    stopInterval(startInterval());
+  }
+}
+
+function startInterval() {
+  setInterval(function() {
+    let audioTime = Math.round(AUDIO.currentTime);
+    let audioLength = Math.round(AUDIO.duration);
+    TIME_UNDERLINE.style.width = (audioTime * 100) / audioLength + '%';
+    TIME_CIRCLE.style.left = (audioTime * 100) / audioLength + '%';
+  }, 10);
+}
+
+function stopInterval(fn) {
+  clearInterval(fn);
+}
+
+function randomNumber(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 const right_number = () => {
   guess_num = randomNumber(0, 5);
@@ -24,35 +55,7 @@ const audioSrc = (i, j) => {
   return AUDIO.src = birdsData[i][j].audio;
 }
 
-function randomNumber(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-const player = () => {
-  
-  let audioPlay;
-
-  if(AUDIO.paused) {
-    PLAY.classList.add('stop');
-    AUDIO.play();
-    audioPlay = setInterval(function() {
-      let audioTime = Math.round(AUDIO.currentTime);
-      let audioLength = Math.round(AUDIO.duration);
-      TIME_UNDERLINE.style.width = (audioTime * 100) / audioLength + '%';
-      TIME_CIRCLE.style.left = (audioTime * 100) / audioLength + '%';
-    }, 10)
-  } else {
-    PLAY.classList.remove('stop');
-    AUDIO.pause();
-    clearInterval(audioPlay);
-  }
-
-}
-
-const createCard = (i) => {
-  
+function createCard(i) {
   const card = document.createElement('div');
   card.classList.add('answer__colum_question');
   card.innerHTML = `<ul class="answer__item">
@@ -79,7 +82,6 @@ const createCard = (i) => {
 }
 
 const nextQuestion = () => {
-  
   num++;
   if(num > 5) {
     num = 0;
@@ -102,6 +104,6 @@ ANSWER.forEach( el => {
 audioSrc(num, guess_num);
 
 LEVEL.addEventListener('click', nextQuestion);
-PLAY.addEventListener('click', player);
+PLAY.addEventListener('click', audioPlayer);
 
 

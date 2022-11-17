@@ -5,8 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="../img/bird-icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../styles/quiz.css">
+  <link rel="icon" href="../../assets/svg/bird-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
   <title>Songbird</title>
 </head>
 <body>
@@ -15,7 +15,7 @@
       <div class="header__quiz__container container">
         <div class="header__quiz__top-panel">
           <div class="header__quiz__logo">
-            <a href="./index.html"><img src="../img/logo.svg" alt="logo"></a>
+            <a href="../home/index.html"><img src="../../assets/svg/logo.svg" alt="logo"></a>
           </div>
           <div class="header__quiz__score">Score: <span class="score">0</span></div>
         </div>
@@ -45,7 +45,7 @@
       <section class="game">
         <div class="game__container container">
           <div class="game__question">
-            <img class="game__question_img" src="../img/bird-non.jpg" alt="bird">
+            <img class="game__question_img" src="../../assets/img/bird-non.jpg" alt="bird">
             <div class="game__player">
               <ul class="game__item">
                 <li class="game__list">
@@ -97,8 +97,7 @@
               </ul>
             </div>
             <div class="answer__colum">
-              <p>Послушайте плеер.</p>
-              <p>Выберите птицу из списка</p>
+              <div class="answer__colum_right">Послушайте плеер.<br>Выберите птицу из списка</div>
             </div>
           </div>
           <button class="next-level" id="level">Next level</button>
@@ -106,6 +105,6 @@
       </section>
     </main>
   </div>
-  <script type="module" src="../modules/quiz.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>

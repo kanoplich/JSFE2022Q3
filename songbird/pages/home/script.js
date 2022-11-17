@@ -1,4 +1,4 @@
-import birdsData from "../modules/birds.js";
+import birdsData from "./birds.js";
 
 const LEFT_BTN = document.querySelector('#btn_left');
 const RIGHT_BTN = document.querySelector('#btn_right');
