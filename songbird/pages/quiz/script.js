@@ -8,7 +8,6 @@ const PLAY = document.querySelector('#play-button');
 const SOUND_TIME = document.querySelector('#time_bar-info');
 const LEVEL = document.querySelector('#level');
 const QUESTION = document.querySelector('#answer__colum_question');
-const ANSWER = document.querySelectorAll('.answer__list');
 
 let num = 0;
 let guess_num;
@@ -59,22 +58,22 @@ function createCard(i) {
   const card = document.createElement('div');
   card.classList.add('answer__colum_question');
   card.innerHTML = `<ul class="answer__item">
-                      <li class="answer__list">
+                      <li class="answer__list" id="0">
                         <span class="list-btn"></span>${birdsData[i][0].name}
                       </li>
-                      <li class="answer__list">
+                      <li class="answer__list" id="1">
                         <span class="list-btn"></span>${birdsData[i][1].name}
                       </li>
-                      <li class="answer__list">
+                      <li class="answer__list" id="2">
                         <span class="list-btn"></span>${birdsData[i][2].name}
                       </li>
-                      <li class="answer__list">
+                      <li class="answer__list" id="3">
                         <span class="list-btn"></span>${birdsData[i][3].name}
                       </li>
-                      <li class="answer__list">
+                      <li class="answer__list" id="4">
                         <span class="list-btn"></span>${birdsData[i][4].name}
                       </li>
-                      <li class="answer__list">
+                      <li class="answer__list" id="5">
                         <span class="list-btn"></span>${birdsData[i][5].name}
                       </li>
                     </ul>`
@@ -92,14 +91,34 @@ const nextQuestion = () => {
   right_number();
   audioSrc(num, guess_num);
   console.log(num, guess_num);
+  chooseElement();
 }
 
-ANSWER.forEach( el => {
-  el.addEventListener('click', (e) => {
-    console.log(e);
-  })
-})
+function chooseElement() {
+  const ANSWER = document.querySelectorAll('.answer__list');
+  const LIST = document.querySelectorAll('.list-btn');
+  const IMG_RIGHT = document.querySelector('.game__question_img');
+  const NAME = document.querySelector('h3');
+  const SCORE = document.querySelector('.score');
 
+  let count = 6;
+
+  ANSWER.forEach( el => {
+    el.addEventListener('click', (e) => {
+      count--;
+      if(e.target.id == guess_num) {
+        IMG_RIGHT.src = `${birdsData[num][guess_num].image}`;
+        NAME.innerHTML = `${birdsData[num][guess_num].name}`;
+        SCORE.innerHTML = `${count}`;
+        el.querySelector('.list-btn').classList.add('success');
+      } else {
+        el.querySelector('.list-btn').classList.add('error');
+      }
+    })
+  })
+}
+
+chooseElement();
 
 audioSrc(num, guess_num);
 
