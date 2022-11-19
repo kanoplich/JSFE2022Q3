@@ -14,7 +14,7 @@ const LEVEL = document.querySelector('#level');
 const PAGE = document.querySelectorAll('.page-item');
 const BIRD_IMG = document.querySelector('.game__question_img');
 const BIRD_NAME = document.querySelector('h3');
-
+const MAIN = document.querySelector('.main')
 
 
 let num = 0;
@@ -33,8 +33,6 @@ function audioPlayer() {
     AUDIO.pause();
     stopInterval(startInterval());
   }
-  console.log(AUDIO.ended);
-
 }
 
 PLAY.addEventListener('click', audioPlayer);
@@ -123,41 +121,62 @@ function createCardAnswer() {
 function createCardStart() {
   const card = document.createElement('div');
   card.classList.add('answer__colum_right');
-  card.innerHTML = `<div class="answer__colum_correct_prev">Послушайте плеер.<br>Выберите птицу из    списка</div>`
+  card.innerHTML = `<div class="answer__colum_correct_prev">Послушайте плеер.
+                      <br>Выберите птицу из    списка
+                    </div>`
   return card
 }
 
+function createCardResult(i) {
+  const card = document.createElement('main');
+  card.classList.add('main');
+  card.innerHTML = `<section class="result">
+                      <div class="result__container container">
+                        <h1 class="result__congratulations">Поздравляем!</h1>
+                        <p class="result__result">Вы прошли викторину и набрали ${i} из 30 возможных баллов</p>
+                        <div class="result__line"></div>
+                        <button onclick="document.location='../quiz/index.html'" class="result__return">Попробовать еще раз!</button>
+                      </div>
+                    </section>`
+  return card;
+}
+
 const nextQuestion = () => {
+  
   num++;
-  if(num > 5) {
-    num = 0;
-  }
-  QUESTION_CARD.innerHTML = '';
-  QUESTION_CARD.appendChild(createCard(num));
 
-  RIGHT_CARD.innerHTML = '';
-  RIGHT_CARD.appendChild(createCardStart());
+  if(num < 6) {
+    QUESTION_CARD.innerHTML = '';
+    QUESTION_CARD.appendChild(createCard(num));
 
-  LEVEL.removeEventListener('click', nextQuestion);
-  LEVEL.style.backgroundColor = '#3d3d3d';
+    RIGHT_CARD.innerHTML = '';
+    RIGHT_CARD.appendChild(createCardStart());
 
-  BIRD_IMG.src = '../../assets/img/bird-non.jpg';
-  BIRD_NAME.innerHTML = '******';
+    LEVEL.removeEventListener('click', nextQuestion);
+    LEVEL.style.backgroundColor = '#3d3d3d';
+  
+    BIRD_IMG.src = '../../assets/img/bird-non.jpg';
+    BIRD_NAME.innerHTML = '******';
 
-  for(let i = 0; i < 5; i++) {
-    if(PAGE[i].classList[1] == 'active') {
-      PAGE[i].classList.remove('active');
-      PAGE[i + 1].classList.add('active');
-      i++;
+    for(let i = 0; i < 5; i++) {
+      if(PAGE[i].classList[1] == 'active') {
+        PAGE[i].classList.remove('active');
+        PAGE[i + 1].classList.add('active');
+        i++;
+      }
     }
+    PLAY.classList.remove('stop');
+
+    right_number();
+    audioSrc(num, guess_num);
+    console.log(num, guess_num);
+    chooseElement();
+
+  } else {
+    MAIN.innerHTML = '';
+    MAIN.appendChild(createCardResult(res));
   }
 
-  PLAY.classList.remove('stop');
-
-  right_number();
-  audioSrc(num, guess_num);
-  console.log(num, guess_num);
-  chooseElement();
 }
 
 function chooseElement() {
@@ -186,22 +205,6 @@ function chooseElement() {
     })
   }
   
-  // BIRD.forEach( el => {
-  //   el.addEventListener('click', function birdItem(e) {
-  //     if(e.target.id == guess_num) {
-  //       BIRD_IMG.src = `${birdsData[num][guess_num].image}`;
-  //       BIRD_NAME.innerHTML = `${birdsData[num][guess_num].name}`;
-  //       el.querySelector('.list-btn').classList.add('success');
-  //       showScore(count);
-  //       nextLevel();
-  //       el.removeEventListener('click', birdItem);
-  //     } else {
-  //       count--;
-  //       el.querySelector('.list-btn').classList.add('error');
-  //       el.removeEventListener('click', birdItem);
-  //     }
-  //   })
-  // })
 }
 
 function nextLevel() {
@@ -213,6 +216,7 @@ function showScore(n) {
   const SCORE = document.querySelector('.score');
   res += n;
   SCORE.innerHTML = `${res}`;
+  return res;
 }
 
 right_number();
