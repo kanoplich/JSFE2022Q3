@@ -5,7 +5,6 @@ const VOLUME = document.querySelector('#range');
 const VOLUME_ICON = document.querySelector('#volume_control');
 const WIN_SOUND = document.querySelector('#win-sound');
 const ERROR_SOUND = document.querySelector('#error-sound');
-const TIME_BAR = document.querySelector('#time_bar-track');
 const TIME_UNDERLINE = document.querySelector('#time_bar-track_underline');
 const TIME_CIRCLE = document.querySelector('#time_bar-circle');
 const PLAY = document.querySelector('#play-button');
@@ -93,8 +92,7 @@ function startInterval() {
     seconds += 1;
     let dateTimer = new Date(0);
     dateTimer.setSeconds(seconds);
-    SOUND_TIME.innerText = ('0' + dateTimer.getMinutes()).slice(-2) + ':' + 
-                   ('0' + dateTimer.getSeconds()).slice(-2);
+    SOUND_TIME.innerText = ('0' + dateTimer.getMinutes()).slice(-2) + ':' + ('0' + dateTimer.getSeconds()).slice(-2);
     if(audioTime == audioLength) {
       PLAY.classList.remove('stop');
       resetTime();
@@ -106,13 +104,11 @@ function stopInterval() {
   clearInterval(timer);
 }
 
-
 function setDurationAudio() {
   let audioLength = Math.round(AUDIO.duration);
   let date = new Date(0);
   date.setSeconds(audioLength)
-  DURATION_TIME.innerText = ('0' + date.getMinutes()).slice(-2) + ':' + 
-  ('0' + date.getSeconds()).slice(-2);
+  DURATION_TIME.innerText = ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
 }
 
 function randomNumber(min, max) {
@@ -165,7 +161,7 @@ function createCardAnswer(i) {
                         <div class="correct__card_wrapper">
                           <h3>${birdsData[num][i].name}</h3>
                           <div class="correct__species">${birdsData[num][i].species}</div>
-                          <audio src="${birdsData[num][i].audio}" preload="metadata" hidden></audio>
+                          <audio id="audio_card" src="${birdsData[num][i].audio}" preload="metadata" hidden></audio>
                           <div class="correct__audio-player_controls">
                             <div class="correct__play-button" id="correct__play-button"></div>
                             <div class="correct__time_bar">
@@ -174,10 +170,14 @@ function createCardAnswer(i) {
                                 <div class="correct__time_bar-circle" id="correct__time_bar-circle"></div>
                               </div>
                               <span class="correct__time_bar-info" id="correct__time_bar-info">00:00</span>
-                              <span class="time_bar-duration" id="time_bar-duration">00:00</span>
+                              <span class="time_bar-duration" id="correct__time_bar-duration">00:00</span>
                             </div>
                           </div>
                         </div>
+                        <div class="control__wrapper">
+                        <div class="volume_control" id="volume_card"></div>
+                        <input class="range_control" id="range_card" min="0" max="10" value="10" step="0.1" type="range">
+                      </div>
                       </div>
                     </div>
                     <p class="correct__description">${birdsData[num][i].description}</p>`
@@ -307,4 +307,3 @@ function showScore(n) {
 right_number();
 chooseElement();
 audioSrc(num, guess_num);
-
