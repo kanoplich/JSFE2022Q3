@@ -1,6 +1,8 @@
 import birdsData from "../home/birds.js";
 
 const AUDIO = document.querySelector('#audio');
+const VOLUME = document.querySelector('#range');
+const VOLUME_ICON = document.querySelector('#volume_control');
 const WIN_SOUND = document.querySelector('#win-sound');
 const ERROR_SOUND = document.querySelector('#error-sound');
 const TIME_BAR = document.querySelector('#time_bar-track');
@@ -8,6 +10,7 @@ const TIME_UNDERLINE = document.querySelector('#time_bar-track_underline');
 const TIME_CIRCLE = document.querySelector('#time_bar-circle');
 const PLAY = document.querySelector('#play-button');
 const SOUND_TIME = document.querySelector('#time_bar-info');
+const DURATION_TIME = document.querySelector('#time_bar-duration');
 const QUESTION_CARD = document.querySelector('#answer__colum_question');
 const RIGHT_CARD = document.querySelector('#answer__colum_right');
 const LEVEL = document.querySelector('#level');
@@ -21,6 +24,9 @@ let num = 0;
 let res = 0;
 let guess_num;
 let count;
+let arr = [];
+let seconds = 0;
+let timer;
 
 function audioPlayer() {
   if(AUDIO.paused) {
@@ -28,26 +34,85 @@ function audioPlayer() {
     AUDIO.play();
     startInterval();
   } else {
-    console.log(AUDIO.ended);
     PLAY.classList.remove('stop');
     AUDIO.pause();
-    stopInterval(startInterval());
+    stopInterval();
   }
 }
 
+function audioStop() {
+  AUDIO.currentTime = 0;
+  AUDIO.pause();
+  PLAY.classList.remove('stop');
+  resetTime();
+}
+
+VOLUME.onchange = function() {
+  AUDIO.volume = parseFloat(this.value / 10);
+  if(AUDIO.volume == 0) {
+    VOLUME_ICON.classList.add('off');
+  } else {
+    VOLUME_ICON.classList.remove('off');
+  }
+}
+
+function volumeChange() {
+  arr.push(VOLUME.value);
+  arr.push(AUDIO.volume);
+  if(!VOLUME_ICON.classList.contains('off')) {
+    VOLUME_ICON.classList.add('off');
+    VOLUME.value = 0;
+    AUDIO.volume = 0;
+  } else {
+    VOLUME_ICON.classList.remove('off');
+    VOLUME.value = arr[0];
+    AUDIO.volume = arr[1];
+    arr = [];
+  }
+}
+
+function resetTime() {
+  clearInterval(timer);
+  seconds = 0;
+  SOUND_TIME.innerText = '00:00';
+  TIME_UNDERLINE.style.width = 0;
+  TIME_CIRCLE.style.left = 0;
+}
+
+
+VOLUME_ICON.addEventListener('click', volumeChange);
 PLAY.addEventListener('click', audioPlayer);
 
 function startInterval() {
-  setInterval(function() {
+  setDurationAudio();
+  timer = setInterval(function() {
     let audioTime = Math.round(AUDIO.currentTime);
     let audioLength = Math.round(AUDIO.duration);
     TIME_UNDERLINE.style.width = (audioTime * 100) / audioLength + '%';
     TIME_CIRCLE.style.left = (audioTime * 100) / audioLength + '%';
-  }, 10);
+    seconds += 1;
+    let dateTimer = new Date(0);
+    dateTimer.setSeconds(seconds);
+    SOUND_TIME.innerText = ('0' + dateTimer.getMinutes()).slice(-2) + ':' + 
+                   ('0' + dateTimer.getSeconds()).slice(-2);
+    if(audioTime == audioLength) {
+      PLAY.classList.remove('stop');
+      resetTime();
+    }
+  }, 1000);
 }
 
-function stopInterval(fn) {
-  clearInterval(fn);
+function stopInterval() {
+  clearInterval(timer);
+}
+
+
+function setDurationAudio() {
+  let audioLength = Math.round(AUDIO.duration);
+  let date = new Date(0);
+  date.setSeconds(audioLength)
+  DURATION_TIME.innerText = ('0' + date.getMinutes()).slice(-2) + ':' + 
+  ('0' + date.getSeconds()).slice(-2);
 }
 
 function randomNumber(min, max) {
@@ -91,16 +156,16 @@ function createCard(i) {
   return card;
 }
 
-function createCardAnswer() {
+function createCardAnswer(i) {
   const card = document.createElement('div');
   card.classList.add('answer__colum_right');
   card.innerHTML = `<div class="answer__colum_correct">
-                      <img class="correct__img" src="${birdsData[num][guess_num].image}">
+                      <img class="correct__img" src="${birdsData[num][i].image}">
                       <div class="correct__card">
                         <div class="correct__card_wrapper">
-                          <h3>${birdsData[num][guess_num].name}</h3>
-                          <div class="correct__species">${birdsData[num][guess_num].species}</div>
-                          <audio src="${birdsData[num][guess_num].audio}" hidden></audio>
+                          <h3>${birdsData[num][i].name}</h3>
+                          <div class="correct__species">${birdsData[num][i].species}</div>
+                          <audio src="${birdsData[num][i].audio}" preload="metadata" hidden></audio>
                           <div class="correct__audio-player_controls">
                             <div class="correct__play-button" id="correct__play-button"></div>
                             <div class="correct__time_bar">
@@ -109,12 +174,13 @@ function createCardAnswer() {
                                 <div class="correct__time_bar-circle" id="correct__time_bar-circle"></div>
                               </div>
                               <span class="correct__time_bar-info" id="correct__time_bar-info">00:00</span>
+                              <span class="time_bar-duration" id="time_bar-duration">00:00</span>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <p class="correct__description">${birdsData[num][guess_num].description}</p>`
+                    <p class="correct__description">${birdsData[num][i].description}</p>`
   return card;
 }
 
@@ -122,7 +188,7 @@ function createCardStart() {
   const card = document.createElement('div');
   card.classList.add('answer__colum_right');
   card.innerHTML = `<div class="answer__colum_correct_prev">Послушайте плеер.
-                      <br>Выберите птицу из    списка
+                      <br>Выберите птицу из списка
                     </div>`
   return card
 }
@@ -158,6 +224,8 @@ const nextQuestion = () => {
     BIRD_IMG.src = '../../assets/img/bird-non.jpg';
     BIRD_NAME.innerHTML = '******';
 
+    DURATION_TIME.innerText = '00:00';
+
     for(let i = 0; i < 5; i++) {
       if(PAGE[i].classList[1] == 'active') {
         PAGE[i].classList.remove('active');
@@ -165,12 +233,13 @@ const nextQuestion = () => {
         i++;
       }
     }
+    resetTime();
     PLAY.classList.remove('stop');
 
     right_number();
     audioSrc(num, guess_num);
-    console.log(num, guess_num);
     chooseElement();
+    resetTime();
 
   } else {
     MAIN.innerHTML = '';
@@ -182,22 +251,28 @@ const nextQuestion = () => {
 function chooseElement() {
   const BIRD = document.querySelectorAll('.answer__list');
 
+  let number = 0;
   count = 5;
 
   for(let i = 0; i < BIRD.length; i++) {
     BIRD[i].addEventListener('click', function birdItem(e) {
       if(e.target.id == guess_num) {
+        number++;
+        WIN_SOUND.currentTime = 0;
         WIN_SOUND.play();
         BIRD_IMG.src = `${birdsData[num][guess_num].image}`;
         BIRD_NAME.innerHTML = `${birdsData[num][guess_num].name}`;
         BIRD[i].querySelector('.list-btn').classList.add('success');
         BIRD[i].removeEventListener('click', birdItem);
         RIGHT_CARD.innerHTML = '';
-        RIGHT_CARD.appendChild(createCardAnswer());
+        RIGHT_CARD.appendChild(createCardAnswer(guess_num));
+        audioStop();
         showScore(count);
+        showCard();
         nextLevel();
-      } else {
+      } else if(number == 0) {
         count--;
+        ERROR_SOUND.currentTime = 0;
         ERROR_SOUND.play();
         BIRD[i].querySelector('.list-btn').classList.add('error');
         BIRD[i].removeEventListener('click', birdItem);
@@ -205,6 +280,16 @@ function chooseElement() {
     })
   }
   
+}
+
+function showCard() {
+  const BIRD = document.querySelectorAll('.answer__list');
+  BIRD.forEach(element => {
+    element.addEventListener('click', (e) => {
+      RIGHT_CARD.innerHTML = '';
+      RIGHT_CARD.appendChild(createCardAnswer(e.target.id));
+    })
+  })
 }
 
 function nextLevel() {
@@ -220,6 +305,6 @@ function showScore(n) {
 }
 
 right_number();
-console.log(num, guess_num);
 chooseElement();
 audioSrc(num, guess_num);
+

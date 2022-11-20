@@ -79,8 +79,10 @@
   border-bottom: 2px solid #5d5d5d;
 }
 .game__list h3 {
+  font-family: 'Lato', sans-serif;
   color: #ffffff;
   font-size: 24px;
+  margin-bottom: 5px;
 }
 .game__audio-player {
   margin-top: 20px;
@@ -89,6 +91,49 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.control__wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.volume_control {
+  background: url('../../assets/svg/on.svg');
+  background-repeat: no-repeat;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+}
+.range_control {
+  margin-left: 20px;
+  max-width: 250px;
+  width: 100%;
+  height: 12px;
+  background-color: inherit;
+  appearance: none; 
+  outline: none;
+  overflow: hidden;
+  -webkit-appearance: none;
+}
+.range_control::-webkit-slider-runnable-track {
+  height: 4px;
+  background-color: #7d7d7d;
+}
+.range_control::-webkit-slider-thumb {
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+  background: #7d7d7d;
+  border-radius: 50%;
+  margin-top: -4px;
+  -webkit-appearance: none;
+}
+.off {
+  background: url('../../assets/svg/off.svg');
+  background-repeat: no-repeat;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
 }
 .play-button {
   background-image: url('../../assets/svg/play.svg');
@@ -108,7 +153,9 @@
 }
 .time_bar {
   position: relative;
-  width: 90%;
+  max-width: 840px;
+  width: 100%;
+  margin-left: 20px;
 }
 .time_bar-track {
   position: relative;
@@ -133,6 +180,14 @@
 .time_bar-info {
   position: absolute;
   left: 0;
+  top: 15px;
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-size: 11px;
+}
+.time_bar-duration {
+  position: absolute;
+  right: 0;
   top: 15px;
   color: #ffffff;
   font-family: 'Lato', sans-serif;
@@ -336,14 +391,6 @@
   background-color: #00bc8c;
 }
 
-@media screen and (max-width: 1080px) {
-
-  .correct__time_bar {
-    width: 70%;
-  }
-
-}
-
 @media screen and (max-width: 910px) {
 
   .correct__card {
@@ -363,10 +410,6 @@
   .correct__time_bar {
     width: 85%;
   }
-  .time_bar {
-    width: 85%;
-  }
-  
 
 }
 
@@ -374,9 +417,6 @@
   
   .container {
     width: calc(100% - 40px);
-  }
-  .time_bar {
-    width: 80%;
   }
   .answer__colum_right,
   .answer__colum_question {
@@ -420,9 +460,6 @@
   .game__player {
     max-width: calc(100% - 20px);
     width: 100%;
-  }
-  .time_bar {
-    width: 85%;
   }
   .correct__card {
     margin: 0;

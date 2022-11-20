@@ -53,7 +53,7 @@
                 </li>
                 <li class="game__list">
                   <div class="game__audio-player">
-                    <audio id="audio" src="" hidden></audio>
+                    <audio id="audio" load="metadata" preload="metadata" hidden></audio>
                       <div class="game__audio-player_controls">
                         <div class="play-button" id="play-button"></div>
                         <div class="time_bar">
@@ -62,8 +62,13 @@
                             <div class="time_bar-circle" id="time_bar-circle"></div>
                           </div>
                           <span class="time_bar-info" id="time_bar-info">00:00</span>
+                          <span class="time_bar-duration" id="time_bar-duration">00:00</span>
                         </div>
                       </div>
+                  </div>
+                  <div class="control__wrapper">
+                    <div class="volume_control" id="volume_control"></div>
+                    <input class="range_control" id="range" min="0" max="10" value="10" step="0.1" type="range">
                   </div>
                 </li>
               </ul>
