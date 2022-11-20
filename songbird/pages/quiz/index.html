@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/svg/bird-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <title>Songbird</title>
+</head>
+<body>
+  <div class="wrapper">
+    <header class="header__quiz">
+      <div class="header__quiz__container container">
+        <div class="header__quiz__top-panel">
+          <div class="header__quiz__logo">
+            <a href="../home/index.html"><img src="../../assets/svg/logo.svg" alt="logo"></a>
+          </div>
+          <div class="header__quiz__score">Score: <span class="score">0</span></div>
+        </div>
+        <ul class="page-level">
+          <li class="page-item active">
+            <span class="page-link">Разминка</span>
+          </li>
+          <li class="page-item">
+            <span class="page-link">Воробьиные</span>
+          </li>
+          <li class="page-item">
+            <span class="page-link">Лесные птицы</span>
+          </li>
+          <li class="page-item">
+            <span class="page-link">Певчие птицы</span>
+          </li>
+          <li class="page-item">
+            <span class="page-link">Хищные птицы</span>
+          </li>
+          <li class="page-item">
+            <span class="page-link">Морские птицы</span>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main class="main">
+      <section class="game">
+        <div class="game__container container">
+          <div class="game__question">
+            <img class="game__question_img" src="../../assets/img/bird-non.jpg" alt="bird">
+            <div class="game__player">
+              <ul class="game__item">
+                <li class="game__list">
+                  <h3>******</h3>
+                </li>
+                <li class="game__list">
+                  <div class="game__audio-player">
+                    <audio id="audio" load="metadata" preload="metadata" hidden></audio>
+                      <div class="game__audio-player_controls">
+                        <div class="play-button" id="play-button"></div>
+                        <div class="time_bar">
+                          <div class="time_bar-track" id="time_bar-track">
+                            <div class="time_bar-track_underline" id="time_bar-track_underline"></div>
+                            <div class="time_bar-circle" id="time_bar-circle"></div>
+                          </div>
+                          <span class="time_bar-info" id="time_bar-info">00:00</span>
+                          <span class="time_bar-duration" id="time_bar-duration">00:00</span>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="control__wrapper">
+                    <div class="volume_control" id="volume_control"></div>
+                    <input class="range_control" id="range" min="0" max="10" value="10" step="0.1" type="range">
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="answer">
+        <div class="answer__container container">
+          <div class="answer__wrapper">
+            <div class="answer__colum_question" id="answer__colum_question">
+              <ul class="answer__item">
+                <li class="answer__list" id="0">
+                  <span class="list-btn"></span>Ворон
+                </li>
+                <li class="answer__list" id="1">
+                  <span class="list-btn"></span>Журавель
+                </li>
+                <li class="answer__list" id="2">
+                  <span class="list-btn"></span>Ласточка
+                </li>
+                <li class="answer__list" id="3">
+                  <span class="list-btn"></span>Козодой
+                </li>
+                <li class="answer__list" id="4">
+                  <span class="list-btn"></span>Кукушка
+                </li>
+                <li class="answer__list" id="5">
+                  <span class="list-btn"></span>Синица
+                </li>
+              </ul>
+            </div>
+            <div class="answer__colum_right" id="answer__colum_right">
+              <div class="answer__colum_correct_prev">Послушайте плеер.<br>Выберите птицу из списка</div>
+            </div>
+            <audio src="../../assets/sound/win.mp3" id="win-sound"></audio>
+            <audio src="../../assets/sound/error.mp3" id="error-sound"></audio>
+          </div>
+          <button class="next-level" id="level">Next level</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
