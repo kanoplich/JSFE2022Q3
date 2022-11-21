@@ -143,14 +143,6 @@
   width: 40px;
   height: 40px;
 }
-.stop {
-  background-image: url('../../assets/svg/pause.svg');
-  background-repeat: no-repeat;
-  cursor: pointer;
-  position: relative;
-  width: 40px;
-  height: 40px;
-}
 .time_bar {
   position: relative;
   max-width: 840px;
@@ -308,6 +300,14 @@
 }
 .correct__play-button {
   background-image: url('../../assets/svg/play.svg');
+  background-repeat: no-repeat;
+  cursor: pointer;
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+.stop {
+  background-image: url('../../assets/svg/pause.svg');
   background-repeat: no-repeat;
   cursor: pointer;
   position: relative;

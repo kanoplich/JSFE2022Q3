@@ -268,6 +268,7 @@ function chooseElement() {
         RIGHT_CARD.appendChild(createCardAnswer(guess_num));
         audioStop();
         showScore(count);
+        playCard();
         showCard();
         nextLevel();
       } else if(number == 0) {
@@ -282,12 +283,108 @@ function chooseElement() {
   
 }
 
+function playCard() {
+
+  const AUDIO_CARD = document.querySelector('#audio_card');
+  const PLAY_CARD = document.querySelector('#correct__play-button');
+  const VOLUME_CARD = document.querySelector('#range_card');
+  const VOLUME_ICON_CARD = document.querySelector('#volume_card');
+  const TIME_UNDERLINE_CARD = document.querySelector('#correct__time_bar-track_underline');
+  const TIME_CIRCLE_CARD = document.querySelector('#correct__time_bar-circle');
+  const SOUND_TIME_CARD = document.querySelector('#correct__time_bar-info');
+  const DURATION_TIME_CARD = document.querySelector('#correct__time_bar-duration');
+
+
+  let timerCard;
+  let seconds = 0;
+
+  PLAY_CARD.addEventListener('click', () => {
+    if(AUDIO_CARD.paused) {
+      PLAY_CARD.classList.add('stop');
+      AUDIO_CARD.play();
+      startIntervalCard();
+    } else {
+      PLAY_CARD.classList.remove('stop');
+      AUDIO_CARD.pause();
+      stopIntervalCard();
+    }
+  })
+
+  function startIntervalCard() {
+    setDurationAudioCard();
+    timerCard = setInterval(function() {
+      let audioTime = Math.round(AUDIO_CARD.currentTime);
+      let audioLength = Math.round(AUDIO_CARD.duration);
+      TIME_UNDERLINE_CARD.style.width = (audioTime * 100) / audioLength + '%';
+      TIME_CIRCLE_CARD.style.left = (audioTime * 100) / audioLength + '%';
+      seconds += 1;
+      let dateTimer = new Date(0);
+      dateTimer.setSeconds(seconds);
+      SOUND_TIME_CARD.innerText = ('0' + dateTimer.getMinutes()).slice(-2) + ':' + ('0' + dateTimer.getSeconds()).slice(-2);
+      if(audioTime == audioLength) {
+        PLAY_CARD.classList.remove('stop');
+        resetTimeCard();
+      }
+    }, 1000);
+  }
+      
+  function stopIntervalCard() {
+    clearInterval(timerCard);
+  }
+  
+  function setDurationAudioCard() {
+    let audioLength = Math.round(AUDIO_CARD.duration);
+    let date = new Date(0);
+    date.setSeconds(audioLength)
+    DURATION_TIME_CARD.innerText = ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
+  }
+  
+  function resetTimeCard() {
+    clearInterval(timerCard);
+    seconds = 0;
+    SOUND_TIME_CARD.innerText = '00:00';
+    TIME_UNDERLINE_CARD.style.width = 0;
+    TIME_CIRCLE_CARD.style.left = 0;
+  }
+
+  VOLUME_CARD.onchange = function() {
+    AUDIO_CARD.volume = parseFloat(this.value / 10);
+    if(AUDIO_CARD.volume == 0) {
+      VOLUME_ICON_CARD.classList.add('off');
+    } else {
+      VOLUME_ICON_CARD.classList.remove('off');
+    }
+  }
+      
+  function volumeChangeCard() {
+    arr.push(VOLUME_CARD.value);
+    arr.push(AUDIO_CARD.volume);
+    if(!VOLUME_ICON_CARD.classList.contains('off')) {
+      VOLUME_ICON_CARD.classList.add('off');
+      VOLUME_CARD.value = 0;
+      AUDIO_CARD.volume = 0;
+    } else {
+      VOLUME_ICON_CARD.classList.remove('off');
+      VOLUME_CARD.value = arr[0];
+      AUDIO_CARD.volume = arr[1];
+      arr = [];
+    }
+  }
+
+  VOLUME_ICON_CARD.addEventListener('click', volumeChangeCard);
+
+}
+
 function showCard() {
   const BIRD = document.querySelectorAll('.answer__list');
+
   BIRD.forEach(element => {
     element.addEventListener('click', (e) => {
       RIGHT_CARD.innerHTML = '';
       RIGHT_CARD.appendChild(createCardAnswer(e.target.id));
+
+      playCard();
+
     })
   })
 }
