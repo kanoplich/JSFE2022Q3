@@ -276,6 +276,9 @@ function chooseElement() {
         ERROR_SOUND.currentTime = 0;
         ERROR_SOUND.play();
         BIRD[i].querySelector('.list-btn').classList.add('error');
+        RIGHT_CARD.innerHTML = '';
+        RIGHT_CARD.appendChild(createCardAnswer(e.target.id));
+        playCard();
         BIRD[i].removeEventListener('click', birdItem);
       }
     })
