@@ -47,3 +47,13 @@ export enum ErrorStatus {
   Forbidden,
   NotFound,
 }
+
+//  -- Callback --
+
+export type Callback = <T>(data?: T) => void;
+
+//  -- Options --
+
+export interface Options {
+  [key: string]: string;
+}

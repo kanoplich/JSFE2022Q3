@@ -1,21 +1,27 @@
-class Loader {
-    constructor(baseLink, options) {
+import { Callback, ErrorStatus, Options } from "../../types";
+
+export class Loader {
+
+    baseLink: string;
+    options: Options;
+
+    constructor(baseLink: string, options: Options) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
     getResp(
-        { endpoint, options = {} },
-        callback = () => {
+        { endpoint, options = {} }: { endpoint: string; options: object },
+        callback: Callback = () => {
             console.error('No callback for GET response');
         }
     ) {
         this.load('GET', endpoint, callback, options);
     }
 
-    errorHandler(res) {
+    errorHandler(res: Response) {
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404)
+            if (res.status === ErrorStatus.Unauthorized || res.status === ErrorStatus.NotFound)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }
@@ -23,7 +29,7 @@ class Loader {
         return res;
     }
 
-    makeUrl(options, endpoint) {
+    makeUrl(options: Options, endpoint: string) {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -34,7 +40,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method, endpoint, callback, options = {}) {
+    load(method: string, endpoint: string, callback: Callback, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
@@ -42,5 +48,3 @@ class Loader {
             .catch((err) => console.error(err));
     }
 }
-
-export default Loader;
