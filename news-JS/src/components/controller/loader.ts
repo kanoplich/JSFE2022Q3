@@ -11,7 +11,7 @@ export class Loader {
     }
 
     getResp(
-        { endpoint, options = {} }: { endpoint: string; options: object },
+        { endpoint, options = {} }: { endpoint: string; options?: Options },
         callback: Callback = () => {
             console.error('No callback for GET response');
         }
