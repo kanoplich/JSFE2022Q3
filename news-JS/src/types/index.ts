@@ -3,7 +3,7 @@
 export interface INews {
   status: string;
   totalResults: number;
-  articles: NewsData;
+  articles: Array<NewsData>;
 }
 
 export interface NewsData {
@@ -26,7 +26,7 @@ export interface NewsDataSource {
 
 export interface ISources {
   status: string;
-  sources: SourcesData;
+  sources: Array<SourcesData>;
 }
 
 export interface SourcesData {
