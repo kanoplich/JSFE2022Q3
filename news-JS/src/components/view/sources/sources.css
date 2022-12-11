@@ -8,6 +8,18 @@
     font: 300 1em 'Fira Sans', sans-serif;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+    height: 8px;
+    background-color: #143861;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #30c5ff;
+    border-radius: 9em;
+    box-shadow: inset 1px 1px 10px #f3faf7;
+}
+
 .source__item {
     background: none;
     border: 2px solid #30c5ff;
