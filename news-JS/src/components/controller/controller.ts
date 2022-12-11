@@ -1,5 +1,5 @@
 import { AppLoader } from './appLoader';
-import { Callback } from '../../types';
+import { Callback, INews, ISources } from '../../types';
 
 export class AppController extends AppLoader {
     getSources(callback: Callback) {
