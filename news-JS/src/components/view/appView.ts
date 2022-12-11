@@ -3,7 +3,6 @@ import { Sources } from './sources/sources';
 import { INews, ISources } from '../../types/index';
 
 export class AppView {
-
     news: News;
     sources: Sources;
 

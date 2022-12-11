@@ -17,7 +17,16 @@ footer {
     height: 100px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+}
+footer .author {
+  font-size: 14px;
+}
+footer .author_link {
+  color:#444;
+}
+footer .author_link:hover {
+  color: #555;
 }
 footer .copyright {
     font-size: 14px;

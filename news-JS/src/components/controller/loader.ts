@@ -1,7 +1,6 @@
-import { Callback, ErrorStatus, Options } from "../../types";
+import { Callback, ErrorStatus, Options } from '../../types';
 
 export class Loader {
-
     baseLink: string;
     options: Options;
 
@@ -10,13 +9,13 @@ export class Loader {
         this.options = options;
     }
 
-    getResp<T>(
+    getResp(
         { endpoint, options = {} }: { endpoint: string; options?: Options },
         callback: Callback = () => {
             console.error('No callback for GET response');
         }
     ) {
-        this.load<T>('GET', endpoint, callback, options);
+        this.load('GET', endpoint, callback, options);
     }
 
     errorHandler(res: Response) {
@@ -40,7 +39,7 @@ export class Loader {
         return url.slice(0, -1);
     }
 
-    load<T>(method: string, endpoint: string, callback: Callback, options = {}) {
+    load(method: string, endpoint: string, callback: Callback, options = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())

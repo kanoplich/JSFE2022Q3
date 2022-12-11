@@ -1,5 +1,5 @@
 import { AppLoader } from './appLoader';
-import { Callback, INews, ISources } from '../../types';
+import { Callback } from '../../types';
 
 export class AppController extends AppLoader {
     getSources(callback: Callback) {
@@ -18,7 +18,11 @@ export class AppController extends AppLoader {
         while (target !== newsContainer) {
             if (target instanceof Element && target?.classList.contains('source__item')) {
                 const sourceId = target.getAttribute('data-source-id');
-                if (sourceId && newsContainer instanceof Element && newsContainer?.getAttribute('data-source') !== sourceId) {
+                if (
+                    sourceId &&
+                    newsContainer instanceof Element &&
+                    newsContainer?.getAttribute('data-source') !== sourceId
+                ) {
                     newsContainer.setAttribute('data-source', sourceId);
                     super.getResp(
                         {

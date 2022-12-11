@@ -17,6 +17,13 @@ const baseConfig = {
                 test:  /\.ts$/i,
                 use: 'ts-loader',
             },
+            {
+                test: /.(?:ico|gif|png|jpg|jpeg|webp|svg)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: "img/[name][ext]",
+                },
+            },
         ],
     },
     resolve: {
