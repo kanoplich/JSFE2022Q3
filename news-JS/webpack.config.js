@@ -40,7 +40,7 @@ const baseConfig = {
         }),
         new CleanWebpackPlugin(),
         new EslingPlugin({ 
-            extensions: 'ts',
+            extensions: 'json',
         }),
     ],
 };
