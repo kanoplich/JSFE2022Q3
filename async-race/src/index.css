@@ -1,0 +1,153 @@
+/* -- Reset styles -- */
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+ul,
+ol,
+li {
+  list-style: none;
+}
+img {
+  vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* --------------------- */
+
+body {
+  background-color: #000000;
+}
+.page__container {
+  margin: 0 auto;
+  width: calc(100% - 50px);
+}
+.to_garage_btn,
+.to_winners_btn {
+  cursor: pointer;
+  width: 200px;
+  height: 30px;
+  color: #ffffff;
+  background-color: goldenrod;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px, inset rgba(255,255,255,.9) 3px 3px 8px, rgba(0,0,0,.8) 3px 3px 8px -3px;
+  margin: 20px 20px 30px 0;
+  transition: .5s ease all;
+}
+.to_garage_btn:hover,
+.to_winners_btn:hover {
+  background-color: darkgoldenrod;
+}
+.garage__btn_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  gap: 10px 0;
+}
+.create__car_wrapper,
+.update__car_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.create__car_btn,
+.update__car_btn {
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: dodgerblue;
+  box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px, inset rgba(255,255,255,.9) 3px 3px 8px, rgba(0,0,0,.8) 3px 3px 8px -3px;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  transition: .5s ease all;
+}
+.create__car_btn:hover,
+.update__car_btn:hover {
+  background-color: blue;
+}
+.create__name,
+.update__name {
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  width: 210px;
+  height: 30px;
+  border-radius: 5px;
+  padding: 0 10px 0 10px;
+}
+.create__color,
+.update__color {
+  cursor: pointer;
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+}
+.control__btn_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 420px;
+  margin-top: 10px;
+}
+.control__race_btn,
+.control__reset_btn {
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: yellowgreen;
+  box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px, inset rgba(255,255,255,.9) 3px 3px 8px, rgba(0,0,0,.8) 3px 3px 8px -3px;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  transition: .5s ease all;
+}
+.control__race_btn:hover,
+.control__reset_btn:hover {
+  background-color: forestgreen;
+}
+.control__generate_cars_btn {
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: dodgerblue;
+  box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px, inset rgba(255,255,255,.9) 3px 3px 8px, rgba(0,0,0,.8) 3px 3px 8px -3px;
+  border-radius: 5px;
+  width: 200px;
+  height: 30px;
+  transition: .5s ease all;
+}
+.control__generate_cars_btn:hover {
+  background-color: blue;
+}
