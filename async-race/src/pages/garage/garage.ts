@@ -64,7 +64,7 @@ const renderCar = (pageContainer: HTMLElement) => {
   const carImg = createElement('', 'div', 'car__img');
   carImg.innerHTML = `${renderCarImage()}`;
   const carFlag = createElement('', 'img', 'car__flag');
-  carFlag.setAttribute('src', '../../img/flag.svg');
+  carFlag.setAttribute('src', 'img/flag.svg');
   carFlag.setAttribute('alt', 'flag');
   const carRoad = createElement('', 'div', 'car__road');
 
