@@ -1,5 +1,5 @@
 import { createElement } from '../../components/pageFunctions';
-import { renderGarage } from '../garage/garage';
+import { renderGarage, renderCarImage } from '../garage/garage';
 
 export const renderWinners = async () => {
   const container = document.body;
@@ -40,7 +40,7 @@ const renderTableWinners = () => `
 <tbody>
   <tr>
     <td>1</td>
-    <td>Car image</td>
+    <td>${renderCarImage()}</td>
     <td>BMW E60</td>
     <td>1</td>
     <td>8</td>
