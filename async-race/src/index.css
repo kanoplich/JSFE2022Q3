@@ -39,7 +39,7 @@ body {
 }
 .page__container {
   margin: 0 auto;
-  width: calc(100% - 50px);
+  width: calc(100% - 40px);
 }
 .to_garage_btn,
 .to_winners_btn {
@@ -150,4 +150,85 @@ body {
 }
 .control__generate_cars_btn:hover {
   background-color: blue;
+}
+.garage__title {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 50px 0 0 0;
+}
+.garage__page__number {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 10px 0 0 0;
+}
+.car__wrapper_btn {
+  display: flex;
+  align-items: center;
+  gap: 0 10px;
+  margin: 10px 0 0 0;
+}
+.car__select,
+.car__remove {
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: dodgerblue;
+  box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px, inset rgba(255,255,255,.9) 3px 3px 8px, rgba(0,0,0,.8) 3px 3px 8px -3px;
+  border-radius: 5px;
+  width: 100px;
+  height: 20px;
+  transition: .5s ease all;
+}
+.car__select:hover,
+.car__remove:hover {
+  background-color: blue;
+}
+.car__name {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: gold;
+}
+.car__control_wrapper {
+  position: relative;
+  margin: 15px 0 0 0;
+}
+.car__start,
+.car__stop {
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  color: cornflowerblue;
+  background-color: inherit;
+  border: 1px solid #ffffff;
+  margin: 0 5px 0 0;
+}
+.car__img {
+  position: absolute;
+  top: -5px;
+  left: 50px;
+}
+.car__flag {
+  width: 30px;
+  margin-left: calc(100% - 170px);
+}
+.car__road {
+  border-bottom: 2px dashed #ffffff;
 }
