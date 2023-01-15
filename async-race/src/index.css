@@ -171,7 +171,7 @@ body {
 }
 .car__wrapper_btn {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 0 10px;
   margin: 10px 0 0 0;
 }
@@ -188,6 +188,7 @@ body {
   border-radius: 5px;
   width: 100px;
   height: 20px;
+  margin: 10px 0 0 0;
   transition: .5s ease all;
 }
 .car__select:hover,
@@ -209,11 +210,11 @@ body {
 .car__stop {
   cursor: pointer;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   text-transform: uppercase;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   border-radius: 3px;
   color: cornflowerblue;
   background-color: inherit;
@@ -223,7 +224,7 @@ body {
 .car__img {
   position: absolute;
   top: -5px;
-  left: 50px;
+  left: 60px;
 }
 .car__flag {
   width: 30px;
@@ -231,4 +232,43 @@ body {
 }
 .car__road {
   border-bottom: 2px dashed #ffffff;
+}
+.table__sort {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  margin: 10px 0 0 0;
+  border-collapse: collapse;
+  table-layout: auto;
+  width: 50%;
+}
+.table__sort th {
+  background-color: dodgerblue;
+  color: #ffffff;
+  padding: 0 10px 0 10px;
+  height: 40px;
+}
+.table__sort tr {
+  color: #ffffff;
+  text-align: center;
+}
+.table__sort td {
+  padding: 5px;
+}
+.prev__btn,
+.next__btn {
+  cursor: pointer;
+  width: 70px;
+  height: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px, inset rgba(255,255,255,.9) 3px 3px 8px, rgba(0,0,0,.8) 3px 3px 8px -3px;
+  border-radius: 5px;
+  background-color: dodgerblue;
+  color: #ffffff;
+  transition: .5s ease all;
+  margin: 50px 10px 0 0;
+}
+.prev__btn:hover,
+.next__btn:hover {
+  background-color: blue;
 }

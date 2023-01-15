@@ -1,9 +1,9 @@
 import { createElement } from '../../components/pageFunctions';
-
-const container = document.body;
-const pageContainer = createElement('', 'div', 'page__container');
+import { renderWinners } from '../winners/winners';
 
 export const renderGarage = async () => {
+  const container = document.body;
+  const pageContainer = createElement('', 'div', 'page__container');
   const pageBtnWrapper = createElement('', 'div', 'page__btn_wrapper');
   const garageBtn = createElement('to garage', 'button', 'to_garage_btn');
   const winnersBtn = createElement('to winners', 'button', 'to_winners_btn');
@@ -13,12 +13,14 @@ export const renderGarage = async () => {
   createName.setAttribute('type', 'text');
   const createColor = createElement('', 'input', 'create__color');
   createColor.setAttribute('type', 'color');
+  createColor.setAttribute('value', '#e66465');
   const createCarBtn = createElement('create', 'button', 'create__car_btn');
   const updateCarWrapper = createElement('', 'div', 'update__car_wrapper');
   const updateName = createElement('', 'input', 'update__name');
   updateName.setAttribute('type', 'text');
   const updateColor = createElement('', 'input', 'update__color');
   updateColor.setAttribute('type', 'color');
+  updateColor.setAttribute('value', '#e66465');
   const updateCarBtn = createElement('update', 'button', 'update__car_btn');
   const controlBtnWrapper = createElement('', 'div', 'control__btn_wrapper');
   const controlRaceBtn = createElement('race', 'button', 'control__race_btn');
@@ -38,10 +40,19 @@ export const renderGarage = async () => {
   createCarWrapper.append(createName, createColor, createCarBtn);
   updateCarWrapper.append(updateName, updateColor, updateCarBtn);
   controlBtnWrapper.append(controlRaceBtn, controlResetBtn, controlGenerateCarBtn);
-  renderCar();
+  const prevBtn = createElement('prev', 'button', 'prev__btn');
+  const nextBtn = createElement('next', 'button', 'next__btn');
+
+  winnersBtn.addEventListener('click', () => {
+    container.innerHTML = '';
+    renderWinners();
+  });
+  renderCar(pageContainer);
+
+  pageContainer.append(prevBtn, nextBtn);
 };
 
-const renderCar = () => {
+const renderCar = (pageContainer: HTMLElement) => {
   const carWrapper = createElement('', 'div', 'car__wrapper');
   const carWrapperBtn = createElement('', 'div', 'car__wrapper_btn');
   const carSelect = createElement('Select', 'button', 'car__select');
