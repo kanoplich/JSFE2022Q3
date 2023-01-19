@@ -1,82 +1,45 @@
-import { createElement } from '../../components/pageFunctions';
-import { renderWinners } from '../winners/winners';
+import { createElement, generateCarName, generateCarColor } from '../../components/pageFunctions';
+import renderWinners from '../winners/winners';
+import {
+  getCars, createCar, deleteCar, body, updateCar,
+} from '../../components/api';
 
-export const renderGarage = async () => {
-  const container = document.body;
-  const pageContainer = createElement('', 'div', 'page__container');
-  const pageBtnWrapper = createElement('', 'div', 'page__btn_wrapper');
-  const garageBtn = createElement('to garage', 'button', 'to_garage_btn');
-  const winnersBtn = createElement('to winners', 'button', 'to_winners_btn');
-  const garageBtnWrapper = createElement('', 'div', 'garage__btn_wrapper');
-  const createCarWrapper = createElement('', 'div', 'create__car_wrapper');
-  const createName = createElement('', 'input', 'create__name');
-  createName.setAttribute('type', 'text');
-  const createColor = createElement('', 'input', 'create__color');
-  createColor.setAttribute('type', 'color');
-  createColor.setAttribute('value', '#e66465');
-  const createCarBtn = createElement('create', 'button', 'create__car_btn');
-  const updateCarWrapper = createElement('', 'div', 'update__car_wrapper');
-  const updateName = createElement('', 'input', 'update__name');
-  updateName.setAttribute('type', 'text');
-  const updateColor = createElement('', 'input', 'update__color');
-  updateColor.setAttribute('type', 'color');
-  updateColor.setAttribute('value', '#e66465');
-  const updateCarBtn = createElement('update', 'button', 'update__car_btn');
-  const controlBtnWrapper = createElement('', 'div', 'control__btn_wrapper');
-  const controlRaceBtn = createElement('race', 'button', 'control__race_btn');
-  const controlResetBtn = createElement('reset', 'button', 'control__reset_btn');
-  const controlGenerateCarBtn = createElement('generate car', 'button', 'control__generate_cars_btn');
-  const garageTitle = createElement('Garage (304)', 'span', 'garage__title');
-  const garagePageNum = createElement('Page #7', 'span', 'garage__page__number');
-
-  container.appendChild(pageContainer);
-  pageContainer.appendChild(pageBtnWrapper);
-  pageContainer.appendChild(garageBtnWrapper);
-  pageContainer.appendChild(controlBtnWrapper);
-  pageContainer.append(garageTitle, garagePageNum);
-  pageBtnWrapper.append(garageBtn, winnersBtn);
-  garageBtnWrapper.appendChild(createCarWrapper);
-  garageBtnWrapper.appendChild(updateCarWrapper);
-  createCarWrapper.append(createName, createColor, createCarBtn);
-  updateCarWrapper.append(updateName, updateColor, updateCarBtn);
-  controlBtnWrapper.append(controlRaceBtn, controlResetBtn, controlGenerateCarBtn);
-  const prevBtn = createElement('prev', 'button', 'prev__btn');
-  const nextBtn = createElement('next', 'button', 'next__btn');
-
-  winnersBtn.addEventListener('click', () => {
-    container.innerHTML = '';
-    renderWinners();
-  });
-  renderCar(pageContainer);
-
-  pageContainer.append(prevBtn, nextBtn);
+type idBody = {
+  id: number,
 };
 
-const renderCar = (pageContainer: HTMLElement) => {
-  const carWrapper = createElement('', 'div', 'car__wrapper');
-  const carWrapperBtn = createElement('', 'div', 'car__wrapper_btn');
-  const carSelect = createElement('Select', 'button', 'car__select');
-  const carRemove = createElement('Remove', 'button', 'car__remove');
-  const carName = createElement('BMW E60', 'span', 'car__name');
-  const carControlWrapper = createElement('', 'div', 'car__control_wrapper');
-  const carStart = createElement('a', 'button', 'car__start');
-  const carStop = createElement('b', 'button', 'car__stop');
-  const carImg = createElement('', 'div', 'car__img');
-  carImg.innerHTML = `${renderCarImage()}`;
-  const carFlag = createElement('', 'img', 'car__flag');
-  carFlag.setAttribute('src', 'img/flag.svg');
-  carFlag.setAttribute('alt', 'flag');
-  const carRoad = createElement('', 'div', 'car__road');
-
-  pageContainer.appendChild(carWrapper);
-  carWrapper.appendChild(carWrapperBtn);
-  carWrapper.appendChild(carControlWrapper);
-  carWrapper.append(carRoad);
-  carWrapperBtn.append(carSelect, carRemove, carName);
-  carControlWrapper.append(carStart, carStop, carImg, carFlag);
+const newCar: body = {
+  name: '',
+  color: '#e66465',
 };
 
-export const renderCarImage = () => `
+const updateCarObj: body = {
+  name: '',
+  color: '#e66465',
+};
+const generateCar: body = {
+  name: '',
+  color: '',
+};
+const idCar: idBody = {
+  id: 0,
+};
+
+type DataAPI = {
+  car: string,
+  countCars: string | null,
+  page: number
+};
+
+const { items: car, count: countCars } = await getCars(1);
+
+const data: DataAPI = {
+  car,
+  countCars,
+  page: 1,
+};
+
+export const renderCarImage = (color: string) => `
   <?xml version="1.0" standalone="no"?>
   <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
    "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
@@ -87,7 +50,7 @@ export const renderCarImage = () => `
   Created by potrace 1.15, written by Peter Selinger 2001-2017
   </metadata>
   <g transform="translate(0.000000,640.000000) scale(0.100000,-0.100000)"
-  fill="#ffffff" stroke="none">
+  fill="${color}" stroke="none">
   <path d="M3525 5341 c-72 -18 -79 -28 -90 -121 -4 -30 -11 -62 -16 -71 -4 -9
   -97 -51 -206 -94 -774 -304 -1348 -540 -1603 -661 -163 -77 -222 -91 -421
   -104 -85 -5 -170 -14 -189 -20 -101 -32 -362 -58 -620 -63 l-115 -2 -47 -80
@@ -176,3 +139,162 @@ export const renderCarImage = () => `
   </g>
   </svg>
 `;
+
+const renderCar = (pageContainer: HTMLElement, data: any) => {
+  const carWrapper = createElement('', 'div', 'car__wrapper');
+  const carWrapperBtn = createElement('', 'div', 'car__wrapper_btn');
+  const carSelect = createElement('Select', 'button', 'car__select');
+  const carRemove = createElement('Remove', 'button', 'car__remove');
+  const carName = createElement(`${data.name}`, 'span', 'car__name');
+  const carControlWrapper = createElement('', 'div', 'car__control_wrapper');
+  const carStart = createElement('a', 'button', 'car__start');
+  const carStop = createElement('b', 'button', 'car__stop');
+  const carImg = createElement('', 'div', 'car__img');
+  carImg.innerHTML = `${renderCarImage(data.color)}`;
+  const carFlag = createElement('', 'img', 'car__flag');
+  carFlag.setAttribute('src', 'img/flag.svg');
+  carFlag.setAttribute('alt', 'flag');
+  const carRoad = createElement('', 'div', 'car__road');
+
+  pageContainer.appendChild(carWrapper);
+  carWrapper.appendChild(carWrapperBtn);
+  carWrapper.appendChild(carControlWrapper);
+  carWrapper.append(carRoad);
+  carWrapperBtn.append(carSelect, carRemove, carName);
+  carControlWrapper.append(carStart, carStop, carImg, carFlag);
+
+  carRemove.addEventListener('click', async () => {
+    await deleteCar(data.id);
+    await updateData();
+    pageContainer.innerHTML = '';
+    await renderGarage();
+  });
+  carSelect.addEventListener('click', async () => {
+    idCar.id = data.id;
+  });
+};
+
+export const renderGarage = async () => {
+  const container = document.body;
+  container.innerHTML = '';
+  const pageContainer = createElement('', 'div', 'page__container');
+  const pageBtnWrapper = createElement('', 'div', 'page__btn_wrapper');
+  const garageBtn = createElement('to garage', 'button', 'to_garage_btn');
+  const winnersBtn = createElement('to winners', 'button', 'to_winners_btn');
+  const garageBtnWrapper = createElement('', 'div', 'garage__btn_wrapper');
+  const createCarWrapper = createElement('', 'div', 'create__car_wrapper');
+  const createName = createElement('', 'input', 'create__name') as HTMLInputElement;
+  createName.setAttribute('type', 'text');
+  createName.value = newCar.name;
+  const createColor = createElement('', 'input', 'create__color') as HTMLInputElement;
+  createColor.setAttribute('type', 'color');
+  createColor.setAttribute('value', `${newCar.color}`);
+  const createCarBtn = createElement('create', 'button', 'create__car_btn');
+  const updateCarWrapper = createElement('', 'div', 'update__car_wrapper');
+  const updateName = createElement('', 'input', 'update__name') as HTMLInputElement;
+  updateName.setAttribute('type', 'text');
+  updateName.value = updateCarObj.name;
+  const updateColor = createElement('', 'input', 'update__color') as HTMLInputElement;
+  updateColor.setAttribute('type', 'color');
+  updateColor.setAttribute('value', `${updateCarObj.color}`);
+  const updateCarBtn = createElement('update', 'button', 'update__car_btn');
+  const controlBtnWrapper = createElement('', 'div', 'control__btn_wrapper');
+  const controlRaceBtn = createElement('race', 'button', 'control__race_btn');
+  const controlResetBtn = createElement('reset', 'button', 'control__reset_btn');
+  const controlGenerateCarBtn = createElement('generate car', 'button', 'control__generate_cars_btn');
+  const garageTitle = createElement(`Garage (${data.countCars})`, 'span', 'garage__title');
+  const garagePageNum = createElement(`Page #${data.page}`, 'span', 'garage__page__number');
+
+  container.appendChild(pageContainer);
+  pageContainer.appendChild(pageBtnWrapper);
+  pageContainer.appendChild(garageBtnWrapper);
+  pageContainer.appendChild(controlBtnWrapper);
+  pageContainer.append(garageTitle, garagePageNum);
+  pageBtnWrapper.append(garageBtn, winnersBtn);
+  garageBtnWrapper.appendChild(createCarWrapper);
+  garageBtnWrapper.appendChild(updateCarWrapper);
+  createCarWrapper.append(createName, createColor, createCarBtn);
+  updateCarWrapper.append(updateName, updateColor, updateCarBtn);
+  controlBtnWrapper.append(controlRaceBtn, controlResetBtn, controlGenerateCarBtn);
+  const prevBtn = createElement('prev', 'button', 'prev__btn');
+  const nextBtn = createElement('next', 'button', 'next__btn');
+
+  winnersBtn.addEventListener('click', async () => {
+    container.innerHTML = '';
+    await renderWinners();
+  });
+
+  if (data.car.length) {
+    for (let i = 0; i < data.car.length; i += 1) {
+      renderCar(pageContainer, data.car[i]);
+    }
+  }
+
+  nextBtn.addEventListener('click', async () => {
+    const num = Number((await getCars(1)).count);
+    if (num > 7 && Math.ceil(num / 7) > data.page) {
+      data.page += 1;
+      await getCars(data.page);
+      await updateData();
+      await renderGarage();
+    }
+  });
+  prevBtn.addEventListener('click', async () => {
+    if (data.page !== 1) {
+      data.page -= 1;
+      await getCars(data.page);
+      await updateData();
+      await renderGarage();
+    }
+  });
+
+  pageContainer.append(prevBtn, nextBtn);
+
+  createName.addEventListener('input', () => {
+    newCar.name = createName.value;
+  });
+  createColor.addEventListener('change', () => {
+    newCar.color = createColor.value;
+  });
+  updateName.addEventListener('input', () => {
+    updateCarObj.name = updateName.value;
+  });
+  updateColor.addEventListener('change', () => {
+    updateCarObj.color = updateColor.value;
+  });
+  createCarBtn.addEventListener('click', async () => {
+    if (newCar.name && newCar.color) {
+      await createCar(newCar);
+      await updateData();
+      newCar.name = '';
+      await renderGarage();
+    }
+  });
+  updateCarBtn.addEventListener('click', async () => {
+    if (idCar.id !== 0) {
+      await updateCar(idCar.id, updateCarObj);
+      await updateData();
+      idCar.id = 0;
+      updateCarObj.name = '';
+      await renderGarage();
+    }
+  });
+
+  controlGenerateCarBtn.addEventListener('click', async () => {
+    let count = 0;
+    while (count < 100) {
+      count += 1;
+      generateCar.name = await generateCarName();
+      generateCar.color = await generateCarColor();
+      createCar(generateCar);
+    }
+    await updateData();
+    await renderGarage();
+  });
+};
+
+const updateData = async () => {
+  const { items, count } = await getCars(data.page);
+  data.car = items;
+  data.countCars = count;
+};

@@ -1,30 +1,39 @@
 import { createElement } from '../../components/pageFunctions';
-import { renderGarage, renderCarImage } from '../garage/garage';
+import { renderCarImage, renderGarage } from '../garage/garage';
+import { getWinners } from '../../components/api';
 
-export const renderWinners = async () => {
-  const container = document.body;
-  const pageContainer = createElement('', 'div', 'page__container');
-  const pageBtnWrapper = createElement('', 'div', 'page__btn_wrapper');
-  const garageBtn = createElement('to garage', 'button', 'to_garage_btn');
-  const winnersBtn = createElement('to winners', 'button', 'to_winners_btn');
-  const winnerTitle = createElement('Winners (4)', 'span', 'garage__title');
-  const winnerPageNum = createElement('Page #1', 'span', 'garage__page__number');
-  const tableWinners = createElement('', 'table', 'table__sort');
-  const prevBtn = createElement('prev', 'button', 'prev__btn');
-  const nextBtn = createElement('next', 'button', 'next__btn');
+export type WinnersAPI = {
+  winnerCar: Array<{
+    car: {
+      name: string,
+      color: string,
+      idCar: number
+    },
+    id: number,
+    time: number,
+    wins: number
+  }>,
+  countWinners: string | null,
+};
 
-  container.appendChild(pageContainer);
-  pageContainer.appendChild(pageBtnWrapper);
-  pageBtnWrapper.append(garageBtn, winnersBtn);
-  pageContainer.append(winnerTitle, winnerPageNum);
-  pageContainer.appendChild(tableWinners);
-  tableWinners.innerHTML = renderTableWinners();
-  pageContainer.append(prevBtn, nextBtn);
+const {
+  items: [{
+    car: { name, color, idCar }, id, time, wins,
+  }], count: countWinners,
+} = await getWinners(1);
 
-  garageBtn.addEventListener('click', () => {
-    container.innerHTML = '';
-    renderGarage();
-  });
+const data: WinnersAPI = {
+  winnerCar: [{
+    car: {
+      name,
+      color,
+      idCar,
+    },
+    id,
+    time,
+    wins,
+  }],
+  countWinners,
 };
 
 const renderTableWinners = () => `
@@ -40,10 +49,38 @@ const renderTableWinners = () => `
 <tbody>
   <tr>
     <td>1</td>
-    <td>${renderCarImage()}</td>
-    <td>BMW E60</td>
-    <td>1</td>
-    <td>8</td>
+    <td>${renderCarImage(data.winnerCar[0].car.color)}</td>
+    <td>${data.winnerCar[0].car.name}</td>
+    <td>${data.winnerCar[0].wins}</td>
+    <td>${data.winnerCar[0].time}</td>
   </tr>
 </tbody>
 `;
+
+const renderWinners = async () => {
+  const container = document.body;
+  const pageContainer = createElement('', 'div', 'page__container');
+  const pageBtnWrapper = createElement('', 'div', 'page__btn_wrapper');
+  const garageBtn = createElement('to garage', 'button', 'to_garage_btn');
+  const winnersBtn = createElement('to winners', 'button', 'to_winners_btn');
+  const winnerTitle = createElement(`Winners (${data.countWinners})`, 'span', 'garage__title');
+  const winnerPageNum = createElement('Page #1', 'span', 'garage__page__number');
+  const tableWinners = createElement('', 'table', 'table__sort');
+  const prevBtn = createElement('prev', 'button', 'prev__btn');
+  const nextBtn = createElement('next', 'button', 'next__btn');
+
+  container.appendChild(pageContainer);
+  pageContainer.appendChild(pageBtnWrapper);
+  pageBtnWrapper.append(garageBtn, winnersBtn);
+  pageContainer.append(winnerTitle, winnerPageNum);
+  pageContainer.appendChild(tableWinners);
+  tableWinners.innerHTML = renderTableWinners();
+  pageContainer.append(prevBtn, nextBtn);
+
+  garageBtn.addEventListener('click', async () => {
+    container.innerHTML = '';
+    await renderGarage();
+  });
+};
+
+export default renderWinners;
