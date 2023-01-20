@@ -22,7 +22,7 @@ const {
   }], count: countWinners,
 } = await getWinners(1);
 
-const data: WinnersAPI = {
+export const dataWins: WinnersAPI = {
   winnerCar: [{
     car: {
       name,
@@ -49,10 +49,10 @@ const renderTableWinners = () => `
 <tbody>
   <tr>
     <td>1</td>
-    <td>${renderCarImage(data.winnerCar[0].car.color)}</td>
-    <td>${data.winnerCar[0].car.name}</td>
-    <td>${data.winnerCar[0].wins}</td>
-    <td>${data.winnerCar[0].time}</td>
+    <td>${renderCarImage(dataWins.winnerCar[0].car.color)}</td>
+    <td>${dataWins.winnerCar[0].car.name}</td>
+    <td>${dataWins.winnerCar[0].wins}</td>
+    <td>${dataWins.winnerCar[0].time}</td>
   </tr>
 </tbody>
 `;
@@ -63,7 +63,7 @@ const renderWinners = async () => {
   const pageBtnWrapper = createElement('', 'div', 'page__btn_wrapper');
   const garageBtn = createElement('to garage', 'button', 'to_garage_btn');
   const winnersBtn = createElement('to winners', 'button', 'to_winners_btn');
-  const winnerTitle = createElement(`Winners (${data.countWinners})`, 'span', 'garage__title');
+  const winnerTitle = createElement(`Winners (${dataWins.countWinners})`, 'span', 'garage__title');
   const winnerPageNum = createElement('Page #1', 'span', 'garage__page__number');
   const tableWinners = createElement('', 'table', 'table__sort');
   const prevBtn = createElement('prev', 'button', 'prev__btn');

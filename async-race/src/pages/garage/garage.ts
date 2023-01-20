@@ -1,7 +1,7 @@
 import { createElement, generateCarName, generateCarColor } from '../../components/pageFunctions';
 import renderWinners from '../winners/winners';
 import {
-  getCars, createCar, deleteCar, body, updateCar,
+  getCars, createCar, deleteCar, body, updateCar, startEngine, stopEngine, drive, updateWinner, getWinner, wins, createWinner, getWinnerStatus,
 } from '../../components/api';
 
 type idBody = {
@@ -25,15 +25,15 @@ const idCar: idBody = {
   id: 0,
 };
 
-type DataAPI = {
-  car: string,
-  countCars: string | null,
-  page: number
+const winnerData: wins = {
+  id: 0,
+  wins: 0,
+  time: 0,
 };
 
 const { items: car, count: countCars } = await getCars(1);
 
-const data: DataAPI = {
+const data = {
   car,
   countCars,
   page: 1,
@@ -150,6 +150,7 @@ const renderCar = (pageContainer: HTMLElement, data: any) => {
   const carStart = createElement('a', 'button', 'car__start');
   const carStop = createElement('b', 'button', 'car__stop');
   const carImg = createElement('', 'div', 'car__img');
+  carImg.setAttribute('id', `car__image_${data.id}`);
   carImg.innerHTML = `${renderCarImage(data.color)}`;
   const carFlag = createElement('', 'img', 'car__flag');
   carFlag.setAttribute('src', 'img/flag.svg');
@@ -171,6 +172,19 @@ const renderCar = (pageContainer: HTMLElement, data: any) => {
   });
   carSelect.addEventListener('click', async () => {
     idCar.id = data.id;
+  });
+  carStart.addEventListener('click', async () => {
+    const { velocity, distance } = await startEngine(data.id);
+    const time = Math.round(distance / velocity);
+    await animationStart(carImg, time);
+    const res = await drive(data.id);
+    if (!res.success) {
+      await animationStop(carImg);
+    }
+  });
+  carStop.addEventListener('click', async () => {
+    await stopEngine(data.id);
+    await resetAnimation(carImg);
   });
 };
 
@@ -204,7 +218,9 @@ export const renderGarage = async () => {
   const controlGenerateCarBtn = createElement('generate car', 'button', 'control__generate_cars_btn');
   const garageTitle = createElement(`Garage (${data.countCars})`, 'span', 'garage__title');
   const garagePageNum = createElement(`Page #${data.page}`, 'span', 'garage__page__number');
+  const winner = createElement('', 'span', 'winner');
 
+  container.append(winner);
   container.appendChild(pageContainer);
   pageContainer.appendChild(pageBtnWrapper);
   pageContainer.appendChild(garageBtnWrapper);
@@ -286,10 +302,52 @@ export const renderGarage = async () => {
       count += 1;
       generateCar.name = await generateCarName();
       generateCar.color = await generateCarColor();
-      createCar(generateCar);
+      await createCar(generateCar);
     }
     await updateData();
     await renderGarage();
+  });
+
+  controlRaceBtn.addEventListener('click', async () => {
+    let result = false;
+    const { items: cars } = await getCars(data.page);
+    const promise = await Promise.all(cars.map(async (car) => (startEngine(car.id))));
+    for (let i = 0; i < promise.length; i += 1) {
+      const time = Math.round(promise[i].distance / promise[i].velocity);
+      const elem = document.querySelector(`#car__image_${cars[i].id}`) as HTMLElement;
+      drive(cars[i].id).then(async (res) => {
+        if (!res.success) {
+          animationStop(elem);
+        }
+        if (res.success && !result) {
+          showWinner(cars[i].name, time);
+          result = true;
+          const winnerStatus = await getWinnerStatus(cars[i].id);
+          if (winnerStatus === 404) {
+            winnerData.id = cars[i].id,
+            winnerData.wins = 1;
+            winnerData.time = Number((time / 1000).toFixed(2));
+            await createWinner(winnerData);
+          } else {
+            const response = await getWinner(cars[i].id);
+            winnerData.id = await cars[i].id,
+            winnerData.wins = await response.wins + 1;
+            winnerData.time = await Number((time / 1000).toFixed(2)) < response.time ? Number((time / 1000).toFixed(2)) : response.time;
+            await updateWinner(cars[i].id, winnerData);
+          }
+        }
+      });
+      animationStart(elem, time);
+    }
+  });
+  controlResetBtn.addEventListener('click', async () => {
+    const { items: cars } = await getCars(data.page);
+    cars.forEach(async (car) => {
+      await stopEngine(car.id);
+      const elem = document.querySelector(`#car__image_${car.id}`) as HTMLElement;
+      elem.style.transform = 'translateX(0px)';
+      elem.style.transition = 'transform 0ms linear';
+    });
   });
 };
 
@@ -297,4 +355,31 @@ const updateData = async () => {
   const { items, count } = await getCars(data.page);
   data.car = items;
   data.countCars = count;
+};
+
+const animationStart = (elem: HTMLElement, time: number) => {
+  const carFlag = document.querySelector('.car__flag') as HTMLElement;
+  const distance = carFlag.offsetLeft - 30;
+  elem.style.transition = `transform ${time}ms linear`;
+  elem.style.transform = `translateX(${distance}px)`;
+};
+
+const animationStop = (elem: HTMLElement) => {
+  const num = window.getComputedStyle(elem);
+  elem.style.transition = 'transform 0ms linear';
+  elem.style.transform = `${num.transform}`;
+};
+
+const resetAnimation = (elem: HTMLElement) => {
+  elem.style.transform = 'translateX(0px)';
+  elem.style.transition = 'transform 0ms linear';
+};
+
+const showWinner = (name: string, time: number) => {
+  const winner = document.querySelector('.winner') as HTMLElement;
+  winner.innerText = `${name} first ${(time / 1000).toFixed(2)}s!`;
+  winner.style.display = 'block';
+  window.addEventListener('click', () => {
+    winner.style.display = 'none';
+  });
 };
