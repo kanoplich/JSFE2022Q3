@@ -1,19 +1,4 @@
-export type body = {
-  name: string,
-  color: string
-};
-
-export type wins = {
-  id: number,
-  wins: number,
-  time: number
-};
-
-type ICar = {
-  name: string,
-  color: string,
-  id: number
-};
+import { Body, ICar, Wins } from './types';
 
 const url = 'http://127.0.0.1:3000';
 
@@ -34,7 +19,7 @@ export const getCar = async (id: number) => {
   return response.json();
 };
 
-export const createCar = async (body: body) => {
+export const createCar = async (body: Body) => {
   const response = await fetch(garage, {
     method: 'POST',
     headers: {
@@ -52,7 +37,7 @@ export const deleteCar = async (id: number) => {
   await response.json();
 };
 
-export const updateCar = async (id: number, body: body) => {
+export const updateCar = async (id: number, body: Body) => {
   const response = await fetch(`${garage}/${id}`, {
     method: 'PATCH',
     headers: {
@@ -70,14 +55,16 @@ export const getWinner = async (id: number) => {
 
 export const getWinners = async (page: number, limit: number = 10) => {
   const response = await fetch(`${winners}?_page=${page}&_limit=${limit}`);
-  const items = await response.json();
+  const items: Wins[] = await response.json();
   return {
-    items: await Promise.all(items.map(async (winner: any) => ({ ...winner, car: await getCar(winner.id) }))),
+    items: await Promise.all(items.map(async (winner) => ({
+      ...winner, car: await getCar(winner.id),
+    }))),
     count: response.headers.get('X-Total-Count'),
   };
 };
 
-export const updateWinner = async (id: number, body: wins) => {
+export const updateWinner = async (id: number, body: Wins) => {
   const response = await fetch(`${winners}/${id}`, {
     method: 'PUT',
     headers: {
@@ -88,7 +75,7 @@ export const updateWinner = async (id: number, body: wins) => {
   await response.json();
 };
 
-export const createWinner = async (body: wins) => {
+export const createWinner = async (body: Wins) => {
   const response = await fetch(winners, {
     method: 'POST',
     headers: {

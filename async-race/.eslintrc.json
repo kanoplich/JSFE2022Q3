@@ -1,7 +1,7 @@
 {
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint", "prettier", "import"],
-  "extends": ["airbnb-base", "airbnb-typescript/base"],
+  "extends": ["eslint:recommended", "airbnb-base", "airbnb-typescript/base"],
   "parserOptions": {
     "ecmaVersion": 2021,
     "sourceType": "module",

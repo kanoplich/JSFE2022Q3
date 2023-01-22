@@ -1,5 +1,5 @@
 import { createElement } from '../../components/pageFunctions';
-import { renderCarImage, renderGarage } from '../garage/garage';
+import { renderGarage, renderCarImage } from '../garage/garage';
 import { getWinners } from '../../components/api';
 
 let page = 1;
@@ -15,6 +15,35 @@ const renderHeadWinners = () => `
 </tr>
 </thead>
 `;
+
+const winnersItems = async (tbody: HTMLElement) => {
+  const elem = tbody;
+  elem.innerHTML = '';
+  const response = await getWinners(page);
+  for (let i = 0; i < response.items.length; i += 1) {
+    const tr = document.createElement('tr');
+    elem.appendChild(tr);
+
+    const numberOuter = (item: number) => {
+      if (item - 1 === 0) return '';
+      if (i !== 9) return item - 1;
+      return item;
+    };
+
+    const numberInner = (item: number) => {
+      if (i !== 9) return i + 1;
+      if (item === 1) return i + 1;
+      return 0;
+    };
+
+    tr.innerHTML = `<td>${numberOuter(page)}${numberInner(page)}</td>
+                    <td>${renderCarImage(response.items[i].car.color)}</td>
+                    <td>${response.items[i].car.name}</td>
+                    <td>${response.items[i].wins}</td>
+                    <td>${response.items[i].time}</td>
+                    `;
+  }
+};
 
 const renderWinners = async () => {
   const response = await getWinners(page);
@@ -64,21 +93,6 @@ const renderWinners = async () => {
       winnerPageNum.innerText = `Page #${page}`;
     }
   });
-};
-
-const winnersItems = async (tbody: HTMLElement) => {
-  tbody.innerHTML = '';
-  const response = await getWinners(page);
-  for (let i = 0; i < response.items.length; i += 1) {
-    const tr = document.createElement('tr');
-    tbody.appendChild(tr);
-    tr.innerHTML = `<td>${page - 1 == 0 ? '' : i !== 9 ? page - 1 : page}${i !== 9 ? i + 1 : page == 1 ? i + 1 : 0}</td>
-                    <td>${renderCarImage(response.items[i].car.color)}</td>
-                    <td>${response.items[i].car.name}</td>
-                    <td>${response.items[i].wins}</td>
-                    <td>${response.items[i].time}</td>
-                    `;
-  }
 };
 
 export default renderWinners;

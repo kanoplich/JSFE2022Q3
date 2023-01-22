@@ -284,3 +284,15 @@ body {
   font-weight: 700;
   z-index: 100;
 }
+button:disabled {
+  cursor: default;
+  background-color: #666666;
+  box-shadow: none;
+}
+button:disabled:hover {
+  background-color: #666666;
+}
+input:disabled {
+  background-color: #666666;
+  cursor: default;
+}

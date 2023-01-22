@@ -1,31 +1,34 @@
-import { createElement, generateCarName, generateCarColor } from '../../components/pageFunctions';
+import {
+  createElement, generateCarName, generateCarColor, animationStart, animationStop,
+  showWinner, resetAnimation,
+} from '../../components/pageFunctions';
 import renderWinners from '../winners/winners';
 import {
-  getCars, createCar, deleteCar, body, updateCar, startEngine, stopEngine, drive, updateWinner, getWinner, wins, createWinner, getWinnerStatus,
+  Body, Wins, IdBody, ICar,
+} from '../../components/types';
+import {
+  getCars, createCar, updateCar, startEngine, stopEngine, drive, deleteCar,
+  updateWinner, getWinner, createWinner, getWinnerStatus,
 } from '../../components/api';
 
-type idBody = {
-  id: number,
-};
-
-const newCar: body = {
+const newCar: Body = {
   name: '',
   color: '#e66465',
 };
 
-const updateCarObj: body = {
+export const updateCarObj: Body = {
   name: '',
   color: '#e66465',
 };
-const generateCar: body = {
+const generateCar: Body = {
   name: '',
   color: '',
 };
-const idCar: idBody = {
+export const idCar: IdBody = {
   id: 0,
 };
 
-const winnerData: wins = {
+const winnerData: Wins = {
   id: 0,
   wins: 0,
   time: 0,
@@ -37,6 +40,12 @@ const data = {
   car,
   countCars,
   page: 1,
+};
+
+export const updateData = async () => {
+  const { items, count } = await getCars(data.page);
+  data.car = items;
+  data.countCars = count;
 };
 
 export const renderCarImage = (color: string) => `
@@ -140,18 +149,18 @@ export const renderCarImage = (color: string) => `
   </svg>
 `;
 
-const renderCar = (pageContainer: HTMLElement, data: any) => {
+export const renderCar = (pageContainer: HTMLElement, item: ICar) => {
   const carWrapper = createElement('', 'div', 'car__wrapper');
   const carWrapperBtn = createElement('', 'div', 'car__wrapper_btn');
   const carSelect = createElement('Select', 'button', 'car__select');
   const carRemove = createElement('Remove', 'button', 'car__remove');
-  const carName = createElement(`${data.name}`, 'span', 'car__name');
+  const carName = createElement(`${item.name}`, 'span', 'car__name');
   const carControlWrapper = createElement('', 'div', 'car__control_wrapper');
   const carStart = createElement('a', 'button', 'car__start');
   const carStop = createElement('b', 'button', 'car__stop');
   const carImg = createElement('', 'div', 'car__img');
-  carImg.setAttribute('id', `car__image_${data.id}`);
-  carImg.innerHTML = `${renderCarImage(data.color)}`;
+  carImg.setAttribute('id', `car__image_${item.id}`);
+  carImg.innerHTML = `${renderCarImage(item.color)}`;
   const carFlag = createElement('', 'img', 'car__flag');
   carFlag.setAttribute('src', 'img/flag.svg');
   carFlag.setAttribute('alt', 'flag');
@@ -165,26 +174,33 @@ const renderCar = (pageContainer: HTMLElement, data: any) => {
   carControlWrapper.append(carStart, carStop, carImg, carFlag);
 
   carRemove.addEventListener('click', async () => {
-    await deleteCar(data.id);
+    await deleteCar(item.id);
     await updateData();
-    pageContainer.innerHTML = '';
     await renderGarage();
   });
   carSelect.addEventListener('click', async () => {
-    idCar.id = data.id;
+    idCar.id = item.id;
+    const updateName = document.querySelector('.update__name') as HTMLInputElement;
+    const updateColor = document.querySelector('.update__color') as HTMLElement;
+    const updateCarBtn = document.querySelector('.update__car_btn') as HTMLElement;
+    updateName.removeAttribute('disabled');
+    updateName.value = item.name;
+    updateCarObj.name = updateName.value;
+    updateColor.removeAttribute('disabled');
+    updateCarBtn.removeAttribute('disabled');
   });
   carStart.addEventListener('click', async () => {
-    const { velocity, distance } = await startEngine(data.id);
+    const { velocity, distance } = await startEngine(item.id);
     const time = Math.round(distance / velocity);
-    await animationStart(carImg, time);
-    const res = await drive(data.id);
+    animationStart(carImg, time);
+    const res = await drive(item.id);
     if (!res.success) {
-      await animationStop(carImg);
+      animationStop(carImg);
     }
   });
   carStop.addEventListener('click', async () => {
-    await stopEngine(data.id);
-    await resetAnimation(carImg);
+    await stopEngine(item.id);
+    resetAnimation(carImg);
   });
 };
 
@@ -207,11 +223,15 @@ export const renderGarage = async () => {
   const updateCarWrapper = createElement('', 'div', 'update__car_wrapper');
   const updateName = createElement('', 'input', 'update__name') as HTMLInputElement;
   updateName.setAttribute('type', 'text');
+  updateName.setAttribute('disabled', 'disabled');
   updateName.value = updateCarObj.name;
   const updateColor = createElement('', 'input', 'update__color') as HTMLInputElement;
   updateColor.setAttribute('type', 'color');
+  updateColor.setAttribute('disabled', 'disabled');
   updateColor.setAttribute('value', `${updateCarObj.color}`);
   const updateCarBtn = createElement('update', 'button', 'update__car_btn');
+  updateCarBtn.setAttribute('type', 'button');
+  updateCarBtn.setAttribute('disabled', 'disabled');
   const controlBtnWrapper = createElement('', 'div', 'control__btn_wrapper');
   const controlRaceBtn = createElement('race', 'button', 'control__race_btn');
   const controlResetBtn = createElement('reset', 'button', 'control__reset_btn');
@@ -298,20 +318,22 @@ export const renderGarage = async () => {
 
   controlGenerateCarBtn.addEventListener('click', async () => {
     let count = 0;
+    const arr: Body[] = [];
     while (count < 100) {
       count += 1;
-      generateCar.name = await generateCarName();
-      generateCar.color = await generateCarColor();
-      await createCar(generateCar);
+      generateCar.name = generateCarName();
+      generateCar.color = generateCarColor();
+      arr.push(generateCar);
     }
+    await Promise.all(arr.map(async (item) => (createCar(item))));
     await updateData();
     await renderGarage();
   });
 
   controlRaceBtn.addEventListener('click', async () => {
-    let result = false;
+    let result = true;
     const { items: cars } = await getCars(data.page);
-    const promise = await Promise.all(cars.map(async (car) => (startEngine(car.id))));
+    const promise = await Promise.all(cars.map(async (item) => (startEngine(item.id))));
     for (let i = 0; i < promise.length; i += 1) {
       const time = Math.round(promise[i].distance / promise[i].velocity);
       const elem = document.querySelector(`#car__image_${cars[i].id}`) as HTMLElement;
@@ -319,20 +341,22 @@ export const renderGarage = async () => {
         if (!res.success) {
           animationStop(elem);
         }
-        if (res.success && !result) {
+        if (res.success && result) {
+          result = false;
           showWinner(cars[i].name, time);
-          result = true;
           const winnerStatus = await getWinnerStatus(cars[i].id);
           if (winnerStatus === 404) {
-            winnerData.id = cars[i].id,
+            winnerData.id = cars[i].id;
             winnerData.wins = 1;
             winnerData.time = Number((time / 1000).toFixed(2));
             await createWinner(winnerData);
           } else {
             const response = await getWinner(cars[i].id);
-            winnerData.id = await cars[i].id,
+            winnerData.id = cars[i].id;
             winnerData.wins = await response.wins + 1;
-            winnerData.time = await Number((time / 1000).toFixed(2)) < response.time ? Number((time / 1000).toFixed(2)) : response.time;
+            winnerData.time = Number((time / 1000).toFixed(2)) < response.time
+              ? Number((time / 1000).toFixed(2))
+              : response.time;
             await updateWinner(cars[i].id, winnerData);
           }
         }
@@ -342,44 +366,11 @@ export const renderGarage = async () => {
   });
   controlResetBtn.addEventListener('click', async () => {
     const { items: cars } = await getCars(data.page);
-    cars.forEach(async (car) => {
-      await stopEngine(car.id);
-      const elem = document.querySelector(`#car__image_${car.id}`) as HTMLElement;
+    cars.forEach(async (item) => {
+      await stopEngine(item.id);
+      const elem = document.querySelector(`#car__image_${item.id}`) as HTMLElement;
       elem.style.transform = 'translateX(0px)';
       elem.style.transition = 'transform 0ms linear';
     });
-  });
-};
-
-const updateData = async () => {
-  const { items, count } = await getCars(data.page);
-  data.car = items;
-  data.countCars = count;
-};
-
-const animationStart = (elem: HTMLElement, time: number) => {
-  const carFlag = document.querySelector('.car__flag') as HTMLElement;
-  const distance = carFlag.offsetLeft - 30;
-  elem.style.transition = `transform ${time}ms linear`;
-  elem.style.transform = `translateX(${distance}px)`;
-};
-
-const animationStop = (elem: HTMLElement) => {
-  const num = window.getComputedStyle(elem);
-  elem.style.transition = 'transform 0ms linear';
-  elem.style.transform = `${num.transform}`;
-};
-
-const resetAnimation = (elem: HTMLElement) => {
-  elem.style.transform = 'translateX(0px)';
-  elem.style.transition = 'transform 0ms linear';
-};
-
-const showWinner = (name: string, time: number) => {
-  const winner = document.querySelector('.winner') as HTMLElement;
-  winner.innerText = `${name} first ${(time / 1000).toFixed(2)}s!`;
-  winner.style.display = 'block';
-  window.addEventListener('click', () => {
-    winner.style.display = 'none';
   });
 };
