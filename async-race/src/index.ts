@@ -1,4 +1,4 @@
 import './index.css';
-import { renderGarage } from './pages/garage/garage';
+import { renderGarage } from './ui';
 
 renderGarage();

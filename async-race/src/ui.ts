@@ -1,15 +1,14 @@
 import {
   createElement, generateCarName, generateCarColor, animationStart, animationStop,
   showWinner, resetAnimation,
-} from '../../components/pageFunctions';
-import renderWinners from '../winners/winners';
+} from './components/pageFunctions';
 import {
   Body, Wins, IdBody, ICar,
-} from '../../components/types';
+} from './components/types';
 import {
   getCars, createCar, updateCar, startEngine, stopEngine, drive, deleteCar,
-  updateWinner, getWinner, createWinner, getWinnerStatus,
-} from '../../components/api';
+  updateWinner, getWinner, createWinner, getWinnerStatus, getWinners,
+} from './components/api';
 
 const newCar: Body = {
   name: '',
@@ -158,6 +157,7 @@ export const renderCar = (pageContainer: HTMLElement, item: ICar) => {
   const carControlWrapper = createElement('', 'div', 'car__control_wrapper');
   const carStart = createElement('a', 'button', 'car__start');
   const carStop = createElement('b', 'button', 'car__stop');
+  carStop.setAttribute('disabled', 'disabled');
   const carImg = createElement('', 'div', 'car__img');
   carImg.setAttribute('id', `car__image_${item.id}`);
   carImg.innerHTML = `${renderCarImage(item.color)}`;
@@ -181,15 +181,19 @@ export const renderCar = (pageContainer: HTMLElement, item: ICar) => {
   carSelect.addEventListener('click', async () => {
     idCar.id = item.id;
     const updateName = document.querySelector('.update__name') as HTMLInputElement;
-    const updateColor = document.querySelector('.update__color') as HTMLElement;
+    const updateColor = document.querySelector('.update__color') as HTMLInputElement;
     const updateCarBtn = document.querySelector('.update__car_btn') as HTMLElement;
     updateName.removeAttribute('disabled');
     updateName.value = item.name;
+    updateColor.value = item.color;
     updateCarObj.name = updateName.value;
+    updateCarObj.color = updateColor.value;
     updateColor.removeAttribute('disabled');
     updateCarBtn.removeAttribute('disabled');
   });
   carStart.addEventListener('click', async () => {
+    carStart.setAttribute('disabled', 'disabled');
+    carStop.removeAttribute('disabled');
     const { velocity, distance } = await startEngine(item.id);
     const time = Math.round(distance / velocity);
     animationStart(carImg, time);
@@ -199,6 +203,8 @@ export const renderCar = (pageContainer: HTMLElement, item: ICar) => {
     }
   });
   carStop.addEventListener('click', async () => {
+    carStop.setAttribute('disabled', 'disabled');
+    carStart.removeAttribute('disabled');
     await stopEngine(item.id);
     resetAnimation(carImg);
   });
@@ -235,6 +241,7 @@ export const renderGarage = async () => {
   const controlBtnWrapper = createElement('', 'div', 'control__btn_wrapper');
   const controlRaceBtn = createElement('race', 'button', 'control__race_btn');
   const controlResetBtn = createElement('reset', 'button', 'control__reset_btn');
+  controlResetBtn.setAttribute('disabled', 'disabled');
   const controlGenerateCarBtn = createElement('generate car', 'button', 'control__generate_cars_btn');
   const garageTitle = createElement(`Garage (${data.countCars})`, 'span', 'garage__title');
   const garagePageNum = createElement(`Page #${data.page}`, 'span', 'garage__page__number');
@@ -254,6 +261,15 @@ export const renderGarage = async () => {
   controlBtnWrapper.append(controlRaceBtn, controlResetBtn, controlGenerateCarBtn);
   const prevBtn = createElement('prev', 'button', 'prev__btn');
   const nextBtn = createElement('next', 'button', 'next__btn');
+  prevBtn.setAttribute('disabled', 'disabled');
+  nextBtn.setAttribute('disabled', 'disabled');
+
+  if (Number(data.countCars) > 7) {
+    nextBtn.removeAttribute('disabled');
+  }
+  if (data.page !== 1) {
+    prevBtn.removeAttribute('disabled');
+  }
 
   winnersBtn.addEventListener('click', async () => {
     container.innerHTML = '';
@@ -317,13 +333,14 @@ export const renderGarage = async () => {
   });
 
   controlGenerateCarBtn.addEventListener('click', async () => {
+    controlGenerateCarBtn.setAttribute('disabled', 'disabled');
     let count = 0;
     const arr: Body[] = [];
     while (count < 100) {
       count += 1;
       generateCar.name = generateCarName();
       generateCar.color = generateCarColor();
-      arr.push(generateCar);
+      arr.push(JSON.parse(JSON.stringify(generateCar)));
     }
     await Promise.all(arr.map(async (item) => (createCar(item))));
     await updateData();
@@ -331,6 +348,12 @@ export const renderGarage = async () => {
   });
 
   controlRaceBtn.addEventListener('click', async () => {
+    controlRaceBtn.setAttribute('disabled', 'disabled');
+    controlResetBtn.removeAttribute('disabled');
+    const carStart = document.querySelectorAll('.car__start');
+    carStart.forEach((item) => item.setAttribute('disabled', 'disabled'));
+    const carStop = document.querySelectorAll('.car__stop');
+    carStop.forEach((item) => item.removeAttribute('disabled'));
     let result = true;
     const { items: cars } = await getCars(data.page);
     const promise = await Promise.all(cars.map(async (item) => (startEngine(item.id))));
@@ -365,6 +388,12 @@ export const renderGarage = async () => {
     }
   });
   controlResetBtn.addEventListener('click', async () => {
+    controlResetBtn.setAttribute('disabled', 'disabled');
+    controlRaceBtn.removeAttribute('disabled');
+    const carStop = document.querySelectorAll('.car__stop');
+    carStop.forEach((item) => item.setAttribute('disabled', 'disabled'));
+    const carStart = document.querySelectorAll('.car__start');
+    carStart.forEach((item) => item.removeAttribute('disabled'));
     const { items: cars } = await getCars(data.page);
     cars.forEach(async (item) => {
       await stopEngine(item.id);
@@ -372,5 +401,107 @@ export const renderGarage = async () => {
       elem.style.transform = 'translateX(0px)';
       elem.style.transition = 'transform 0ms linear';
     });
+  });
+};
+
+let page = 1;
+
+const renderHeadWinners = () => `
+<thead>
+<tr>
+    <th>Number</th>
+    <th>Car</th>
+    <th>Name</th>
+    <th>Wins</th>
+    <th>Best time (seconds)</th>
+</tr>
+</thead>
+`;
+
+const winnersItems = async (tbody: HTMLElement) => {
+  const elem = tbody;
+  elem.innerHTML = '';
+  const response = await getWinners(page);
+  for (let i = 0; i < response.items.length; i += 1) {
+    const tr = document.createElement('tr');
+    elem.appendChild(tr);
+
+    const numberOuter = (item: number) => {
+      if (item - 1 === 0) return '';
+      if (i !== 9) return item - 1;
+      return item;
+    };
+
+    const numberInner = (item: number) => {
+      if (i !== 9) return i + 1;
+      if (item === 1) return i + 1;
+      return 0;
+    };
+
+    tr.innerHTML = `<td>${numberOuter(page)}${numberInner(page)}</td>
+                    <td>${renderCarImage(response.items[i].car.color)}</td>
+                    <td>${response.items[i].car.name}</td>
+                    <td>${response.items[i].wins}</td>
+                    <td>${response.items[i].time}</td>
+                    `;
+  }
+};
+
+const renderWinners = async () => {
+  const response = await getWinners(page);
+  const container = document.body;
+  container.innerHTML = '';
+  const pageContainer = createElement('', 'div', 'page__container');
+  const pageBtnWrapper = createElement('', 'div', 'page__btn_wrapper');
+  const garageBtn = createElement('to garage', 'button', 'to_garage_btn');
+  const winnersBtn = createElement('to winners', 'button', 'to_winners_btn');
+  const winnerTitle = createElement(`Winners (${response.count})`, 'span', 'garage__title');
+  const winnerPageNum = createElement(`Page #${page}`, 'span', 'garage__page__number');
+  const tableWinners = createElement('', 'table', 'table__sort');
+  const tbody = document.createElement('tbody');
+  const prevBtn = createElement('prev', 'button', 'prev__btn');
+  const nextBtn = createElement('next', 'button', 'next__btn');
+  prevBtn.setAttribute('disabled', 'disabled');
+  nextBtn.setAttribute('disabled', 'disabled');
+
+  if (Number(response.count) > 10) {
+    nextBtn.removeAttribute('disabled');
+  }
+  if (page !== 1) {
+    prevBtn.removeAttribute('disabled');
+  }
+
+  container.appendChild(pageContainer);
+  pageContainer.appendChild(pageBtnWrapper);
+  pageBtnWrapper.append(garageBtn, winnersBtn);
+  pageContainer.append(winnerTitle, winnerPageNum);
+  pageContainer.appendChild(tableWinners);
+  tableWinners.innerHTML = renderHeadWinners();
+  tableWinners.append(tbody);
+  winnersItems(tbody);
+
+  pageContainer.append(prevBtn, nextBtn);
+
+  garageBtn.addEventListener('click', async () => {
+    container.innerHTML = '';
+    await renderGarage();
+  });
+
+  nextBtn.addEventListener('click', async () => {
+    const num = Number((response.count));
+    if (num > 10 && Math.ceil(num / 10) > page) {
+      page += 1;
+      await getWinners(page);
+      await winnersItems(tbody);
+      winnerPageNum.innerText = `Page #${page}`;
+    }
+  });
+  prevBtn.addEventListener('click', async () => {
+    if (page !== 1) {
+      page -= 1;
+      await getWinners(page);
+      await winnersItems(tbody);
+      winnerPageNum.innerText = `Page #${page}`;
+    }
   });
 };

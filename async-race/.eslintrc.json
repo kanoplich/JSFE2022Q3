@@ -16,6 +16,10 @@
     "no-debugger": "off",
     "no-console": 0,
     "class-methods-use-this": "off",
-    "@typescript-eslint/no-explicit-any": 2
+    "@typescript-eslint/no-explicit-any": 2,
+    "@typescript-eslint/no-use-before-define": ["error", {
+        "variables": false
+    }],
+    "@typescript-eslint/no-loop-func": "off"
   }
 }
