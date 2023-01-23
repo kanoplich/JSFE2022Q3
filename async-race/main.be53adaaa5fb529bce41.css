@@ -239,7 +239,7 @@ body {
   margin: 10px 0 0 0;
   border-collapse: collapse;
   table-layout: auto;
-  width: 50%;
+  width: 100%;
 }
 .table__sort th {
   background-color: dodgerblue;
@@ -296,4 +296,9 @@ button:disabled:hover {
 input:disabled {
   background-color: #666666;
   cursor: default;
+}
+.wins,
+.best_time {
+  cursor: pointer;
+  flex-wrap: nowrap;
 }
