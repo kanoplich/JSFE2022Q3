@@ -10,7 +10,7 @@ export const getCars = async (page: number, limit: number = 7) => {
   const response = await fetch(`${garage}?_page=${page}&_limit=${limit}`);
   return {
     items: await response.json() as ICar[],
-    count: response.headers.get('X-Total-Count'),
+    count: response.headers.get('X-Total-Count') as string,
   };
 };
 
@@ -53,8 +53,8 @@ export const getWinner = async (id: number) => {
   return response.json();
 };
 
-export const getWinners = async (page: number, limit: number = 10) => {
-  const response = await fetch(`${winners}?_page=${page}&_limit=${limit}`);
+export const getWinners = async (page: number, limit: number = 10, sort: string = 'id', order: string = 'ASC') => {
+  const response = await fetch(`${winners}?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`);
   const items: Wins[] = await response.json();
   return {
     items: await Promise.all(items.map(async (winner) => ({
@@ -71,6 +71,13 @@ export const updateWinner = async (id: number, body: Wins) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(body),
+  });
+  await response.json();
+};
+
+export const deleteWinner = async (id: number) => {
+  const response = await fetch(`${winners}/${id}`, {
+    method: 'DELETE',
   });
   await response.json();
 };

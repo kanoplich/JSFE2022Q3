@@ -7,4 +7,7 @@ module.exports = {
     static: path.resolve(__dirname, 'dist'),
     historyApiFallback: true,
   },
+  experiments: {
+    topLevelAwait: true
+  }
 };

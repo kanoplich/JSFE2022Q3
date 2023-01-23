@@ -6,7 +6,7 @@ export type Body = {
 export type Wins = {
   id: number,
   wins: number,
-  time: number
+  time: number,
 };
 
 export type ICar = {

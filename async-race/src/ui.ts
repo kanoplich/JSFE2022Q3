@@ -7,7 +7,7 @@ import {
 } from './components/types';
 import {
   getCars, createCar, updateCar, startEngine, stopEngine, drive, deleteCar,
-  updateWinner, getWinner, createWinner, getWinnerStatus, getWinners,
+  updateWinner, getWinner, createWinner, getWinnerStatus, getWinners, deleteWinner,
 } from './components/api';
 
 const newCar: Body = {
@@ -148,7 +148,7 @@ export const renderCarImage = (color: string) => `
   </svg>
 `;
 
-export const renderCar = (pageContainer: HTMLElement, item: ICar) => {
+export const renderCar = async (pageContainer: HTMLElement, item: ICar) => {
   const carWrapper = createElement('', 'div', 'car__wrapper');
   const carWrapperBtn = createElement('', 'div', 'car__wrapper_btn');
   const carSelect = createElement('Select', 'button', 'car__select');
@@ -175,6 +175,7 @@ export const renderCar = (pageContainer: HTMLElement, item: ICar) => {
 
   carRemove.addEventListener('click', async () => {
     await deleteCar(item.id);
+    await deleteWinner(item.id);
     await updateData();
     await renderGarage();
   });
@@ -412,16 +413,17 @@ const renderHeadWinners = () => `
     <th>Number</th>
     <th>Car</th>
     <th>Name</th>
-    <th>Wins</th>
-    <th>Best time (seconds)</th>
+    <th class="wins">Wins</th>
+    <th class="best_time">Best time (seconds)</th>
 </tr>
 </thead>
 `;
 
-const winnersItems = async (tbody: HTMLElement) => {
+const winnersItems = async (tbody: HTMLElement, sort: string = 'id', order: string = 'ASC') => {
   const elem = tbody;
   elem.innerHTML = '';
-  const response = await getWinners(page);
+  const response = await getWinners(page, 10, sort, order);
+
   for (let i = 0; i < response.items.length; i += 1) {
     const tr = document.createElement('tr');
     elem.appendChild(tr);
@@ -444,6 +446,18 @@ const winnersItems = async (tbody: HTMLElement) => {
                     <td>${response.items[i].wins}</td>
                     <td>${response.items[i].time}</td>
                     `;
+  }
+
+  const nextBtn = document.querySelector('.next__btn') as HTMLElement;
+  const prevBtn = document.querySelector('.prev__btn') as HTMLElement;
+
+  if (Number(response.count) > 10) {
+    nextBtn.removeAttribute('disabled');
+  }
+  if (page !== 1) {
+    prevBtn.removeAttribute('disabled');
+  } else {
+    prevBtn.setAttribute('disabled', 'disabled');
   }
 };
 
@@ -502,6 +516,33 @@ const renderWinners = async () => {
       await getWinners(page);
       await winnersItems(tbody);
       winnerPageNum.innerText = `Page #${page}`;
+    }
+  });
+  const wins = document.querySelector('.wins') as HTMLElement;
+  const bestTime = document.querySelector('.best_time') as HTMLElement;
+
+  wins.addEventListener('click', () => {
+    bestTime.innerText = 'Best time (seconds)';
+    if (!wins.classList.contains('active')) {
+      wins.classList.add('active');
+      winnersItems(tbody, 'wins', 'DESC');
+      wins.innerText = 'Wins ↓';
+    } else {
+      wins.classList.remove('active');
+      winnersItems(tbody, 'wins', 'ASC');
+      wins.innerText = 'Wins ↑';
+    }
+  });
+  bestTime.addEventListener('click', () => {
+    wins.innerText = 'Wins';
+    if (!bestTime.classList.contains('active')) {
+      bestTime.classList.add('active');
+      winnersItems(tbody, 'time', 'ASC');
+      bestTime.innerText = 'Best time (seconds) ↑';
+    } else {
+      bestTime.classList.remove('active');
+      winnersItems(tbody, 'time', 'DESC');
+      bestTime.innerText = 'Best time (seconds) ↓';
     }
   });
 };
