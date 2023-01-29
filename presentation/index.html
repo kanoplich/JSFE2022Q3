@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+          <h1>TypeScript</h1>
+        </section>
+        <section>
+          <section data-auto-animate>
+            <h2>What is TypeScript</h2>
+          </section>
+          <section data-auto-animate>
+            <h2>What is TypeScript</h2>
+            <span>TypeScript is a free and open source programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript and adds optional static typing to the language. It is designed for the development of large applications and transpiles to JavaScript</span>
+          </section>
+        </section>
+				<section>
+          <section>
+            <h2>Types</h2>
+          </section>
+          <section>
+            <p>TypeScript has next type</p>
+            <ul style="display: flex; justify-content: space-around; margin-top: 30px;">
+              <li style="list-style-type: none;">Basic Types:
+                <ul style="list-style-type: initial;">
+                  <li>Number</li>
+                  <li>String</li>
+                  <li>Boolean</li>
+                  <li>Symbol</li>
+                  <li>Null</li>
+                  <li>Undefined</li>
+                  <li>Object</li>
+                </ul>
+              </li>
+              <li style="list-style-type: none;">Extra Types:
+                <ul style="list-style-type: initial;">
+                  <li>Array</li>
+                  <li>Tuple</li>
+                  <li>Enum</li>
+                  <li>Void</li>
+                  <li>Never</li>
+                  <li>Any</li>
+                  <li>Unknown</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+        </section>
+				<section>
+          <section>
+            <h2>Basic types</h2>
+          </section>
+          <section>
+            <h3>Boolean</h3>
+            <pre>
+              <code>
+                let isCompleted: boolean = false;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Number</h3>
+            <pre>
+              <code>
+                let decimal: number = 6;
+                let hex: number = 0xf00d;
+                let binary: number = 0b1010;
+                let octal: number = 0o744;
+                let big: bigint = 100n;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>String</h3>
+            <pre>
+              <code>
+                const color: string = "blue";
+                color = 'red';
+                const sentence: string = `Color ${color}`;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Null and Undefined</h3>
+            <pre>
+              <code>
+                let u: undefined = undefined;
+                let n: null = null;
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Object</h3>
+            <pre>
+              <code>
+                const create = (o: object | null): void => { };
+              </code>
+            </pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Extra types</h2>
+          </section>
+          <section>
+            <h3>Array</h3>
+            <pre>
+              <code>
+                <script type="text/template">
+                  let list: number[] = [1, 2, 3];
+                  let list: Array<number> = [1, 2, 3];
+                </script>
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Tuple</h3>
+            <pre>
+              <code>
+                <script type="text/template">
+                  let x: [string, number] = ['Hello', 42];
+                </script>
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Enum</h3>
+            <pre>
+              <code>
+                <script type="text/template">
+                  enum Directions {
+                    Up,
+                    Down,
+                    Left,
+                    Right
+                  }
+
+                  Directions.Up;    // 0
+                  Directions.Down;  // 1
+                  Directions.Left;  // 2
+                  Directions.Right; // 3
+                </script>
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Enum</h3>
+            <pre>
+              <code>
+                <script type="text/template">
+                  enum Directions {
+                    Up = 2,
+                    Down = 4,
+                    Left = 6,
+                    Right
+                  }
+
+                  Directions.Up;    // 2
+                  Directions.Down;  // 4
+                  Directions.Left;  // 6
+                  Directions.Right; // 7
+                </script>
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Unknown</h3>
+            <pre>
+              <code>
+                let notSure: unknown = 4;
+                notSure = "maybe a string instead";
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Any</h3>
+            <pre>
+              <code>
+                <script type="text/template">
+                  let notSure: any = false;
+
+                  notSure = 42;
+                  notSure = 'Hello';
+                </script>
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Void</h3>
+            <pre>
+              <code>
+                const greetUser = (): void => {
+                  console.log("Hello, nice to see you!")
+                };
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Never</h3>
+            <pre>
+              <code>
+                <script type="text/template">
+                  const msg = 'Hello';
+                  const error = (msg: string): never => {
+                    throw new Error(msg);
+                  };
+
+                  const infinityLoop = (): never => {
+                    while(true) {
+
+                    }
+                  };
+                </script>
+              </code>
+            </pre>
+          </section>
+          <section>
+            <h3>Type</h3>
+            <pre>
+              <code>
+                type Name = string;
+                let id: Name = '42';
+              </code>
+            </pre>
+          </section>
+        </section>
+        <section>
+          <section data-auto-animate>
+            <h2>Advantages of TypeScript</h2>
+          </section>
+          <section data-auto-animate>
+            <h2>Advantages of TypeScript</h2>
+            <p>It always highlights errors at compilation time during the time of development. Whereas if you are using JavaScript errors get pointed out at runtime.</p>
+          </section>
+          <section data-auto-animate>
+            <h2>Advantages of TypeScript</h2>
+            <p>One can run TypeScript on any browser or JavaScript engine. TypeScript includes the features that are strongly typed or Static Typing. Static typing helps us for checking type correctness at compile time. However, this feature is not available in JavaScript.</p>
+          </section>
+          <section data-auto-animate>
+            <h2>Advantages of TypeScript</h2>
+            <p>An additional feature of using TypeScript is it allows great tooling supports with IntelliSense which provides active hints as the code is added.</p>
+          </section>
+          <section data-auto-animate>
+            <h2>Advantages of TypeScript</h2>
+            <p>TypeScript compiler can compile the .ts files into Es3, ES4 and ES5.</p>
+          </section>
+          <section data-auto-animate>
+            <h2>Advantages of TypeScript</h2>
+            <p>Frameworks like Angular 2 also use TypeScript as a programming language.</p>
+          </section>
+        </section>
+        <section>
+          <p>Thanks</p>
+        </section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
