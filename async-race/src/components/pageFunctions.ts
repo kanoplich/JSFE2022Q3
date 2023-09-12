@@ -1,0 +1,52 @@
+export function createElement(text: string, type: string, style: string) {
+  const element = document.createElement(type);
+  element.classList.add(style);
+  element.innerText = text;
+  return element;
+}
+
+const carName = ['BMW', 'AUDI', 'TESLA', 'OPEL', 'FORD', 'JAGUAR', 'MAZDA', 'SKODA', 'VOLKSWAGEN', 'VOLVO'];
+const carModel = ['M5', 'S7', 'Model S', 'Insignia', 'Mustang', 'S-Type', 'RX-7', 'Superb', 'Golf GTI', 'XC90'];
+
+function getRandomItem() {
+  return Math.floor(Math.random() * 10);
+}
+export const generateCarName = () => {
+  const name: string = `${carName[getRandomItem()]} ${carModel[getRandomItem()]}`;
+  return name;
+};
+
+export const generateCarColor = () => {
+  const color: string = `#${getRandomItem()}${getRandomItem()}${getRandomItem()}${getRandomItem()}${getRandomItem()}${getRandomItem()}`;
+  return color;
+};
+
+export const animationStart = (elem: HTMLElement, time: number) => {
+  const element = elem;
+  const carFlag = document.querySelector('.car__flag') as HTMLElement;
+  const distance = carFlag.offsetLeft - 30;
+  element.style.transition = `transform ${time}ms linear`;
+  element.style.transform = `translateX(${distance}px)`;
+};
+
+export const animationStop = (elem: HTMLElement) => {
+  const element = elem;
+  const num = window.getComputedStyle(elem);
+  element.style.transition = 'transform 0ms linear';
+  element.style.transform = `${num.transform}`;
+};
+
+export const resetAnimation = (elem: HTMLElement) => {
+  const element = elem;
+  element.style.transform = 'translateX(0px)';
+  element.style.transition = 'transform 0ms linear';
+};
+
+export const showWinner = (name: string, time: number) => {
+  const winner = document.querySelector('.winner') as HTMLElement;
+  winner.innerText = `${name} first ${(time / 1000).toFixed(2)}s!`;
+  winner.style.display = 'block';
+  window.addEventListener('click', () => {
+    winner.style.display = 'none';
+  });
+};

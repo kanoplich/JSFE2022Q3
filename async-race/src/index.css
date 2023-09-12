@@ -1,0 +1,304 @@
+/* -- Reset styles -- */
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+ul,
+ol,
+li {
+  list-style: none;
+}
+img {
+  vertical-align: top;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* --------------------- */
+
+body {
+  background-color: #000000;
+}
+.page__container {
+  margin: 0 auto;
+  width: calc(100% - 40px);
+}
+.to_garage_btn,
+.to_winners_btn {
+  cursor: pointer;
+  width: 200px;
+  height: 30px;
+  color: #ffffff;
+  background-color: goldenrod;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px, inset rgba(255,255,255,.9) 3px 3px 8px, rgba(0,0,0,.8) 3px 3px 8px -3px;
+  margin: 20px 20px 30px 0;
+  transition: .5s ease all;
+}
+.to_garage_btn:hover,
+.to_winners_btn:hover {
+  background-color: darkgoldenrod;
+}
+.garage__btn_wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  gap: 10px 0;
+}
+.create__car_wrapper,
+.update__car_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.create__car_btn,
+.update__car_btn {
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: dodgerblue;
+  box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px, inset rgba(255,255,255,.9) 3px 3px 8px, rgba(0,0,0,.8) 3px 3px 8px -3px;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  transition: .5s ease all;
+}
+.create__car_btn:hover,
+.update__car_btn:hover {
+  background-color: blue;
+}
+.create__name,
+.update__name {
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  width: 210px;
+  height: 30px;
+  border-radius: 5px;
+  padding: 0 10px 0 10px;
+}
+.create__color,
+.update__color {
+  cursor: pointer;
+  width: 80px;
+  height: 30px;
+  border-radius: 5px;
+}
+.control__btn_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 420px;
+  margin-top: 10px;
+}
+.control__race_btn,
+.control__reset_btn {
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: yellowgreen;
+  box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px, inset rgba(255,255,255,.9) 3px 3px 8px, rgba(0,0,0,.8) 3px 3px 8px -3px;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  transition: .5s ease all;
+}
+.control__race_btn:hover,
+.control__reset_btn:hover {
+  background-color: forestgreen;
+}
+.control__generate_cars_btn {
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: dodgerblue;
+  box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px, inset rgba(255,255,255,.9) 3px 3px 8px, rgba(0,0,0,.8) 3px 3px 8px -3px;
+  border-radius: 5px;
+  width: 200px;
+  height: 30px;
+  transition: .5s ease all;
+}
+.control__generate_cars_btn:hover {
+  background-color: blue;
+}
+.garage__title {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 50px 0 0 0;
+}
+.garage__page__number {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 10px 0 0 0;
+}
+.car__wrapper_btn {
+  display: flex;
+  align-items: flex-end;
+  gap: 0 10px;
+  margin: 10px 0 0 0;
+}
+.car__select,
+.car__remove {
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: dodgerblue;
+  box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px, inset rgba(255,255,255,.9) 3px 3px 8px, rgba(0,0,0,.8) 3px 3px 8px -3px;
+  border-radius: 5px;
+  width: 100px;
+  height: 20px;
+  margin: 10px 0 0 0;
+  transition: .5s ease all;
+}
+.car__select:hover,
+.car__remove:hover {
+  background-color: blue;
+}
+.car__name {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: gold;
+}
+.car__control_wrapper {
+  position: relative;
+  margin: 15px 0 0 0;
+}
+.car__start,
+.car__stop {
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  width: 25px;
+  height: 25px;
+  border-radius: 3px;
+  color: cornflowerblue;
+  background-color: inherit;
+  border: 1px solid #ffffff;
+  margin: 0 5px 0 0;
+}
+.car__img {
+  position: absolute;
+  top: -5px;
+  left: 60px;
+}
+.car__flag {
+  width: 30px;
+  margin-left: calc(100% - 170px);
+}
+.car__road {
+  border-bottom: 2px dashed #ffffff;
+}
+.table__sort {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  margin: 10px 0 0 0;
+  border-collapse: collapse;
+  table-layout: auto;
+  width: 100%;
+}
+.table__sort th {
+  background-color: dodgerblue;
+  color: #ffffff;
+  padding: 0 10px 0 10px;
+  height: 40px;
+}
+.table__sort tr {
+  color: #ffffff;
+  text-align: center;
+}
+.table__sort td {
+  padding: 5px;
+}
+.prev__btn,
+.next__btn {
+  cursor: pointer;
+  width: 70px;
+  height: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  box-shadow: inset rgba(0,0,0,.5) -3px -3px 8px, inset rgba(255,255,255,.9) 3px 3px 8px, rgba(0,0,0,.8) 3px 3px 8px -3px;
+  border-radius: 5px;
+  background-color: dodgerblue;
+  color: #ffffff;
+  transition: .5s ease all;
+  margin: 50px 10px 0 0;
+}
+.prev__btn:hover,
+.next__btn:hover {
+  background-color: blue;
+}
+.winner {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  z-index: 100;
+}
+button:disabled {
+  cursor: default;
+  background-color: #666666;
+  color: #ffffff;
+  box-shadow: none;
+}
+button:disabled:hover {
+  background-color: #666666;
+}
+input:disabled {
+  background-color: #666666;
+  cursor: default;
+}
+.wins,
+.best_time {
+  cursor: pointer;
+  flex-wrap: nowrap;
+}
